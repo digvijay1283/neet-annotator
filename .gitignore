@@ -1,0 +1,10 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.log
+
+# Node (in case you add tooling later)
+node_modules/
+
+# Local Netlify state
+.netlify/

@@ -1,0 +1,2888 @@
+{
+  "subjects": [
+    {
+      "id": "69110cdb758c88c5d1ea2277",
+      "name": "Biology 11th"
+    },
+    {
+      "id": "69110d2b758c88c5d1ea23e0",
+      "name": "Biology 12th"
+    },
+    {
+      "id": "69110d18758c88c5d1ea2389",
+      "name": "Chemistry 11th"
+    },
+    {
+      "id": "69110d5c758c88c5d1ea24d3",
+      "name": "Chemistry 12th"
+    },
+    {
+      "id": "69110cf6758c88c5d1ea22fe",
+      "name": "Physics 11th"
+    },
+    {
+      "id": "69110d3d758c88c5d1ea2436",
+      "name": "Physics 12th"
+    }
+  ],
+  "marks": {
+    "69110cdb758c88c5d1ea2277": {
+      "id": "69110cf6758c88c5d1ea22fc",
+      "name": "4"
+    },
+    "69110d2b758c88c5d1ea23e0": {
+      "id": "69110d3d758c88c5d1ea2434",
+      "name": "4"
+    },
+    "69110d18758c88c5d1ea2389": {
+      "id": "69110d2a758c88c5d1ea23dd",
+      "name": "4"
+    },
+    "69110d5c758c88c5d1ea24d3": {
+      "id": "69110d6f758c88c5d1ea252d",
+      "name": "4"
+    },
+    "69110cf6758c88c5d1ea22fe": {
+      "id": "69110d14758c88c5d1ea2387",
+      "name": "4"
+    },
+    "69110d3d758c88c5d1ea2436": {
+      "id": "69110d5c758c88c5d1ea24d1",
+      "name": "4"
+    }
+  },
+  "chapters": {
+    "69110cdb758c88c5d1ea2277": [
+      {
+        "id": "69110cdb758c88c5d1ea2278",
+        "name": "The Living World",
+        "topics": [
+          {
+            "id": "69110cdc758c88c5d1ea2279",
+            "name": "Diversity in the Living World"
+          },
+          {
+            "id": "69110cdc758c88c5d1ea227a",
+            "name": "Taxonomic Categories"
+          }
+        ]
+      },
+      {
+        "id": "69110ce4758c88c5d1ea22a6",
+        "name": "Biological Classification",
+        "topics": [
+          {
+            "id": "69110ce5758c88c5d1ea22a7",
+            "name": "Kingdom Fungi"
+          },
+          {
+            "id": "69110ce5758c88c5d1ea22a8",
+            "name": "Kingdom Animalia"
+          },
+          {
+            "id": "69110ce5758c88c5d1ea22a9",
+            "name": "Kingdom Protista"
+          },
+          {
+            "id": "69110ce5758c88c5d1ea22aa",
+            "name": "Kingdom Plantae"
+          },
+          {
+            "id": "69110ce5758c88c5d1ea22ab",
+            "name": "Kingdom Monera"
+          },
+          {
+            "id": "69110ce5758c88c5d1ea22ac",
+            "name": "Viruses, Viroids and Lichens"
+          }
+        ]
+      },
+      {
+        "id": "69110cdc758c88c5d1ea227b",
+        "name": "Plant Kingdom",
+        "topics": [
+          {
+            "id": "69110cdc758c88c5d1ea227c",
+            "name": "Algae"
+          },
+          {
+            "id": "69110cdc758c88c5d1ea227d",
+            "name": "Pteridophytes"
+          },
+          {
+            "id": "69110cdd758c88c5d1ea227e",
+            "name": "Angiosperms"
+          },
+          {
+            "id": "69110cdd758c88c5d1ea227f",
+            "name": "Gymnosperms"
+          },
+          {
+            "id": "69110cdd758c88c5d1ea2280",
+            "name": "Bryophytes"
+          }
+        ]
+      },
+      {
+        "id": "69110cdd758c88c5d1ea2281",
+        "name": "Animal Kingdom",
+        "topics": [
+          {
+            "id": "69110cde758c88c5d1ea2283",
+            "name": "Basis of Classification"
+          },
+          {
+            "id": "69110cde758c88c5d1ea2282",
+            "name": "Classification of Animals"
+          }
+        ]
+      },
+      {
+        "id": "69110ce1758c88c5d1ea2296",
+        "name": "Morphology of Flowering Plants",
+        "topics": [
+          {
+            "id": "69110ce2758c88c5d1ea2297",
+            "name": "The Leaf"
+          },
+          {
+            "id": "69110ce2758c88c5d1ea2298",
+            "name": "The Flower"
+          },
+          {
+            "id": "69110ce2758c88c5d1ea2299",
+            "name": "Semi-technical Description of a Typical Flowering Plant"
+          },
+          {
+            "id": "69110ce2758c88c5d1ea229a",
+            "name": "The Stem"
+          },
+          {
+            "id": "69110ce2758c88c5d1ea229b",
+            "name": "The Inflorescence"
+          },
+          {
+            "id": "69110ce3758c88c5d1ea229c",
+            "name": "The Seed"
+          },
+          {
+            "id": "69110ce3758c88c5d1ea229d",
+            "name": "Description of Some Important Families"
+          },
+          {
+            "id": "69110ce3758c88c5d1ea229e",
+            "name": "The Root"
+          },
+          {
+            "id": "69110ce3758c88c5d1ea229f",
+            "name": "The Fruit"
+          }
+        ]
+      },
+      {
+        "id": "69110cde758c88c5d1ea2284",
+        "name": "Anatomy of Flowering Plants",
+        "topics": [
+          {
+            "id": "69110cde758c88c5d1ea2285",
+            "name": "The Tissue System"
+          },
+          {
+            "id": "69110cdf758c88c5d1ea2286",
+            "name": "Anatomy of Dicotyledonous and Monocotyledonous Plants"
+          }
+        ]
+      },
+      {
+        "id": "69110ce6758c88c5d1ea22ad",
+        "name": "Structural Organisation in Animals",
+        "topics": [
+          {
+            "id": "69110ce6758c88c5d1ea22ae",
+            "name": "Organ and Organ System"
+          },
+          {
+            "id": "69110ce6758c88c5d1ea22af",
+            "name": "Frogs"
+          }
+        ]
+      },
+      {
+        "id": "69110cdf758c88c5d1ea2287",
+        "name": "Cell: The Unit of Life",
+        "topics": [
+          {
+            "id": "69110cdf758c88c5d1ea2288",
+            "name": "What is a Cell?"
+          },
+          {
+            "id": "69110cdf758c88c5d1ea2289",
+            "name": "Eukaryotic Cells"
+          },
+          {
+            "id": "69110cdf758c88c5d1ea228a",
+            "name": "Cell Theory"
+          },
+          {
+            "id": "69110cdf758c88c5d1ea228b",
+            "name": "Prokaryotic Cells"
+          },
+          {
+            "id": "69110ce0758c88c5d1ea228c",
+            "name": "An Overview of Cell"
+          }
+        ]
+      },
+      {
+        "id": "69110ce0758c88c5d1ea228d",
+        "name": "Biomolecules",
+        "topics": [
+          {
+            "id": "69110ce0758c88c5d1ea228e",
+            "name": "How to Analyse Chemical Composition?"
+          },
+          {
+            "id": "69110ce0758c88c5d1ea228f",
+            "name": "Polysaccharides"
+          },
+          {
+            "id": "69110ce0758c88c5d1ea2290",
+            "name": "Nucleic Acids"
+          },
+          {
+            "id": "69110ce1758c88c5d1ea2291",
+            "name": "Primary and Secondary Metabolites"
+          },
+          {
+            "id": "69110ce1758c88c5d1ea2292",
+            "name": "Biomacromolecules"
+          },
+          {
+            "id": "69110ce1758c88c5d1ea2293",
+            "name": "Structure of Proteins"
+          },
+          {
+            "id": "69110ce1758c88c5d1ea2294",
+            "name": "Enzymes"
+          },
+          {
+            "id": "69110ce1758c88c5d1ea2295",
+            "name": "Proteins"
+          }
+        ]
+      },
+      {
+        "id": "69110ce3758c88c5d1ea22a0",
+        "name": "Cell Cycle and Cell Division",
+        "topics": [
+          {
+            "id": "69110ce4758c88c5d1ea22a1",
+            "name": "Cell Cycle"
+          },
+          {
+            "id": "69110ce4758c88c5d1ea22a2",
+            "name": "Significance of Meiosis"
+          },
+          {
+            "id": "69110ce4758c88c5d1ea22a3",
+            "name": "M Phase"
+          },
+          {
+            "id": "69110ce4758c88c5d1ea22a4",
+            "name": "Significance of Mitosis"
+          },
+          {
+            "id": "69110ce4758c88c5d1ea22a5",
+            "name": "Meiosis"
+          }
+        ]
+      },
+      {
+        "id": "69110ce6758c88c5d1ea22b0",
+        "name": "Photosynthesis in Higher Plants",
+        "topics": [
+          {
+            "id": "69110ce7758c88c5d1ea22b1",
+            "name": "What do we Know?"
+          },
+          {
+            "id": "69110ce7758c88c5d1ea22b2",
+            "name": "What is Light Reaction?"
+          },
+          {
+            "id": "69110ce7758c88c5d1ea22b3",
+            "name": "The Electron Transport"
+          },
+          {
+            "id": "69110ce7758c88c5d1ea22b4",
+            "name": "Factors affecting Photosynthesis"
+          },
+          {
+            "id": "69110ce7758c88c5d1ea22b5",
+            "name": "Early Experiments"
+          },
+          {
+            "id": "69110ce8758c88c5d1ea22b6",
+            "name": "Where does Photosynthesis take place?"
+          },
+          {
+            "id": "69110ce8758c88c5d1ea22b7",
+            "name": "Where are the ATP and NADPH Used?"
+          },
+          {
+            "id": "69110ce8758c88c5d1ea22b8",
+            "name": "The C4  Pathway"
+          },
+          {
+            "id": "69110ce8758c88c5d1ea22b9",
+            "name": "How many Pigments are involved in Photosynthesis?"
+          },
+          {
+            "id": "69110ce8758c88c5d1ea22ba",
+            "name": "Hotorespiration"
+          }
+        ]
+      },
+      {
+        "id": "69110cf0758c88c5d1ea22e1",
+        "name": "Respiration in Plants",
+        "topics": [
+          {
+            "id": "69110cf1758c88c5d1ea22e2",
+            "name": "Do Plants Breathe?"
+          },
+          {
+            "id": "69110cf1758c88c5d1ea22e3",
+            "name": "The Respiratory Balance Sheet"
+          },
+          {
+            "id": "69110cf2758c88c5d1ea22e4",
+            "name": "Amphibolic Pathway"
+          },
+          {
+            "id": "69110cf2758c88c5d1ea22e5",
+            "name": "Glycolysis"
+          },
+          {
+            "id": "69110cf2758c88c5d1ea22e6",
+            "name": "Aerobic Respiration"
+          },
+          {
+            "id": "69110cf2758c88c5d1ea22e7",
+            "name": "Respiratory Quotient"
+          },
+          {
+            "id": "69110cf2758c88c5d1ea22e8",
+            "name": "Fermentation"
+          }
+        ]
+      },
+      {
+        "id": "69110ce8758c88c5d1ea22bb",
+        "name": "Plant Growth and Development",
+        "topics": [
+          {
+            "id": "69110ce9758c88c5d1ea22bc",
+            "name": "Differentiation, Dedifferentiation and Redifferentiation"
+          },
+          {
+            "id": "69110ce9758c88c5d1ea22bd",
+            "name": "Growth"
+          },
+          {
+            "id": "69110ce9758c88c5d1ea22be",
+            "name": "Plant Growth Regulators"
+          },
+          {
+            "id": "69110ce9758c88c5d1ea22bf",
+            "name": "Development"
+          }
+        ]
+      },
+      {
+        "id": "69110ce9758c88c5d1ea22c0",
+        "name": "Breathing and Exchange of Gases",
+        "topics": [
+          {
+            "id": "69110cea758c88c5d1ea22c1",
+            "name": "Respiratory Organs"
+          },
+          {
+            "id": "69110cea758c88c5d1ea22c2",
+            "name": "Regulation of Respiration"
+          },
+          {
+            "id": "69110cea758c88c5d1ea22c3",
+            "name": "Exchange of Gases"
+          },
+          {
+            "id": "69110cea758c88c5d1ea22c4",
+            "name": "Transport of Gases"
+          },
+          {
+            "id": "69110cea758c88c5d1ea22c5",
+            "name": "Disorders of Respiratory System"
+          },
+          {
+            "id": "69110cea758c88c5d1ea22c6",
+            "name": "Mechanism of Breathing"
+          }
+        ]
+      },
+      {
+        "id": "69110ceb758c88c5d1ea22c7",
+        "name": "Body Fluids and Circulation",
+        "topics": [
+          {
+            "id": "69110ceb758c88c5d1ea22c8",
+            "name": "Circulatory Pathways"
+          },
+          {
+            "id": "69110ceb758c88c5d1ea22c9",
+            "name": "Regulation of Cardiac Activity"
+          },
+          {
+            "id": "69110ceb758c88c5d1ea22ca",
+            "name": "Lymph (Tissue Fluid)"
+          },
+          {
+            "id": "69110cec758c88c5d1ea22cb",
+            "name": "Blood"
+          },
+          {
+            "id": "69110cec758c88c5d1ea22cc",
+            "name": "Double Circulation"
+          },
+          {
+            "id": "69110cec758c88c5d1ea22cd",
+            "name": "Disorders of Circulatory System"
+          }
+        ]
+      },
+      {
+        "id": "69110cee758c88c5d1ea22d3",
+        "name": "Excretory Products and Their Elimination",
+        "topics": [
+          {
+            "id": "69110cee758c88c5d1ea22d4",
+            "name": "Regulation of Kidney Function"
+          },
+          {
+            "id": "69110cee758c88c5d1ea22d5",
+            "name": "Function of the Tubules"
+          },
+          {
+            "id": "69110cee758c88c5d1ea22d6",
+            "name": "Disorders of the Excretory System"
+          },
+          {
+            "id": "69110cee758c88c5d1ea22d7",
+            "name": "Mechanism of Concentration of the Filtrate"
+          },
+          {
+            "id": "69110cef758c88c5d1ea22d8",
+            "name": "Urine Formation"
+          },
+          {
+            "id": "69110cef758c88c5d1ea22d9",
+            "name": "Human Excretory System"
+          },
+          {
+            "id": "69110cef758c88c5d1ea22da",
+            "name": "Role of other Organs in Excretion"
+          },
+          {
+            "id": "69110cef758c88c5d1ea22db",
+            "name": "Micturition"
+          }
+        ]
+      },
+      {
+        "id": "69110cf2758c88c5d1ea22e9",
+        "name": "Locomotion and Movement",
+        "topics": [
+          {
+            "id": "69110cf3758c88c5d1ea22ea",
+            "name": "Types of Movement"
+          },
+          {
+            "id": "69110cf3758c88c5d1ea22eb",
+            "name": "Disorders of Muscular and Skeletal System"
+          },
+          {
+            "id": "69110cf3758c88c5d1ea22ec",
+            "name": "Skeletal System"
+          },
+          {
+            "id": "69110cf3758c88c5d1ea22ed",
+            "name": "Muscle"
+          },
+          {
+            "id": "69110cf3758c88c5d1ea22ee",
+            "name": "Joints"
+          }
+        ]
+      },
+      {
+        "id": "69110cef758c88c5d1ea22dc",
+        "name": "Neural Control and Coordination",
+        "topics": [
+          {
+            "id": "69110cf0758c88c5d1ea22dd",
+            "name": "Neuron as Structural and Functional Unit of Neural System"
+          },
+          {
+            "id": "69110cf0758c88c5d1ea22de",
+            "name": "Human Neural System"
+          },
+          {
+            "id": "69110cf0758c88c5d1ea22df",
+            "name": "Central Neural System"
+          },
+          {
+            "id": "69110cf0758c88c5d1ea22e0",
+            "name": "Neural System"
+          }
+        ]
+      },
+      {
+        "id": "69110cec758c88c5d1ea22ce",
+        "name": "Chemical Coordination and Integration",
+        "topics": [
+          {
+            "id": "69110ced758c88c5d1ea22cf",
+            "name": "Endocrine Glands and Hormones"
+          },
+          {
+            "id": "69110ced758c88c5d1ea22d0",
+            "name": "Hormones of Heart, Kidney and Gastrointestinal Tract"
+          },
+          {
+            "id": "69110ced758c88c5d1ea22d1",
+            "name": "Mechanism of Hormone Action"
+          },
+          {
+            "id": "69110cee758c88c5d1ea22d2",
+            "name": "Human Endocrine System"
+          }
+        ]
+      },
+      {
+        "id": "69110cf3758c88c5d1ea22ef",
+        "name": "Experimental Biology",
+        "topics": [
+          {
+            "id": "69110cf4758c88c5d1ea22f0",
+            "name": "Plant Anatomy"
+          },
+          {
+            "id": "69110cf5758c88c5d1ea22f7",
+            "name": "Dicot Stem"
+          },
+          {
+            "id": "69110cf4758c88c5d1ea22f2",
+            "name": "Monocot Stem"
+          },
+          {
+            "id": "69110cf4758c88c5d1ea22f5",
+            "name": "Dicot Root"
+          },
+          {
+            "id": "69110cf4758c88c5d1ea22f1",
+            "name": "Momocot Roots"
+          },
+          {
+            "id": "69110cf4758c88c5d1ea22f3",
+            "name": "Dicotyledonous Leaf"
+          },
+          {
+            "id": "69110cf5758c88c5d1ea22f8",
+            "name": "Monocotyledonous Leaf "
+          },
+          {
+            "id": "69110cf4758c88c5d1ea22f4",
+            "name": "Human Skeletal System"
+          },
+          {
+            "id": "69110cf5758c88c5d1ea22f6",
+            "name": "Morphology of Flowering Plants"
+          }
+        ]
+      }
+    ],
+    "69110d2b758c88c5d1ea23e0": [
+      {
+        "id": "69110d2b758c88c5d1ea23e1",
+        "name": "SEXUAL REPRODUCTION IN FLOWERING PLANTS",
+        "topics": [
+          {
+            "id": "69110d2c758c88c5d1ea23e2",
+            "name": "Pre-fertilisation : Structures and Events"
+          },
+          {
+            "id": "69110d2c758c88c5d1ea23e3",
+            "name": "Double Fertilisation"
+          },
+          {
+            "id": "69110d2c758c88c5d1ea23e4",
+            "name": "Apomixis and Polyembryony"
+          },
+          {
+            "id": "69110d2c758c88c5d1ea23e5",
+            "name": "Post-fertilisation: Structures and Events"
+          },
+          {
+            "id": "69110d2c758c88c5d1ea23e6",
+            "name": "Flower – A Fascinating Organ of Angiosperms"
+          }
+        ]
+      },
+      {
+        "id": "69110d37758c88c5d1ea2419",
+        "name": "HUMAN REPRODUCTION",
+        "topics": [
+          {
+            "id": "69110d37758c88c5d1ea241a",
+            "name": "The Female Reproductive System"
+          },
+          {
+            "id": "69110d37758c88c5d1ea241b",
+            "name": "The Male Reproductive System"
+          },
+          {
+            "id": "69110d38758c88c5d1ea241c",
+            "name": "Fertilisation and Implantation"
+          },
+          {
+            "id": "69110d38758c88c5d1ea241d",
+            "name": "Pregnancy and Embryonic Development"
+          },
+          {
+            "id": "69110d38758c88c5d1ea241e",
+            "name": "Parturition and Lactation"
+          },
+          {
+            "id": "69110d38758c88c5d1ea241f",
+            "name": "Menstrual Cycle"
+          },
+          {
+            "id": "69110d38758c88c5d1ea2420",
+            "name": "Gametogenesis"
+          }
+        ]
+      },
+      {
+        "id": "69110d2c758c88c5d1ea23e7",
+        "name": "REPRODUCTIVE HEALTH",
+        "topics": [
+          {
+            "id": "69110d2d758c88c5d1ea23e8",
+            "name": "Population Explosion and Birth Control"
+          },
+          {
+            "id": "69110d2d758c88c5d1ea23e9",
+            "name": "Infertility"
+          },
+          {
+            "id": "69110d2d758c88c5d1ea23ea",
+            "name": "Medical Termination of Pregnancy"
+          },
+          {
+            "id": "69110d2e758c88c5d1ea23eb",
+            "name": "Sexually Transmitted Diseases"
+          },
+          {
+            "id": "69110d2e758c88c5d1ea23ec",
+            "name": "Reproductive Health – Problems and Strategies"
+          }
+        ]
+      },
+      {
+        "id": "69110d34758c88c5d1ea2409",
+        "name": "PRINCIPLES OF INHERITANCE AND VARIATION",
+        "topics": [
+          {
+            "id": "69110d34758c88c5d1ea240a",
+            "name": "Mendel’s Laws of Inheritance"
+          },
+          {
+            "id": "69110d34758c88c5d1ea240b",
+            "name": "Inheritance of One Gene"
+          },
+          {
+            "id": "69110d34758c88c5d1ea240c",
+            "name": "Inheritance of Two Genes"
+          },
+          {
+            "id": "69110d34758c88c5d1ea240d",
+            "name": "Mutation"
+          },
+          {
+            "id": "69110d34758c88c5d1ea240e",
+            "name": "Genetic Disorders"
+          },
+          {
+            "id": "69110d35758c88c5d1ea240f",
+            "name": "Sex Determination"
+          }
+        ]
+      },
+      {
+        "id": "69110d32758c88c5d1ea23fe",
+        "name": "MOLECULAR BASIS OF INHERITANCE",
+        "topics": [
+          {
+            "id": "69110d32758c88c5d1ea23ff",
+            "name": "RNA World"
+          },
+          {
+            "id": "69110d32758c88c5d1ea2400",
+            "name": "Transcription"
+          },
+          {
+            "id": "69110d32758c88c5d1ea2401",
+            "name": "Regulation of Gene Expression"
+          },
+          {
+            "id": "69110d32758c88c5d1ea2402",
+            "name": "DNA Fingerprinting"
+          },
+          {
+            "id": "69110d33758c88c5d1ea2403",
+            "name": "The Search for Genetic Material"
+          },
+          {
+            "id": "69110d33758c88c5d1ea2404",
+            "name": "Translation"
+          },
+          {
+            "id": "69110d33758c88c5d1ea2405",
+            "name": "The DNA"
+          },
+          {
+            "id": "69110d33758c88c5d1ea2406",
+            "name": "Replication"
+          },
+          {
+            "id": "69110d33758c88c5d1ea2407",
+            "name": "Genetic Code"
+          },
+          {
+            "id": "69110d33758c88c5d1ea2408",
+            "name": "Human Genome Project"
+          }
+        ]
+      },
+      {
+        "id": "69110d2e758c88c5d1ea23ed",
+        "name": "EVOLUTION",
+        "topics": [
+          {
+            "id": "69110d2f758c88c5d1ea23ee",
+            "name": "Origin of Life"
+          },
+          {
+            "id": "69110d2f758c88c5d1ea23ef",
+            "name": "Biological Evolution"
+          },
+          {
+            "id": "69110d2f758c88c5d1ea23f0",
+            "name": "Mechanism of Evolution"
+          },
+          {
+            "id": "69110d2f758c88c5d1ea23f1",
+            "name": "Evolution of Life Forms - A Theory"
+          },
+          {
+            "id": "69110d2f758c88c5d1ea23f2",
+            "name": "Hardy - Weinberg Principle"
+          },
+          {
+            "id": "69110d30758c88c5d1ea23f3",
+            "name": "What is Adaptive Radiation?"
+          },
+          {
+            "id": "69110d30758c88c5d1ea23f4",
+            "name": "What are the Evidences for Evolution?"
+          },
+          {
+            "id": "69110d30758c88c5d1ea23f5",
+            "name": "Origin and Evolution of Man"
+          },
+          {
+            "id": "69110d30758c88c5d1ea23f6",
+            "name": "A Brief Account of Evolution"
+          }
+        ]
+      },
+      {
+        "id": "69110d39758c88c5d1ea2421",
+        "name": "HUMAN HEALTH AND DISEASES",
+        "topics": [
+          {
+            "id": "69110d39758c88c5d1ea2422",
+            "name": "Common Diseases in Humans"
+          },
+          {
+            "id": "69110d39758c88c5d1ea2423",
+            "name": "AIDS"
+          },
+          {
+            "id": "69110d39758c88c5d1ea2424",
+            "name": "Drugs and Alcohol Abuse"
+          },
+          {
+            "id": "69110d39758c88c5d1ea2425",
+            "name": "Cancer"
+          },
+          {
+            "id": "69110d3a758c88c5d1ea2426",
+            "name": "Immunity"
+          }
+        ]
+      },
+      {
+        "id": "69110d30758c88c5d1ea23f7",
+        "name": "MICROBES IN HUMAN WELFARE",
+        "topics": [
+          {
+            "id": "69110d30758c88c5d1ea23f8",
+            "name": "Microbes in Sewage Treatment"
+          },
+          {
+            "id": "69110d31758c88c5d1ea23f9",
+            "name": "Microbes as Biocontrol Agents"
+          },
+          {
+            "id": "69110d31758c88c5d1ea23fa",
+            "name": "Microbes in Industrial Products"
+          },
+          {
+            "id": "69110d31758c88c5d1ea23fb",
+            "name": "Microbes in Production of Biogas"
+          },
+          {
+            "id": "69110d31758c88c5d1ea23fc",
+            "name": "Microbes in Household Products"
+          },
+          {
+            "id": "69110d31758c88c5d1ea23fd",
+            "name": "Microbes as Biofertilisers"
+          }
+        ]
+      },
+      {
+        "id": "69110d36758c88c5d1ea2415",
+        "name": "BIOTECHNOLOGY: PRINCIPLES AND PROCESSES",
+        "topics": [
+          {
+            "id": "69110d36758c88c5d1ea2416",
+            "name": "Principles of Biotechnology"
+          },
+          {
+            "id": "69110d37758c88c5d1ea2417",
+            "name": "Tools of Recombinant DNA Technology"
+          },
+          {
+            "id": "69110d37758c88c5d1ea2418",
+            "name": "Processes of Recombinant DNA Technology"
+          }
+        ]
+      },
+      {
+        "id": "69110d35758c88c5d1ea2410",
+        "name": "BIOTECHNOLOGY AND ITS APPLICATIONS",
+        "topics": [
+          {
+            "id": "69110d35758c88c5d1ea2411",
+            "name": "Biotechnological Applications in Agriculture"
+          },
+          {
+            "id": "69110d35758c88c5d1ea2412",
+            "name": "Transgenic Animals"
+          },
+          {
+            "id": "69110d36758c88c5d1ea2413",
+            "name": "Ethical Issues"
+          },
+          {
+            "id": "69110d36758c88c5d1ea2414",
+            "name": "Biotechnological Applications in Medicine"
+          }
+        ]
+      },
+      {
+        "id": "69110d3a758c88c5d1ea2427",
+        "name": "ORGANISMS AND POPULATION",
+        "topics": [
+          {
+            "id": "69110d3a758c88c5d1ea2428",
+            "name": "Populations"
+          }
+        ]
+      },
+      {
+        "id": "69110d3b758c88c5d1ea242c",
+        "name": "ECOSYSTEM",
+        "topics": [
+          {
+            "id": "69110d3b758c88c5d1ea242d",
+            "name": "Productivity"
+          },
+          {
+            "id": "69110d3b758c88c5d1ea242e",
+            "name": "Ecosystem–Structure and Function"
+          },
+          {
+            "id": "69110d3b758c88c5d1ea242f",
+            "name": "Ecological Pyramids"
+          },
+          {
+            "id": "69110d3c758c88c5d1ea2430",
+            "name": "Energy Flow"
+          },
+          {
+            "id": "69110d3c758c88c5d1ea2431",
+            "name": "Decomposition"
+          }
+        ]
+      },
+      {
+        "id": "69110d3a758c88c5d1ea2429",
+        "name": "BIODIVERSITY AND ITS CONSERVATION",
+        "topics": [
+          {
+            "id": "69110d3b758c88c5d1ea242b",
+            "name": "Biodiversity"
+          },
+          {
+            "id": "69110d3b758c88c5d1ea242a",
+            "name": "Biodiversity Conservation"
+          }
+        ]
+      }
+    ],
+    "69110d18758c88c5d1ea2389": [
+      {
+        "id": "69110d18758c88c5d1ea238a",
+        "name": "Some Basic Concepts of Chemistry",
+        "topics": [
+          {
+            "id": "69110d18758c88c5d1ea238b",
+            "name": "Properties of Matter and their Measurement"
+          },
+          {
+            "id": "69110d19758c88c5d1ea238c",
+            "name": "Laws of Chemical Combinations"
+          },
+          {
+            "id": "69110d19758c88c5d1ea238d",
+            "name": "Mole Concept and Molar Masses "
+          },
+          {
+            "id": "69110d19758c88c5d1ea238e",
+            "name": "Stoichiometry and Stoichiometric Calculations"
+          },
+          {
+            "id": "69110d19758c88c5d1ea238f",
+            "name": "Nature of Matter"
+          },
+          {
+            "id": "69110d19758c88c5d1ea2390",
+            "name": "Uncertainty in Measurement"
+          },
+          {
+            "id": "69110d1a758c88c5d1ea2391",
+            "name": "Atomic and Molecular Masses"
+          },
+          {
+            "id": "69110d1a758c88c5d1ea2392",
+            "name": "Percentage Composition"
+          },
+          {
+            "id": "69110d1a758c88c5d1ea2393",
+            "name": "Importance of Chemistry"
+          },
+          {
+            "id": "69110d1a758c88c5d1ea2394",
+            "name": "Dalton’s Atomic Theory"
+          }
+        ]
+      },
+      {
+        "id": "69110d27758c88c5d1ea23cf",
+        "name": "Structure of Atom",
+        "topics": [
+          {
+            "id": "69110d28758c88c5d1ea23d0",
+            "name": "Developments Leading to the Bohr’s Model of Atom"
+          },
+          {
+            "id": "69110d28758c88c5d1ea23d1",
+            "name": "Towards Quantum Mechanical Model of the Atom"
+          },
+          {
+            "id": "69110d28758c88c5d1ea23d2",
+            "name": "Bohr’s Model for Hydrogen Atom"
+          },
+          {
+            "id": "69110d28758c88c5d1ea23d3",
+            "name": "Atomic Models"
+          },
+          {
+            "id": "69110d28758c88c5d1ea23d4",
+            "name": "Discovery of Sub-atomic Particles"
+          },
+          {
+            "id": "69110d29758c88c5d1ea23d5",
+            "name": "Quantum Mechanical Model of Atom"
+          }
+        ]
+      },
+      {
+        "id": "69110d1a758c88c5d1ea2395",
+        "name": "Classification of Elements and Periodicity in Properties",
+        "topics": [
+          {
+            "id": "69110d1b758c88c5d1ea2396",
+            "name": "Modern Periodic Law and the Present Form of the Periodic Table"
+          },
+          {
+            "id": "69110d1b758c88c5d1ea2397",
+            "name": "Electronic Configurations of Elements and the Periodic Table"
+          },
+          {
+            "id": "69110d1b758c88c5d1ea2398",
+            "name": "Nomenclature of Elements with Atomic Numbers > 100"
+          },
+          {
+            "id": "69110d1b758c88c5d1ea2399",
+            "name": "Genesis of Periodic Classification"
+          },
+          {
+            "id": "69110d1b758c88c5d1ea239a",
+            "name": "Why do we Need to Classify Elements?"
+          },
+          {
+            "id": "69110d1c758c88c5d1ea239b",
+            "name": "Periodic Trends in Properties of Elements"
+          },
+          {
+            "id": "69110d1c758c88c5d1ea239c",
+            "name": "Electronic Configurations and Types of Elements: s-, p-, d-, f- Blocks"
+          }
+        ]
+      },
+      {
+        "id": "69110d1e758c88c5d1ea23a5",
+        "name": "Chemical Bonding and Molecular Structure",
+        "topics": [
+          {
+            "id": "69110d1e758c88c5d1ea23a6",
+            "name": "Valence Bond Theory"
+          },
+          {
+            "id": "69110d1e758c88c5d1ea23a7",
+            "name": "Bond Parameters"
+          },
+          {
+            "id": "69110d1f758c88c5d1ea23a8",
+            "name": "Bonding in Some Homonuclear Diatomic Molecules"
+          },
+          {
+            "id": "69110d20758c88c5d1ea23a9",
+            "name": "Kössel-Lewis Approach to Chemical Bonding"
+          },
+          {
+            "id": "69110d21758c88c5d1ea23aa",
+            "name": "The Valence Shell Electron Pair Repulsion (VSEPR) Theory"
+          },
+          {
+            "id": "69110d21758c88c5d1ea23ab",
+            "name": "Hybridisation"
+          },
+          {
+            "id": "69110d21758c88c5d1ea23ac",
+            "name": "Hydrogen Bonding"
+          },
+          {
+            "id": "69110d21758c88c5d1ea23ad",
+            "name": "Ionic or Electrovalent Bond"
+          },
+          {
+            "id": "69110d21758c88c5d1ea23ae",
+            "name": "Molecular Orbital Theory"
+          }
+        ]
+      },
+      {
+        "id": "69110d1c758c88c5d1ea239d",
+        "name": "Thermodynamics",
+        "topics": [
+          {
+            "id": "69110d1c758c88c5d1ea239e",
+            "name": "Measurement of ∆U and ∆H: Calorimetry"
+          },
+          {
+            "id": "69110d1c758c88c5d1ea239f",
+            "name": "Enthalpies for Different Types of Reactions"
+          },
+          {
+            "id": "69110d1d758c88c5d1ea23a0",
+            "name": "Enthalpy Change, ∆rH of a Reaction – Reaction Enthalpy"
+          },
+          {
+            "id": "69110d1d758c88c5d1ea23a1",
+            "name": "Thermodynamic Terms"
+          },
+          {
+            "id": "69110d1d758c88c5d1ea23a2",
+            "name": "Applications"
+          },
+          {
+            "id": "69110d1d758c88c5d1ea23a3",
+            "name": "Spontaneity"
+          },
+          {
+            "id": "69110d1d758c88c5d1ea23a4",
+            "name": "Gibbs Energy Change and Equilibrium"
+          }
+        ]
+      },
+      {
+        "id": "69110d24758c88c5d1ea23ba",
+        "name": "Equilibrium",
+        "topics": [
+          {
+            "id": "69110d24758c88c5d1ea23bb",
+            "name": "Equilibrium in Chemical Processes – Dynamic Equilibrium"
+          },
+          {
+            "id": "69110d24758c88c5d1ea23bc",
+            "name": "Equilibrium in Physical Processes"
+          },
+          {
+            "id": "69110d24758c88c5d1ea23bd",
+            "name": "Heterogeneous Equilibria"
+          },
+          {
+            "id": "69110d24758c88c5d1ea23be",
+            "name": "Applications of Equilibrium Constants"
+          },
+          {
+            "id": "69110d25758c88c5d1ea23bf",
+            "name": "Relationship between Equilibrium Constant K, Reaction Quotient Q and Gibbs Energy G"
+          },
+          {
+            "id": "69110d25758c88c5d1ea23c0",
+            "name": "Acids, Bases and Salts"
+          },
+          {
+            "id": "69110d25758c88c5d1ea23c1",
+            "name": "Homogeneous Equilibria"
+          },
+          {
+            "id": "69110d25758c88c5d1ea23c2",
+            "name": "Ionic Equilibrium in Solution"
+          },
+          {
+            "id": "69110d25758c88c5d1ea23c3",
+            "name": "Law of Chemical Equilibrium and Equilibrium Constant"
+          },
+          {
+            "id": "69110d25758c88c5d1ea23c4",
+            "name": "Factors Affecting Equilibria"
+          },
+          {
+            "id": "69110d26758c88c5d1ea23c5",
+            "name": "Ionization of Acids and Bases"
+          },
+          {
+            "id": "69110d26758c88c5d1ea23c6",
+            "name": "Buffer Solutions"
+          },
+          {
+            "id": "69110d26758c88c5d1ea23c7",
+            "name": "Solubility Equilibria of Sparingly Soluble Salts"
+          }
+        ]
+      },
+      {
+        "id": "69110d29758c88c5d1ea23d6",
+        "name": "Redox Reactions",
+        "topics": [
+          {
+            "id": "69110d29758c88c5d1ea23d7",
+            "name": "Oxidation Number"
+          },
+          {
+            "id": "69110d29758c88c5d1ea23d8",
+            "name": "Redox Reactions and Electrode Processes"
+          },
+          {
+            "id": "69110d29758c88c5d1ea23d9",
+            "name": "Redox Reactions in Terms of Electron Transfer Reactions "
+          },
+          {
+            "id": "69110d29758c88c5d1ea23da",
+            "name": "Classical Idea of Redox Reactions-Oxidation and Reduction Reactions"
+          }
+        ]
+      },
+      {
+        "id": "69110d22758c88c5d1ea23af",
+        "name": "Organic Chemistry – Some Basic Principles and Techniques",
+        "topics": [
+          {
+            "id": "69110d22758c88c5d1ea23b0",
+            "name": "General Introduction"
+          },
+          {
+            "id": "69110d22758c88c5d1ea23b1",
+            "name": "Nomenclature of Organic Compounds"
+          },
+          {
+            "id": "69110d22758c88c5d1ea23b2",
+            "name": "Isomerism"
+          },
+          {
+            "id": "69110d23758c88c5d1ea23b3",
+            "name": "Quantitative Analysis"
+          },
+          {
+            "id": "69110d23758c88c5d1ea23b4",
+            "name": "Tetravalence of Carbon: Shapes of Organic Compounds"
+          },
+          {
+            "id": "69110d23758c88c5d1ea23b5",
+            "name": "Fundamental Concepts in Organic Reaction Mechanism"
+          },
+          {
+            "id": "69110d23758c88c5d1ea23b6",
+            "name": "Structural Representations of Organic Compounds"
+          },
+          {
+            "id": "69110d23758c88c5d1ea23b7",
+            "name": "Classification of Organic Compounds"
+          },
+          {
+            "id": "69110d23758c88c5d1ea23b8",
+            "name": "Methods of Purification of Organic Compounds"
+          },
+          {
+            "id": "69110d24758c88c5d1ea23b9",
+            "name": "Qualitative Analysis of Organic Compounds"
+          }
+        ]
+      },
+      {
+        "id": "69110d26758c88c5d1ea23c8",
+        "name": "Hydrocarbons",
+        "topics": [
+          {
+            "id": "69110d26758c88c5d1ea23c9",
+            "name": "Classification"
+          },
+          {
+            "id": "69110d27758c88c5d1ea23cb",
+            "name": "Aromatic Hydrocarbon"
+          },
+          {
+            "id": "69110d27758c88c5d1ea23cc",
+            "name": "Carcinogenicity and Toxicity"
+          },
+          {
+            "id": "69110d27758c88c5d1ea23ca",
+            "name": "Alkenes"
+          },
+          {
+            "id": "69110d27758c88c5d1ea23cd",
+            "name": "Alkynes"
+          },
+          {
+            "id": "69110d27758c88c5d1ea23ce",
+            "name": "Alkanes"
+          }
+        ]
+      }
+    ],
+    "69110d5c758c88c5d1ea24d3": [
+      {
+        "id": "69110d5c758c88c5d1ea24d4",
+        "name": "Solutions",
+        "topics": [
+          {
+            "id": "69110d5d758c88c5d1ea24d5",
+            "name": "Ideal and Non-ideal Solutions"
+          },
+          {
+            "id": "69110d5d758c88c5d1ea24d6",
+            "name": "Solubility"
+          },
+          {
+            "id": "69110d5d758c88c5d1ea24d7",
+            "name": "Vapour Pressure of Liquid Solutions"
+          },
+          {
+            "id": "69110d5d758c88c5d1ea24d8",
+            "name": "Types of Solutions"
+          },
+          {
+            "id": "69110d5d758c88c5d1ea24d9",
+            "name": "Expressing Concentration of Solutions"
+          },
+          {
+            "id": "69110d5d758c88c5d1ea24da",
+            "name": "Colligative Properties and Determination of Molar Mass"
+          },
+          {
+            "id": "69110d5e758c88c5d1ea24db",
+            "name": "Abnormal Molar Masses"
+          }
+        ]
+      },
+      {
+        "id": "69110d69758c88c5d1ea2517",
+        "name": "Electrochemistry",
+        "topics": [
+          {
+            "id": "69110d6a758c88c5d1ea2518",
+            "name": "Electrochemical Cells"
+          },
+          {
+            "id": "69110d6a758c88c5d1ea2519",
+            "name": "Nernst Equation"
+          },
+          {
+            "id": "69110d6a758c88c5d1ea251a",
+            "name": "Electrolytic Cells and Electrolysis"
+          },
+          {
+            "id": "69110d6b758c88c5d1ea251b",
+            "name": "Conductance of Electrolytic Solutions"
+          },
+          {
+            "id": "69110d6b758c88c5d1ea251c",
+            "name": "Corrosion"
+          },
+          {
+            "id": "69110d6b758c88c5d1ea251d",
+            "name": "Batteries"
+          },
+          {
+            "id": "69110d6b758c88c5d1ea251e",
+            "name": "Galvanic Cells"
+          },
+          {
+            "id": "69110d6b758c88c5d1ea251f",
+            "name": "Fuel Cells"
+          }
+        ]
+      },
+      {
+        "id": "69110d5e758c88c5d1ea24dc",
+        "name": "Chemical Kinetics",
+        "topics": [
+          {
+            "id": "69110d5e758c88c5d1ea24dd",
+            "name": "Rate of a Chemical Reaction "
+          },
+          {
+            "id": "69110d5e758c88c5d1ea24de",
+            "name": "Collision Theory of Chemical Reactions "
+          },
+          {
+            "id": "69110d5f758c88c5d1ea24df",
+            "name": "Factors Influencing Rate of a Reaction"
+          },
+          {
+            "id": "69110d5f758c88c5d1ea24e0",
+            "name": "Temperature Dependence of the Rate of a Reaction"
+          },
+          {
+            "id": "69110d5f758c88c5d1ea24e1",
+            "name": "Integrated Rate Equations"
+          }
+        ]
+      },
+      {
+        "id": "69110d66758c88c5d1ea2505",
+        "name": "The d-and f-Block Elements",
+        "topics": [
+          {
+            "id": "69110d66758c88c5d1ea2506",
+            "name": "General Properties of the Transition Elements (d-Block)"
+          },
+          {
+            "id": "69110d66758c88c5d1ea2507",
+            "name": "The Lanthanoids"
+          },
+          {
+            "id": "69110d66758c88c5d1ea2508",
+            "name": "Electronic Configurations of the d-Block Elements"
+          },
+          {
+            "id": "69110d67758c88c5d1ea2509",
+            "name": "Position in the Periodic Table"
+          },
+          {
+            "id": "69110d67758c88c5d1ea250a",
+            "name": "Some Applications of d- and f-Block Elements"
+          },
+          {
+            "id": "69110d67758c88c5d1ea250b",
+            "name": "The Actinoids "
+          },
+          {
+            "id": "69110d67758c88c5d1ea250c",
+            "name": "Some Important Compounds of Transition Elements"
+          }
+        ]
+      },
+      {
+        "id": "69110d5f758c88c5d1ea24e2",
+        "name": "Coordination Compounds",
+        "topics": [
+          {
+            "id": "69110d5f758c88c5d1ea24e3",
+            "name": "Nomenclature of Coordination Compounds"
+          },
+          {
+            "id": "69110d60758c88c5d1ea24e4",
+            "name": "Bonding in Coordination Compounds"
+          },
+          {
+            "id": "69110d60758c88c5d1ea24e5",
+            "name": "Definitions of Some Important Terms Pertaining to Coordination Compounds"
+          },
+          {
+            "id": "69110d60758c88c5d1ea24e6",
+            "name": "Werner's Theory of Coordination Compounds"
+          },
+          {
+            "id": "69110d60758c88c5d1ea24e7",
+            "name": "Importance and Applications of Coordination Compounds"
+          },
+          {
+            "id": "69110d60758c88c5d1ea24e8",
+            "name": "Bonding in Metal Carbonyls"
+          },
+          {
+            "id": "69110d60758c88c5d1ea24e9",
+            "name": "Isomerism in Coordination Compounds"
+          }
+        ]
+      },
+      {
+        "id": "69110d61758c88c5d1ea24ea",
+        "name": "Haloalkanes and Haloarenes",
+        "topics": [
+          {
+            "id": "69110d61758c88c5d1ea24eb",
+            "name": "Classification"
+          },
+          {
+            "id": "69110d61758c88c5d1ea24ec",
+            "name": "Preparation of Haloarenes"
+          },
+          {
+            "id": "69110d61758c88c5d1ea24ed",
+            "name": "Physical Properties "
+          },
+          {
+            "id": "69110d61758c88c5d1ea24ee",
+            "name": "Nomenclature"
+          },
+          {
+            "id": "69110d62758c88c5d1ea24ef",
+            "name": "Chemical Reactions"
+          },
+          {
+            "id": "69110d62758c88c5d1ea24f0",
+            "name": "Methods of Preparation of Haloalkanes"
+          },
+          {
+            "id": "69110d62758c88c5d1ea24f1",
+            "name": "Nature of C–X Bond"
+          },
+          {
+            "id": "69110d62758c88c5d1ea24f2",
+            "name": "Polyhalogen Compounds"
+          }
+        ]
+      },
+      {
+        "id": "69110d6b758c88c5d1ea2520",
+        "name": "Alcohols, Phenols and Ethers",
+        "topics": [
+          {
+            "id": "69110d6c758c88c5d1ea2521",
+            "name": "Classification"
+          },
+          {
+            "id": "69110d6c758c88c5d1ea2522",
+            "name": "Structures of Functional Groups"
+          },
+          {
+            "id": "69110d6c758c88c5d1ea2523",
+            "name": "Some Commercially Important Alcohols"
+          },
+          {
+            "id": "69110d6c758c88c5d1ea2524",
+            "name": "Ethers"
+          },
+          {
+            "id": "69110d6c758c88c5d1ea2525",
+            "name": "Alcohols and Phenols"
+          },
+          {
+            "id": "69110d6d758c88c5d1ea2526",
+            "name": "Nomenclature"
+          }
+        ]
+      },
+      {
+        "id": "69110d62758c88c5d1ea24f3",
+        "name": "Aldehydes, Ketones and Carboxylic Acids",
+        "topics": [
+          {
+            "id": "69110d63758c88c5d1ea24f4",
+            "name": "Physical Properties"
+          },
+          {
+            "id": "69110d63758c88c5d1ea24f5",
+            "name": "Uses of Aldehydes and Ketones"
+          },
+          {
+            "id": "69110d63758c88c5d1ea24f6",
+            "name": "Physical Properties"
+          },
+          {
+            "id": "69110d63758c88c5d1ea24f7",
+            "name": "Uses of Carboxylic Acids"
+          },
+          {
+            "id": "69110d63758c88c5d1ea24f8",
+            "name": "Preparation of Aldehydes and Ketones"
+          },
+          {
+            "id": "69110d63758c88c5d1ea24f9",
+            "name": "Nomenclature and Structure of Carbonyl Group"
+          },
+          {
+            "id": "69110d64758c88c5d1ea24fa",
+            "name": "Methods of Preparation of Carboxylic Acids"
+          },
+          {
+            "id": "69110d64758c88c5d1ea24fb",
+            "name": "Chemical Reactions"
+          },
+          {
+            "id": "69110d64758c88c5d1ea24fc",
+            "name": "Nomenclature and Structure of Carboxyl Group"
+          },
+          {
+            "id": "69110d64758c88c5d1ea24fd",
+            "name": "Chemical Reactions"
+          }
+        ]
+      },
+      {
+        "id": "69110d67758c88c5d1ea250d",
+        "name": "Amines",
+        "topics": [
+          {
+            "id": "69110d68758c88c5d1ea250e",
+            "name": "Nomenclature"
+          },
+          {
+            "id": "69110d68758c88c5d1ea250f",
+            "name": "Physical Properties"
+          },
+          {
+            "id": "69110d69758c88c5d1ea2516",
+            "name": "Chemical Reactions"
+          },
+          {
+            "id": "69110d68758c88c5d1ea2510",
+            "name": "Importance of Diazonium Salts in Synthesis of Aromatic Compounds"
+          },
+          {
+            "id": "69110d68758c88c5d1ea2511",
+            "name": "Classification"
+          },
+          {
+            "id": "69110d68758c88c5d1ea2512",
+            "name": "Preparation of Amines"
+          },
+          {
+            "id": "69110d68758c88c5d1ea2513",
+            "name": "Method of Preparation of Diazonium Salts"
+          },
+          {
+            "id": "69110d69758c88c5d1ea2514",
+            "name": "Chemical Reactions"
+          },
+          {
+            "id": "69110d69758c88c5d1ea2515",
+            "name": "Structure of Amines"
+          }
+        ]
+      },
+      {
+        "id": "69110d64758c88c5d1ea24fe",
+        "name": "Biomolecules",
+        "topics": [
+          {
+            "id": "69110d65758c88c5d1ea24ff",
+            "name": "Enzymes"
+          },
+          {
+            "id": "69110d65758c88c5d1ea2500",
+            "name": "Nucleic Acids"
+          },
+          {
+            "id": "69110d65758c88c5d1ea2501",
+            "name": "Vitamins"
+          },
+          {
+            "id": "69110d65758c88c5d1ea2502",
+            "name": "Proteins"
+          },
+          {
+            "id": "69110d65758c88c5d1ea2503",
+            "name": "Carbohydrates"
+          },
+          {
+            "id": "69110d66758c88c5d1ea2504",
+            "name": "Hormones"
+          }
+        ]
+      },
+      {
+        "id": "69110d6d758c88c5d1ea2527",
+        "name": "Experimental Chemistry",
+        "topics": [
+          {
+            "id": "69110d6d758c88c5d1ea2528",
+            "name": "Physical Chemistry"
+          },
+          {
+            "id": "69110d6e758c88c5d1ea2529",
+            "name": "Inorganic Chemistry"
+          },
+          {
+            "id": "69110d6f758c88c5d1ea252a",
+            "name": "Organic Chemistry"
+          }
+        ]
+      }
+    ],
+    "69110cf6758c88c5d1ea22fe": [
+      {
+        "id": "69110d12758c88c5d1ea237e",
+        "name": "Units and Measurements",
+        "topics": [
+          {
+            "id": "69110d13758c88c5d1ea2383",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d13758c88c5d1ea2381",
+            "name": "The international system of units"
+          },
+          {
+            "id": "69110d13758c88c5d1ea2384",
+            "name": "Dimensional formulae and dimensional equations"
+          },
+          {
+            "id": "69110d12758c88c5d1ea237f",
+            "name": "Significant Figures"
+          },
+          {
+            "id": "69110d13758c88c5d1ea2382",
+            "name": "Dimensions of Physical Quantities"
+          },
+          {
+            "id": "69110d12758c88c5d1ea2380",
+            "name": "Dimensional analysis and its applications"
+          }
+        ]
+      },
+      {
+        "id": "69110cf7758c88c5d1ea22ff",
+        "name": "Motion in a Straight Line",
+        "topics": [
+          {
+            "id": "69110cf8758c88c5d1ea2302",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110cf7758c88c5d1ea2300",
+            "name": "Acceleration"
+          },
+          {
+            "id": "69110cf8758c88c5d1ea2301",
+            "name": "Relative velocity"
+          },
+          {
+            "id": "69110cf8758c88c5d1ea2303",
+            "name": "Instantaneous velocity and speed"
+          },
+          {
+            "id": "69110cf8758c88c5d1ea2304",
+            "name": "Kinematic equations for uniformly accelerated motion"
+          }
+        ]
+      },
+      {
+        "id": "69110d09758c88c5d1ea2353",
+        "name": "Motion in a Plane",
+        "topics": [
+          {
+            "id": "69110d09758c88c5d1ea2354",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d0a758c88c5d1ea2355",
+            "name": "Resolution of vectors"
+          },
+          {
+            "id": "69110d0a758c88c5d1ea2356",
+            "name": "Addition and subtraction of vectors — graphical method"
+          },
+          {
+            "id": "69110d0a758c88c5d1ea2357",
+            "name": "Multiplication of vectors by real numbers"
+          },
+          {
+            "id": "69110d0a758c88c5d1ea2358",
+            "name": " Uniform circular motion"
+          },
+          {
+            "id": "69110d0a758c88c5d1ea2359",
+            "name": "Motion in a plane with constant acceleration"
+          },
+          {
+            "id": "69110d0b758c88c5d1ea235a",
+            "name": "Projectile motion"
+          },
+          {
+            "id": "69110d0b758c88c5d1ea235b",
+            "name": "Vector addition — analytical method"
+          },
+          {
+            "id": "69110d0b758c88c5d1ea235c",
+            "name": "Scalars and vectors"
+          },
+          {
+            "id": "69110d0b758c88c5d1ea235d",
+            "name": "Motion in a plane"
+          }
+        ]
+      },
+      {
+        "id": "69110cfb758c88c5d1ea2312",
+        "name": "Laws of Motion",
+        "topics": [
+          {
+            "id": "69110cfc758c88c5d1ea231b",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110cfb758c88c5d1ea2313",
+            "name": "The law of inertia"
+          },
+          {
+            "id": "69110cfb758c88c5d1ea2314",
+            "name": "Newton’s second law of motion"
+          },
+          {
+            "id": "69110cfc758c88c5d1ea2315",
+            "name": "Equilibrium of a particle"
+          },
+          {
+            "id": "69110cfc758c88c5d1ea2316",
+            "name": "Circular motion"
+          },
+          {
+            "id": "69110cfc758c88c5d1ea2317",
+            "name": "Newton’s first law of motion"
+          },
+          {
+            "id": "69110cfc758c88c5d1ea2318",
+            "name": "Aristotle’s fallacy"
+          },
+          {
+            "id": "69110cfc758c88c5d1ea2319",
+            "name": "Common forces in mechanics"
+          },
+          {
+            "id": "69110cfc758c88c5d1ea231a",
+            "name": "Conservation of momentum"
+          },
+          {
+            "id": "69110cfd758c88c5d1ea231c",
+            "name": "Newton’s third law of motion"
+          },
+          {
+            "id": "69110cfd758c88c5d1ea231d",
+            "name": "Solving problems in mechanics"
+          }
+        ]
+      },
+      {
+        "id": "69110cfd758c88c5d1ea231e",
+        "name": "Work, Energy and Power",
+        "topics": [
+          {
+            "id": "69110cfd758c88c5d1ea231f",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110cfd758c88c5d1ea2320",
+            "name": "Work done by a variable force"
+          },
+          {
+            "id": "69110cfe758c88c5d1ea2321",
+            "name": "Work"
+          },
+          {
+            "id": "69110cfe758c88c5d1ea2322",
+            "name": "Kinetic energy"
+          },
+          {
+            "id": "69110cfe758c88c5d1ea2323",
+            "name": "The conservation of mechanical energy"
+          },
+          {
+            "id": "69110cfe758c88c5d1ea2324",
+            "name": "Power"
+          },
+          {
+            "id": "69110cfe758c88c5d1ea2325",
+            "name": "The potential energy of a spring"
+          },
+          {
+            "id": "69110cfe758c88c5d1ea2326",
+            "name": "The work-energy theorem for a variable force"
+          },
+          {
+            "id": "69110cff758c88c5d1ea2327",
+            "name": "Notions of work and kinetic energy : The work-energy theorem"
+          },
+          {
+            "id": "69110cff758c88c5d1ea2328",
+            "name": "The concept of potential energy"
+          },
+          {
+            "id": "69110cff758c88c5d1ea2329",
+            "name": " Collisions"
+          }
+        ]
+      },
+      {
+        "id": "69110cf8758c88c5d1ea2305",
+        "name": "System of Particles and Rotational Motion",
+        "topics": [
+          {
+            "id": "69110cf9758c88c5d1ea2306",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110cf9758c88c5d1ea2307",
+            "name": "Motion of centre of mass"
+          },
+          {
+            "id": "69110cf9758c88c5d1ea2308",
+            "name": "Vector product of two vectors"
+          },
+          {
+            "id": "69110cf9758c88c5d1ea2309",
+            "name": "Equilibrium of a rigid body"
+          },
+          {
+            "id": "69110cf9758c88c5d1ea230a",
+            "name": "Kinematics of rotational motion about a fixed axis"
+          },
+          {
+            "id": "69110cfa758c88c5d1ea230b",
+            "name": "Centre of mass"
+          },
+          {
+            "id": "69110cfa758c88c5d1ea230c",
+            "name": "Linear momentum of a system of particles"
+          },
+          {
+            "id": "69110cfa758c88c5d1ea230d",
+            "name": "Torque and angular momentum"
+          },
+          {
+            "id": "69110cfa758c88c5d1ea230e",
+            "name": "Moment of inertia"
+          },
+          {
+            "id": "69110cfa758c88c5d1ea230f",
+            "name": "Angular velocity and its relation with linear velocity"
+          },
+          {
+            "id": "69110cfa758c88c5d1ea2310",
+            "name": "Dynamics of rotational motion about a fixed axis"
+          },
+          {
+            "id": "69110cfb758c88c5d1ea2311",
+            "name": "Angular momentum in case of rotation about a fixed axis"
+          }
+        ]
+      },
+      {
+        "id": "69110cff758c88c5d1ea232a",
+        "name": "Gravitation",
+        "topics": [
+          {
+            "id": "69110cff758c88c5d1ea232b",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110cff758c88c5d1ea232c",
+            "name": "Acceleration due to gravity of the earth"
+          },
+          {
+            "id": "69110d00758c88c5d1ea232d",
+            "name": "Acceleration due to gravity below and above the surface of earth"
+          },
+          {
+            "id": "69110d00758c88c5d1ea232e",
+            "name": "Energy of an orbiting satellite"
+          },
+          {
+            "id": "69110d00758c88c5d1ea232f",
+            "name": "Kepler’s laws"
+          },
+          {
+            "id": "69110d00758c88c5d1ea2330",
+            "name": "Universal law of gravitation"
+          },
+          {
+            "id": "69110d00758c88c5d1ea2331",
+            "name": "Gravitational potential energy"
+          },
+          {
+            "id": "69110d01758c88c5d1ea2332",
+            "name": "Escape speed"
+          },
+          {
+            "id": "69110d01758c88c5d1ea2333",
+            "name": "The gravitational constant"
+          },
+          {
+            "id": "69110d01758c88c5d1ea2334",
+            "name": "Earth satellites"
+          }
+        ]
+      },
+      {
+        "id": "69110d0b758c88c5d1ea235e",
+        "name": "Mechanical Properties of Solids",
+        "topics": [
+          {
+            "id": "69110d0c758c88c5d1ea2363",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d0c758c88c5d1ea235f",
+            "name": "Hooke’s law"
+          },
+          {
+            "id": "69110d0c758c88c5d1ea2360",
+            "name": "Elastic moduli"
+          },
+          {
+            "id": "69110d0c758c88c5d1ea2361",
+            "name": "Stress-strain curve"
+          },
+          {
+            "id": "69110d0c758c88c5d1ea2362",
+            "name": "Stress and strain"
+          },
+          {
+            "id": "69110d0c758c88c5d1ea2364",
+            "name": "Applications of elastic behaviour of materials"
+          }
+        ]
+      },
+      {
+        "id": "69110d04758c88c5d1ea2341",
+        "name": "Mechanical Properties of Fluids",
+        "topics": [
+          {
+            "id": "69110d07758c88c5d1ea2346",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d07758c88c5d1ea2347",
+            "name": "Surface tension"
+          },
+          {
+            "id": "69110d06758c88c5d1ea2342",
+            "name": "Streamline flow"
+          },
+          {
+            "id": "69110d06758c88c5d1ea2343",
+            "name": "Viscosity"
+          },
+          {
+            "id": "69110d07758c88c5d1ea2344",
+            "name": "Pressure"
+          },
+          {
+            "id": "69110d07758c88c5d1ea2345",
+            "name": "Bernoulli’s principle"
+          }
+        ]
+      },
+      {
+        "id": "69110d07758c88c5d1ea2348",
+        "name": "Thermal Properties of Matter",
+        "topics": [
+          {
+            "id": "69110d08758c88c5d1ea234e",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d08758c88c5d1ea234f",
+            "name": "Heat transfer"
+          },
+          {
+            "id": "69110d09758c88c5d1ea2350",
+            "name": "Specific heat capacity"
+          },
+          {
+            "id": "69110d09758c88c5d1ea2351",
+            "name": "Temperature and heat"
+          },
+          {
+            "id": "69110d09758c88c5d1ea2352",
+            "name": "Calorimetry"
+          },
+          {
+            "id": "69110d08758c88c5d1ea2349",
+            "name": "Measurement of temperature"
+          },
+          {
+            "id": "69110d08758c88c5d1ea234a",
+            "name": "Thermal expansion"
+          },
+          {
+            "id": "69110d08758c88c5d1ea234b",
+            "name": "Change of state"
+          },
+          {
+            "id": "69110d08758c88c5d1ea234c",
+            "name": "Newton’s law of cooling"
+          },
+          {
+            "id": "69110d08758c88c5d1ea234d",
+            "name": "Ideal-gas equation and absolute temperature"
+          }
+        ]
+      },
+      {
+        "id": "69110d01758c88c5d1ea2335",
+        "name": "Thermodynamics",
+        "topics": [
+          {
+            "id": "69110d02758c88c5d1ea233b",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d02758c88c5d1ea233c",
+            "name": "Second law of thermodynamics"
+          },
+          {
+            "id": "69110d02758c88c5d1ea233d",
+            "name": "Specific heat capacity"
+          },
+          {
+            "id": "69110d03758c88c5d1ea233e",
+            "name": "Thermal equilibrium"
+          },
+          {
+            "id": "69110d03758c88c5d1ea233f",
+            "name": "Thermodynamic state variables and equation of state"
+          },
+          {
+            "id": "69110d03758c88c5d1ea2340",
+            "name": "Carnot engine"
+          },
+          {
+            "id": "69110d01758c88c5d1ea2336",
+            "name": "Zeroth law of Thermodynamics"
+          },
+          {
+            "id": "69110d02758c88c5d1ea2337",
+            "name": "First law of thermodynamics"
+          },
+          {
+            "id": "69110d02758c88c5d1ea2338",
+            "name": "Thermodynamic processes"
+          },
+          {
+            "id": "69110d02758c88c5d1ea2339",
+            "name": "Reversible and irreversible processes"
+          },
+          {
+            "id": "69110d02758c88c5d1ea233a",
+            "name": "Heat, internal energy and work"
+          }
+        ]
+      },
+      {
+        "id": "69110d0c758c88c5d1ea2365",
+        "name": "Kinetic Theory",
+        "topics": [
+          {
+            "id": "69110d0d758c88c5d1ea2366",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d0d758c88c5d1ea2367",
+            "name": "Law of equipartition of energy"
+          },
+          {
+            "id": "69110d0d758c88c5d1ea2368",
+            "name": "Specific heat capacity"
+          },
+          {
+            "id": "69110d0d758c88c5d1ea2369",
+            "name": "Molecular nature of matter"
+          },
+          {
+            "id": "69110d0d758c88c5d1ea236a",
+            "name": "Kinetic theory of an ideal gas"
+          },
+          {
+            "id": "69110d0e758c88c5d1ea236b",
+            "name": "Mean free path"
+          },
+          {
+            "id": "69110d0e758c88c5d1ea236c",
+            "name": "Behaviour of gases"
+          }
+        ]
+      },
+      {
+        "id": "69110d10758c88c5d1ea2375",
+        "name": "Oscillations",
+        "topics": [
+          {
+            "id": "69110d11758c88c5d1ea2376",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d11758c88c5d1ea2377",
+            "name": "Velocity and acceleration in simple harmonic motion"
+          },
+          {
+            "id": "69110d11758c88c5d1ea2378",
+            "name": "Force law for simple harmonic motion"
+          },
+          {
+            "id": "69110d11758c88c5d1ea2379",
+            "name": "Periodic and oscillatory motions"
+          },
+          {
+            "id": "69110d11758c88c5d1ea237a",
+            "name": "Simple harmonic motion and uniform circular motion"
+          },
+          {
+            "id": "69110d11758c88c5d1ea237b",
+            "name": "Energy in simple harmonic motion"
+          },
+          {
+            "id": "69110d12758c88c5d1ea237c",
+            "name": "Simple harmonic motion"
+          },
+          {
+            "id": "69110d12758c88c5d1ea237d",
+            "name": "The simple pendulum"
+          }
+        ]
+      },
+      {
+        "id": "69110d0e758c88c5d1ea236d",
+        "name": "Waves",
+        "topics": [
+          {
+            "id": "69110d0e758c88c5d1ea236e",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d0e758c88c5d1ea236f",
+            "name": "Displacement relation in a progressive wave"
+          },
+          {
+            "id": "69110d10758c88c5d1ea2370",
+            "name": "The speed of a travelling wave"
+          },
+          {
+            "id": "69110d10758c88c5d1ea2371",
+            "name": "The principle of superposition of waves"
+          },
+          {
+            "id": "69110d10758c88c5d1ea2372",
+            "name": "Reflection of waves"
+          },
+          {
+            "id": "69110d10758c88c5d1ea2373",
+            "name": "Transverse and longitudinal waves"
+          },
+          {
+            "id": "69110d10758c88c5d1ea2374",
+            "name": "Beats"
+          }
+        ]
+      }
+    ],
+    "69110d3d758c88c5d1ea2436": [
+      {
+        "id": "69110d3e758c88c5d1ea2437",
+        "name": "ELECTRIC CHARGES & FIELDS",
+        "topics": [
+          {
+            "id": "69110d3f758c88c5d1ea2440",
+            "name": "INTRODUCTION"
+          },
+          {
+            "id": "69110d3f758c88c5d1ea2441",
+            "name": "FORCES BETWEEN MULTIPLE CHARGES"
+          },
+          {
+            "id": "69110d3f758c88c5d1ea2442",
+            "name": "DIPOLE IN A UNIFORM EXTERNAL FIELD"
+          },
+          {
+            "id": "69110d3f758c88c5d1ea2443",
+            "name": "GAUSS’S LAW"
+          },
+          {
+            "id": "69110d40758c88c5d1ea2444",
+            "name": "APPLICATIONS OF GAUSS’S LAW"
+          },
+          {
+            "id": "69110d40758c88c5d1ea2445",
+            "name": "CONTINUOUS CHARGE DISTRIBUTION"
+          },
+          {
+            "id": "69110d3e758c88c5d1ea2438",
+            "name": "CONDUCTORS AND INSULATORS"
+          },
+          {
+            "id": "69110d3e758c88c5d1ea2439",
+            "name": "COULOMB’S LAW"
+          },
+          {
+            "id": "69110d3e758c88c5d1ea243a",
+            "name": "ELECTRIC FIELD LINES"
+          },
+          {
+            "id": "69110d3e758c88c5d1ea243b",
+            "name": "ELECTRIC DIPOLE"
+          },
+          {
+            "id": "69110d3e758c88c5d1ea243c",
+            "name": "BASIC PROPERTIES OF ELECTRIC CHARGE"
+          },
+          {
+            "id": "69110d3f758c88c5d1ea243d",
+            "name": "ELECTRIC CHARGE"
+          },
+          {
+            "id": "69110d3f758c88c5d1ea243e",
+            "name": "ELECTRIC FLUX"
+          },
+          {
+            "id": "69110d3f758c88c5d1ea243f",
+            "name": "ELECTRIC FIELD"
+          }
+        ]
+      },
+      {
+        "id": "69110d4c758c88c5d1ea2483",
+        "name": "ELECTROSTATIC POTENTIALS & CAPACITANCE",
+        "topics": [
+          {
+            "id": "69110d4d758c88c5d1ea2489",
+            "name": "INTRODUCTION"
+          },
+          {
+            "id": "69110d4d758c88c5d1ea248a",
+            "name": "POTENTIAL ENERGY OF A SYSTEM OF CHARGES"
+          },
+          {
+            "id": "69110d4d758c88c5d1ea248b",
+            "name": "EQUIPOTENTIAL SURFACES"
+          },
+          {
+            "id": "69110d4e758c88c5d1ea248c",
+            "name": "POTENTIAL DUE TO AN ELECTRIC DIPOLE"
+          },
+          {
+            "id": "69110d4e758c88c5d1ea248d",
+            "name": "ELECTROSTATICS OF CONDUCTORS"
+          },
+          {
+            "id": "69110d4e758c88c5d1ea248e",
+            "name": "CAPACITORS AND CAPACITANCE"
+          },
+          {
+            "id": "69110d4e758c88c5d1ea248f",
+            "name": "EFFECT OF DIELECTRIC ON CAPACITANCE"
+          },
+          {
+            "id": "69110d4e758c88c5d1ea2490",
+            "name": "ENERGY STORED IN A CAPACITOR"
+          },
+          {
+            "id": "69110d4e758c88c5d1ea2491",
+            "name": "THE PARALLEL PLATE CAPACITOR"
+          },
+          {
+            "id": "69110d4f758c88c5d1ea2492",
+            "name": "COMBINATION OF CAPACITORS"
+          },
+          {
+            "id": "69110d4c758c88c5d1ea2484",
+            "name": "POTENTIAL DUE TO A POINT CHARGE"
+          },
+          {
+            "id": "69110d4c758c88c5d1ea2485",
+            "name": "POTENTIAL DUE TO A SYSTEM OF CHARGES"
+          },
+          {
+            "id": "69110d4d758c88c5d1ea2486",
+            "name": "POTENTIAL ENERGY IN AN EXTERNAL FIELD"
+          },
+          {
+            "id": "69110d4d758c88c5d1ea2487",
+            "name": "DIELECTRICS AND POLARISATION"
+          },
+          {
+            "id": "69110d4d758c88c5d1ea2488",
+            "name": "ELECTROSTATIC POTENTIAL"
+          }
+        ]
+      },
+      {
+        "id": "69110d40758c88c5d1ea2446",
+        "name": "CURRENT ELECTRICITY",
+        "topics": [
+          {
+            "id": "69110d41758c88c5d1ea2448",
+            "name": "INTRODUCTION"
+          },
+          {
+            "id": "69110d41758c88c5d1ea2449",
+            "name": "DRIFT OF ELECTRONS AND THE ORIGIN OF RESISTIVITY"
+          },
+          {
+            "id": "69110d41758c88c5d1ea244a",
+            "name": "LIMITATIONS OF OHM’S LAW"
+          },
+          {
+            "id": "69110d41758c88c5d1ea244b",
+            "name": "RESISTIVITY OF VARIOUS MATERIALS"
+          },
+          {
+            "id": "69110d42758c88c5d1ea244c",
+            "name": "CELLS, EMF, INTERNAL RESISTANCE"
+          },
+          {
+            "id": "69110d42758c88c5d1ea244d",
+            "name": "OHM’S LAW"
+          },
+          {
+            "id": "69110d42758c88c5d1ea244e",
+            "name": "ELECTRICAL ENERGY, POWER"
+          },
+          {
+            "id": "69110d42758c88c5d1ea244f",
+            "name": "ELECTRIC CURRENTS IN CONDUCTORS"
+          },
+          {
+            "id": "69110d42758c88c5d1ea2450",
+            "name": "TEMPERATURE DEPENDENCE OF RESISTIVITY"
+          },
+          {
+            "id": "69110d42758c88c5d1ea2451",
+            "name": "CELLS IN SERIES AND IN PARALLEL"
+          },
+          {
+            "id": "69110d43758c88c5d1ea2452",
+            "name": "KIRCHHOFF’S RULES"
+          },
+          {
+            "id": "69110d43758c88c5d1ea2453",
+            "name": "WHEATSTONE BRIDGE"
+          },
+          {
+            "id": "69110d41758c88c5d1ea2447",
+            "name": "ELECTRIC CURRENT"
+          }
+        ]
+      },
+      {
+        "id": "69110d48758c88c5d1ea2470",
+        "name": "MOVING CHARGES & MAGNETISM",
+        "topics": [
+          {
+            "id": "69110d4a758c88c5d1ea2476",
+            "name": "INTRODUCTION"
+          },
+          {
+            "id": "69110d4a758c88c5d1ea2477",
+            "name": "THE SOLENOID"
+          },
+          {
+            "id": "69110d4a758c88c5d1ea2478",
+            "name": "MAGNETIC FIELD DUE TO A CURRENT ELEMENT, BIOT-SAVART LAW"
+          },
+          {
+            "id": "69110d4a758c88c5d1ea2479",
+            "name": "AMPERE’S CIRCUITAL LAW"
+          },
+          {
+            "id": "69110d4a758c88c5d1ea247a",
+            "name": "TORQUE ON CURRENT LOOP, MAGNETIC DIPOLE"
+          },
+          {
+            "id": "69110d49758c88c5d1ea2471",
+            "name": "MOTION IN A MAGNETIC FIELD"
+          },
+          {
+            "id": "69110d49758c88c5d1ea2472",
+            "name": "MAGNETIC FIELD ON THE AXIS OF A CIRCULAR CURRENT LOOP"
+          },
+          {
+            "id": "69110d49758c88c5d1ea2473",
+            "name": "FORCE BETWEEN TWO PARALLEL CURRENTS, THE AMPERE"
+          },
+          {
+            "id": "69110d49758c88c5d1ea2474",
+            "name": "THE MOVING COIL GALVANOMETER"
+          },
+          {
+            "id": "69110d49758c88c5d1ea2475",
+            "name": "MAGNETIC FORCE"
+          }
+        ]
+      },
+      {
+        "id": "69110d43758c88c5d1ea2454",
+        "name": "MAGNETISM & MATTER",
+        "topics": [
+          {
+            "id": "69110d44758c88c5d1ea2459",
+            "name": "INTRODUCTION"
+          },
+          {
+            "id": "69110d43758c88c5d1ea2455",
+            "name": "MAGNETISM AND GAUSS’S LAW"
+          },
+          {
+            "id": "69110d43758c88c5d1ea2456",
+            "name": "MAGNETIC PROPERTIES OF MATERIALS"
+          },
+          {
+            "id": "69110d43758c88c5d1ea2457",
+            "name": "THE BAR MAGNET"
+          },
+          {
+            "id": "69110d44758c88c5d1ea2458",
+            "name": "MAGNETISATION AND MAGNETIC INTENSITY"
+          }
+        ]
+      },
+      {
+        "id": "69110d45758c88c5d1ea245f",
+        "name": "ELECTROMAGNETIC INDUCTION",
+        "topics": [
+          {
+            "id": "69110d46758c88c5d1ea2464",
+            "name": "INTRODUCTION"
+          },
+          {
+            "id": "69110d46758c88c5d1ea2465",
+            "name": "THE EXPERIMENTS OF FARADAY AND HENRY"
+          },
+          {
+            "id": "69110d47758c88c5d1ea2466",
+            "name": "MOTIONAL ELECTROMOTIVE FORCE"
+          },
+          {
+            "id": "69110d47758c88c5d1ea2467",
+            "name": "INDUCTANCE"
+          },
+          {
+            "id": "69110d46758c88c5d1ea2460",
+            "name": "MAGNETIC FLUX"
+          },
+          {
+            "id": "69110d46758c88c5d1ea2461",
+            "name": "LENZ’S LAW AND CONSERVATION OF ENERGY"
+          },
+          {
+            "id": "69110d46758c88c5d1ea2462",
+            "name": "AC GENERATOR"
+          },
+          {
+            "id": "69110d46758c88c5d1ea2463",
+            "name": "FARADAY’S LAW OF INDUCTION"
+          }
+        ]
+      },
+      {
+        "id": "69110d4f758c88c5d1ea2493",
+        "name": "ALTERNATING CURRENT",
+        "topics": [
+          {
+            "id": "69110d50758c88c5d1ea2498",
+            "name": "INTRODUCTION"
+          },
+          {
+            "id": "69110d50758c88c5d1ea2499",
+            "name": "AC VOLTAGE APPLIED TO A RESISTOR"
+          },
+          {
+            "id": "69110d51758c88c5d1ea249a",
+            "name": "AC VOLTAGE APPLIED TO A SERIES LCR CIRCUIT"
+          },
+          {
+            "id": "69110d51758c88c5d1ea249b",
+            "name": "POWER IN AC CIRCUIT: THE POWER FACTOR"
+          },
+          {
+            "id": "69110d4f758c88c5d1ea2494",
+            "name": "AC VOLTAGE APPLIED TO A CAPACITOR"
+          },
+          {
+            "id": "69110d4f758c88c5d1ea2495",
+            "name": "REPRESENTATION OF AC CURRENT AND VOLTAGE BY ROTATING VECTORS — PHASORS"
+          },
+          {
+            "id": "69110d50758c88c5d1ea2496",
+            "name": "TRANSFORMERS"
+          },
+          {
+            "id": "69110d50758c88c5d1ea2497",
+            "name": "AC VOLTAGE APPLIED TO AN INDUCTOR"
+          }
+        ]
+      },
+      {
+        "id": "69110d44758c88c5d1ea245a",
+        "name": "ELECTROMAGNETIC WAVES",
+        "topics": [
+          {
+            "id": "69110d45758c88c5d1ea245e",
+            "name": "INTRODUCTION"
+          },
+          {
+            "id": "69110d44758c88c5d1ea245b",
+            "name": "ELECTROMAGNETIC WAVES"
+          },
+          {
+            "id": "69110d44758c88c5d1ea245c",
+            "name": "DISPLACEMENT CURRENT"
+          },
+          {
+            "id": "69110d45758c88c5d1ea245d",
+            "name": "ELECTROMAGNETIC SPECTRUM"
+          }
+        ]
+      },
+      {
+        "id": "69110d4a758c88c5d1ea247b",
+        "name": "RAY OPTICS AND OPTICAL INSTRUMENTS",
+        "topics": [
+          {
+            "id": "69110d4b758c88c5d1ea247f",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d4b758c88c5d1ea2480",
+            "name": "Optical Instruments "
+          },
+          {
+            "id": "69110d4c758c88c5d1ea2481",
+            "name": "Refraction through a Prism"
+          },
+          {
+            "id": "69110d4c758c88c5d1ea2482",
+            "name": "Total Internal Reflection"
+          },
+          {
+            "id": "69110d4b758c88c5d1ea247c",
+            "name": "Refraction"
+          },
+          {
+            "id": "69110d4b758c88c5d1ea247d",
+            "name": "Refraction at Spherical Surfaces and by Lenses"
+          },
+          {
+            "id": "69110d4b758c88c5d1ea247e",
+            "name": "Reflection of Light by Spherical Mirrors"
+          }
+        ]
+      },
+      {
+        "id": "69110d47758c88c5d1ea2468",
+        "name": "WAVE OPTICS",
+        "topics": [
+          {
+            "id": "69110d47758c88c5d1ea2469",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d47758c88c5d1ea246a",
+            "name": "Huygens Principle"
+          },
+          {
+            "id": "69110d48758c88c5d1ea246b",
+            "name": "Interference of Light Waves and Young’s Experiment"
+          },
+          {
+            "id": "69110d48758c88c5d1ea246c",
+            "name": "Polarisation"
+          },
+          {
+            "id": "69110d48758c88c5d1ea246d",
+            "name": "Diffraction"
+          },
+          {
+            "id": "69110d48758c88c5d1ea246e",
+            "name": "Coherent and Incoherent Addition of Waves"
+          },
+          {
+            "id": "69110d48758c88c5d1ea246f",
+            "name": "Refraction and Reflection of Plane Waves using Huygens Principle"
+          }
+        ]
+      },
+      {
+        "id": "69110d51758c88c5d1ea249c",
+        "name": "DUAL NATURE OF REDIATION AND MATTER",
+        "topics": [
+          {
+            "id": "69110d52758c88c5d1ea24a3",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d52758c88c5d1ea24a4",
+            "name": "Einstein’s Photoelectric Equation: Energy Quantum of Radiation"
+          },
+          {
+            "id": "69110d51758c88c5d1ea249d",
+            "name": "Electron Emission"
+          },
+          {
+            "id": "69110d51758c88c5d1ea249e",
+            "name": "Photoelectric Effect"
+          },
+          {
+            "id": "69110d52758c88c5d1ea249f",
+            "name": "Photoelectric Effect and Wave Theory of Light"
+          },
+          {
+            "id": "69110d52758c88c5d1ea24a0",
+            "name": "Wave Nature of Matter"
+          },
+          {
+            "id": "69110d52758c88c5d1ea24a1",
+            "name": "Particle Nature of Light: The Photon"
+          },
+          {
+            "id": "69110d52758c88c5d1ea24a2",
+            "name": "Experimental Study of Photoelectric Effect"
+          }
+        ]
+      },
+      {
+        "id": "69110d59758c88c5d1ea24c8",
+        "name": "ATOMS",
+        "topics": [
+          {
+            "id": "69110d5a758c88c5d1ea24cd",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d5b758c88c5d1ea24ce",
+            "name": "DE Broglie’s Explanation of Bohr’s Second Postulate of Quantisation"
+          },
+          {
+            "id": "69110d59758c88c5d1ea24c9",
+            "name": "Atomic Spectra"
+          },
+          {
+            "id": "69110d5a758c88c5d1ea24ca",
+            "name": "The Line Spectra of the Hydrogen Atom"
+          },
+          {
+            "id": "69110d5a758c88c5d1ea24cb",
+            "name": "Bohr Model of the Hydrogen Atom"
+          },
+          {
+            "id": "69110d5a758c88c5d1ea24cc",
+            "name": "Alpha-particle Scattering and Rutherford’s Nuclear Model of Atom"
+          }
+        ]
+      },
+      {
+        "id": "69110d53758c88c5d1ea24a5",
+        "name": "NUCLEI",
+        "topics": [
+          {
+            "id": "69110d53758c88c5d1ea24a8",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d53758c88c5d1ea24a9",
+            "name": "Atomic Masses and Composition of Nucleus"
+          },
+          {
+            "id": "69110d53758c88c5d1ea24aa",
+            "name": "Mass-Energy and Nuclear Binding Energy"
+          },
+          {
+            "id": "69110d54758c88c5d1ea24ab",
+            "name": "Radioactivity"
+          },
+          {
+            "id": "69110d54758c88c5d1ea24ac",
+            "name": "Nuclear Energy"
+          },
+          {
+            "id": "69110d53758c88c5d1ea24a6",
+            "name": "Size of the Nucleus"
+          },
+          {
+            "id": "69110d53758c88c5d1ea24a7",
+            "name": "Nuclear Force"
+          }
+        ]
+      },
+      {
+        "id": "69110d57758c88c5d1ea24c0",
+        "name": "SEMICONDUCTOR ELECTRONICS: MATERIALS, DEVICES AND SIMPLE CIRCUITS",
+        "topics": [
+          {
+            "id": "69110d59758c88c5d1ea24c6",
+            "name": "Introduction"
+          },
+          {
+            "id": "69110d59758c88c5d1ea24c7",
+            "name": "Semiconductor Diode"
+          },
+          {
+            "id": "69110d58758c88c5d1ea24c1",
+            "name": "Intrinsic Semiconductor"
+          },
+          {
+            "id": "69110d58758c88c5d1ea24c2",
+            "name": "p-n Junction"
+          },
+          {
+            "id": "69110d58758c88c5d1ea24c3",
+            "name": "Classification of Metals, Conductors and Semiconductors"
+          },
+          {
+            "id": "69110d58758c88c5d1ea24c4",
+            "name": "Extrinsic Semiconductor"
+          },
+          {
+            "id": "69110d58758c88c5d1ea24c5",
+            "name": "Application of Junction Diode as a Rectifier"
+          }
+        ]
+      },
+      {
+        "id": "69110d54758c88c5d1ea24ad",
+        "name": "Experimental Physics",
+        "topics": [
+          {
+            "id": "69110d56758c88c5d1ea24b6",
+            "name": "Vernier Calipers"
+          },
+          {
+            "id": "69110d55758c88c5d1ea24b2",
+            "name": "Screw Gauge"
+          },
+          {
+            "id": "69110d54758c88c5d1ea24ae",
+            "name": "Simple Pendulum"
+          },
+          {
+            "id": "69110d55758c88c5d1ea24b3",
+            "name": "Metre Scale"
+          },
+          {
+            "id": "69110d55758c88c5d1ea24af",
+            "name": "Young’s Modulus"
+          },
+          {
+            "id": "69110d56758c88c5d1ea24b7",
+            "name": "Surface Tension of Water"
+          },
+          {
+            "id": "69110d55758c88c5d1ea24b4",
+            "name": "Coefficient of Viscosity"
+          },
+          {
+            "id": "69110d55758c88c5d1ea24b0",
+            "name": "Speed of Sound in Air"
+          },
+          {
+            "id": "69110d56758c88c5d1ea24b5",
+            "name": "Specific Heat Capacity"
+          },
+          {
+            "id": "69110d55758c88c5d1ea24b1",
+            "name": "Resistivity of Material"
+          },
+          {
+            "id": "69110d56758c88c5d1ea24b8",
+            "name": "Resistance of a Wire"
+          },
+          {
+            "id": "69110d57758c88c5d1ea24ba",
+            "name": "Galvanometer"
+          },
+          {
+            "id": "69110d56758c88c5d1ea24b9",
+            "name": "Focal Length Determination"
+          },
+          {
+            "id": "69110d57758c88c5d1ea24bb",
+            "name": "Triangular Prism"
+          },
+          {
+            "id": "69110d57758c88c5d1ea24bc",
+            "name": "Refractive Index of Glass Slab"
+          },
+          {
+            "id": "69110d57758c88c5d1ea24be",
+            "name": "P-N Junction Diode"
+          },
+          {
+            "id": "69110d57758c88c5d1ea24bd",
+            "name": "Zener Diode"
+          },
+          {
+            "id": "69110d57758c88c5d1ea24bf",
+            "name": "Identification of Electronic Components"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "success": true,
+  "data": [
+    {
+      "slug": "assertion-reason",
+      "name": "Assertion-Reason (A-R)"
+    },
+    {
+      "slug": "conceptual",
+      "name": "Conceptual"
+    },
+    {
+      "slug": "diagram",
+      "name": "Diagram"
+    },
+    {
+      "slug": "important-2026",
+      "name": "Important 2026"
+    },
+    {
+      "slug": "mark-for-review",
+      "name": "Mark For Review"
+    },
+    {
+      "slug": "matching",
+      "name": "Matching"
+    },
+    {
+      "slug": "miscallaneous",
+      "name": "Miscallaneous"
+    },
+    {
+      "slug": "ncert",
+      "name": "NCERT"
+    },
+    {
+      "slug": "numerical",
+      "name": "Numerical"
+    },
+    {
+      "slug": "order-arrangement",
+      "name": "Order Arrangement"
+    },
+    {
+      "slug": "pyq",
+      "name": "PYQ"
+    },
+    {
+      "slug": "single-liner",
+      "name": "Single Liner"
+    },
+    {
+      "slug": "statement-based",
+      "name": "Statement Based"
+    }
+  ]
+}

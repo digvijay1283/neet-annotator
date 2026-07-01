@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEET Question Annotator</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header id="app-bar">
+    <div id="app-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      NEET Annotator
+    </div>
+    <span id="global-status">Loading data…</span>
+  </header>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <main id="layout">
+
+    <!-- ======== LEFT PANEL: Editor ======== -->
+    <section id="left-panel">
+
+      <div id="editor-header">
+        <div id="question-counter">Question <span id="q-num">–</span> of <span id="q-total">–</span></div>
+        <div id="editor-badges">
+          <span id="badge-status" class="badge unsaved">Unsaved</span>
+        </div>
+      </div>
+
+      <div id="question-body"></div>
+
+      <ul id="options-list"></ul>
+
+      <details id="explanation-toggle">
+        <summary>View Explanation</summary>
+        <div id="explanation-body"></div>
+      </details>
+
+      <div id="annotation-form">
+
+        <div class="form-section-title">Assign Parameters</div>
+
+        <div class="form-row">
+          <label for="sel-subject">Subject</label>
+          <select id="sel-subject">
+            <option value="">— Select Subject —</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="sel-chapter">Chapter</label>
+          <select id="sel-chapter" disabled>
+            <option value="">— Select Chapter —</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="sel-topic">Topic</label>
+          <select id="sel-topic" disabled>
+            <option value="">— Select Topic —</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="sel-tag">Tag</label>
+          <select id="sel-tag">
+            <option value="">— Select Tag —</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label>Marks</label>
+          <span id="marks-display" class="readonly-field">–</span>
+        </div>
+
+        <div class="form-row">
+          <label for="sel-difficulty">Difficulty</label>
+          <select id="sel-difficulty">
+            <option value="Easy">Easy</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div id="editor-actions">
+        <button id="btn-prev" class="btn-ghost">← Prev</button>
+        <button id="btn-skip" class="btn-ghost">Skip</button>
+        <button id="btn-save" class="btn-primary">Save &amp; Next →</button>
+      </div>
+
+      <div id="editor-footer">
+        <span id="save-count">0 saved</span>
+      </div>
+
+    </section>
+
+    <!-- ======== RIGHT PANEL: Browser ======== -->
+    <section id="right-panel">
+
+      <div id="stats-bar">
+        <div class="stat-item">
+          <span class="stat-value" id="stat-saved">0</span>
+          <span class="stat-label">Saved</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-skipped">0</span>
+          <span class="stat-label">Skipped</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-total">–</span>
+          <span class="stat-label">Total</span>
+        </div>
+        <div class="stat-progress-wrap">
+          <div id="stat-progress-bar"></div>
+        </div>
+        <div id="export-actions">
+          <button id="btn-export-today" class="btn-ghost">Export Today's</button>
+          <button id="btn-export" class="btn-primary btn-export">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export JSON
+          </button>
+        </div>
+      </div>
+
+      <div id="filter-bar">
+        <select id="filter-subject">
+          <option value="">All Subjects</option>
+        </select>
+        <select id="filter-status">
+          <option value="all">All Status</option>
+          <option value="unsaved">Unsaved</option>
+          <option value="saved">Saved</option>
+          <option value="skipped">Skipped</option>
+        </select>
+        <div id="search-wrap">
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="filter-search" placeholder="Search questions…" />
+        </div>
+      </div>
+
+      <div id="question-list"></div>
+
+      <div id="pagination">
+        <button id="pg-prev" class="btn-ghost" disabled>‹ Prev</button>
+        <span id="pg-info">Page 1 of 1</span>
+        <button id="pg-next" class="btn-ghost" disabled>Next ›</button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
