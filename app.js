@@ -10,7 +10,16 @@ const state = {
   filters:        { subject: '', status: 'all', search: '' },
   currentPage:    1,
   PAGE_SIZE:      15,
-  filteredIndices: []
+  filteredIndices: [],
+  // ── Collaboration ──
+  userName:       '',            // who is annotating (from name prompt)
+  editedBy:       {},            // array index → { name, at }
+  sb:             null,          // Supabase client
+  useSupabase:    false,         // false → local-only fallback
+  // ── Question identity (stable across users) ──
+  qidToIndex:     new Map(),     // stable question id → current array index
+  hiddenQids:     new Set(),     // ids soft-deleted for everyone
+  hiddenIndexSet: new Set()      // array indices currently hidden
 };
 
 /* ── DOM refs ───────────────────────────────────── */
@@ -29,14 +38,20 @@ async function init() {
     return;
   }
 
-  restoreFromLocalStorage();
+  await ensureUserName();          // identify the annotator (name prompt)
   populateSubjectDropdowns();
   populateTagDropdown();
+
+  initSupabase();                  // connect shared storage (or fall back)
+  await loadRemoteQuestions();     // pull team-added questions + hidden list
+  await loadAnnotations();         // pull team progress from Supabase / local
+
   applyFilters();
   renderEditor(state.currentIndex);
   updateStats();
 
   attachEvents();
+  subscribeRealtime();             // live updates from other users
   setGlobalStatus(`${state.questions.length} questions loaded`);
 }
 
@@ -52,6 +67,10 @@ async function loadData() {
   state.questions = await qRes.json();
   state.topicData = await tRes.json();
 
+  // Give every original question a stable id ('st-<position>') so annotations
+  // key off identity, not array position — survives added/deleted questions.
+  state.questions.forEach((q, i) => { q._qid = 'st-' + i; q._added = false; });
+
   // Tags file is optional — accept either the raw array or the API envelope.
   if (tagRes && tagRes.ok) {
     const tagJson = await tagRes.json();
@@ -59,13 +78,322 @@ async function loadData() {
   }
 }
 
+/* ── Identity (name prompt) ─────────────────────── */
+const LS_USER = 'neet_user';
+
+function ensureUserName() {
+  return new Promise(resolve => {
+    const existing = localStorage.getItem(LS_USER);
+    if (existing) { state.userName = existing; updateUserChip(); resolve(); return; }
+
+    const modal  = $('name-modal');
+    const input  = $('name-input');
+    const submit = $('name-submit');
+    modal.classList.remove('hidden');
+    setTimeout(() => input.focus(), 50);
+
+    const done = () => {
+      state.userName = (input.value || '').trim() || 'Anonymous';
+      localStorage.setItem(LS_USER, state.userName);
+      modal.classList.add('hidden');
+      updateUserChip();
+      resolve();
+    };
+    submit.addEventListener('click', done);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') done(); });
+  });
+}
+
+function updateUserChip() {
+  const chip = $('user-chip');
+  chip.textContent = '👤 ' + state.userName;
+  chip.classList.remove('hidden');
+}
+
+function changeUserName() {
+  const next = prompt('Your name:', state.userName || '');
+  if (next && next.trim()) {
+    state.userName = next.trim();
+    localStorage.setItem(LS_USER, state.userName);
+    updateUserChip();
+  }
+}
+
+/* ── Supabase (shared realtime storage) ─────────── */
+function initSupabase() {
+  const cfg = window.SUPABASE_CONFIG || {};
+  const configured =
+    cfg.url && cfg.anonKey &&
+    !cfg.url.includes('YOUR_SUPABASE') && !cfg.anonKey.includes('YOUR_SUPABASE');
+
+  if (!configured || typeof supabase === 'undefined') {
+    state.useSupabase = false;
+    setSyncStatus('offline', 'Local only');
+    return;
+  }
+  try {
+    state.sb = supabase.createClient(cfg.url, cfg.anonKey);
+    state.useSupabase = true;
+    setSyncStatus('online', 'Connecting…');
+  } catch (e) {
+    console.warn('Supabase init failed:', e);
+    state.useSupabase = false;
+    setSyncStatus('error', 'Local only');
+  }
+}
+
+/* ── Question identity helpers ──────────────────── */
+function buildQidIndex() {
+  state.qidToIndex = new Map();
+  state.questions.forEach((q, i) => state.qidToIndex.set(q._qid, i));
+}
+
+function indexOfQid(qid) {
+  return state.qidToIndex.has(qid) ? state.qidToIndex.get(qid) : -1;
+}
+
+function qidOf(index) {
+  const q = state.questions[index];
+  return q ? q._qid : null;
+}
+
+function recomputeHidden() {
+  state.hiddenIndexSet = new Set();
+  state.questions.forEach((q, i) => {
+    if (state.hiddenQids.has(q._qid)) state.hiddenIndexSet.add(i);
+  });
+}
+
+function visibleCount() {
+  return state.questions.length - state.hiddenIndexSet.size;
+}
+
+// Turn a `questions` table row into an in-memory question and append it.
+function appendAddedQuestion(row) {
+  if (state.qidToIndex.has(row.id)) return;   // already present
+  state.questions.push({
+    subjectId:       null,
+    chapterId:       null,
+    topicId:         null,
+    markId:          null,
+    difficulty:      'Medium',
+    questionHtml:    row.question_html,
+    explanationHtml: row.explanation_html || '',
+    options:         Array.isArray(row.options) ? row.options : [],
+    tagSlugs:        [],
+    _qid:            row.id,
+    _added:          true,
+    _createdBy:      row.created_by
+  });
+}
+
+/* ── Load team-added questions + hidden list ────── */
+async function loadRemoteQuestions() {
+  if (!state.useSupabase) { buildQidIndex(); recomputeHidden(); return; }
+  try {
+    const [qRes, hRes] = await Promise.all([
+      state.sb.from('questions').select('*').order('created_at', { ascending: true }),
+      state.sb.from('hidden_questions').select('question_id')
+    ]);
+    if (qRes.error) throw qRes.error;
+    if (hRes.error) throw hRes.error;
+
+    (qRes.data || []).forEach(row => appendAddedQuestion(row));
+    state.hiddenQids = new Set((hRes.data || []).map(h => h.question_id));
+    buildQidIndex();
+    recomputeHidden();
+
+    const added = (qRes.data || []).length;
+    if (added) showToast(`Loaded ${added} team-added question${added > 1 ? 's' : ''}`, 'success');
+  } catch (e) {
+    console.warn('Loading remote questions failed:', e);
+    buildQidIndex();
+    recomputeHidden();
+  }
+}
+
+async function loadAnnotations() {
+  if (!state.useSupabase) { restoreFromLocalStorage(); return; }
+
+  setSyncStatus('online', 'Syncing…');
+  try {
+    const { data, error } = await state.sb.from('annotations').select('*');
+    if (error) throw error;
+
+    state.savedQuestions = [];
+    state.savedIndexSet  = new Set();
+    state.skippedSet     = new Set();
+    state.editedBy       = {};
+    (data || []).forEach(row => applyRow(row));
+
+    restoreCurrentIndex();
+    setSyncStatus('online', 'Live');
+    if (state.savedQuestions.length) {
+      showToast(`Loaded ${state.savedQuestions.length} annotations from the team`, 'success');
+    }
+  } catch (e) {
+    console.warn('Supabase load failed — falling back to local:', e);
+    state.useSupabase = false;
+    setSyncStatus('error', 'Offline (local)');
+    restoreFromLocalStorage();
+  }
+}
+
+// Apply one DB row into local state (used by initial load AND realtime).
+function applyRow(row) {
+  const idx = indexOfQid(row.question_id);
+  if (idx < 0) return;
+
+  state.editedBy[idx] = { name: row.edited_by || '?', at: row.updated_at };
+  const pos = state.savedQuestions.findIndex(s => s._originalIndex === idx);
+
+  if (row.status === 'skipped') {
+    state.skippedSet.add(idx);
+    state.savedIndexSet.delete(idx);
+    if (pos !== -1) state.savedQuestions.splice(pos, 1);
+    return;
+  }
+
+  const q = state.questions[idx] || {};
+  const annotated = {
+    subjectId:       row.subject_id,
+    chapterId:       row.chapter_id,
+    topicId:         row.topic_id,
+    markId:          row.mark_id,
+    difficulty:      row.difficulty || 'Medium',
+    questionHtml:    q.questionHtml,
+    explanationHtml: q.explanationHtml,
+    options:         q.options,
+    tagSlugs:        Array.isArray(row.tag_slugs) ? row.tag_slugs : [],
+    _originalIndex:  idx,
+    _savedAt:        row.updated_at
+  };
+  if (pos !== -1) state.savedQuestions[pos] = annotated;
+  else            state.savedQuestions.push(annotated);
+  state.savedIndexSet.add(idx);
+  state.skippedSet.delete(idx);
+}
+
+function removeRow(qid) {
+  const idx = indexOfQid(qid);
+  if (idx < 0) return;
+  state.savedIndexSet.delete(idx);
+  state.skippedSet.delete(idx);
+  delete state.editedBy[idx];
+  const pos = state.savedQuestions.findIndex(s => s._originalIndex === idx);
+  if (pos !== -1) state.savedQuestions.splice(pos, 1);
+}
+
+// Write one annotation to the shared DB (last write wins). Always caches locally.
+async function upsertAnnotation(payload) {
+  persistToLocalStorage();
+  if (!state.useSupabase) return;
+  try {
+    const { error } = await state.sb
+      .from('annotations')
+      .upsert(payload, { onConflict: 'question_id' });
+    if (error) throw error;
+    setSyncStatus('online', 'Live');
+  } catch (e) {
+    console.warn('Save to Supabase failed:', e);
+    setSyncStatus('error', 'Sync failed');
+    showToast('Cloud sync failed — saved locally', 'warning');
+  }
+}
+
+// Live updates: another user's save/skip/add/delete lands here.
+function subscribeRealtime() {
+  if (!state.useSupabase) return;
+  state.sb
+    .channel('neet-realtime')
+    // Annotations (save / skip)
+    .on('postgres_changes',
+        { event: '*', schema: 'public', table: 'annotations' },
+        payload => {
+          const isDelete = payload.eventType === 'DELETE';
+          const row = isDelete ? payload.old : payload.new;
+          const idx = isDelete ? removeRowReturnIndex(row.question_id) : applyRowReturnIndex(row);
+
+          applyFilters();
+          if (idx === state.currentIndex) renderEditor(idx);
+          updateStats();
+
+          if (!isDelete && idx >= 0 && row.edited_by && row.edited_by !== state.userName) {
+            showToast(`${row.edited_by} updated Q${idx + 1}`, '');
+          }
+        })
+    // New questions added by teammates
+    .on('postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'questions' },
+        payload => {
+          appendAddedQuestion(payload.new);
+          buildQidIndex();
+          recomputeHidden();
+          applyFilters();
+          updateStats();
+          if (payload.new.created_by && payload.new.created_by !== state.userName) {
+            showToast(`${payload.new.created_by} added a question`, '');
+          }
+        })
+    // A teammate hard-deleted a question they had added
+    .on('postgres_changes',
+        { event: 'DELETE', schema: 'public', table: 'questions' },
+        payload => { hideQidLocally(payload.old.id); })
+    // Soft-delete (hide) / un-hide of any question
+    .on('postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'hidden_questions' },
+        payload => { hideQidLocally(payload.new.question_id); })
+    .on('postgres_changes',
+        { event: 'DELETE', schema: 'public', table: 'hidden_questions' },
+        payload => { unhideQidLocally(payload.old.question_id); })
+    .subscribe(status => {
+      if (status === 'SUBSCRIBED') setSyncStatus('online', 'Live');
+    });
+}
+
+// Realtime helpers that also report the affected array index.
+function applyRowReturnIndex(row) { applyRow(row); return indexOfQid(row.question_id); }
+function removeRowReturnIndex(qid) { const i = indexOfQid(qid); removeRow(qid); return i; }
+
+// Hide a question locally (from a remote hide/delete) without shifting indices.
+function hideQidLocally(qid) {
+  if (!qid || state.hiddenQids.has(qid)) return;
+  state.hiddenQids.add(qid);
+  recomputeHidden();
+  applyFilters();
+  updateStats();
+  if (indexOfQid(qid) === state.currentIndex) navigateToVisible();
+}
+
+function unhideQidLocally(qid) {
+  if (!state.hiddenQids.has(qid)) return;
+  state.hiddenQids.delete(qid);
+  recomputeHidden();
+  applyFilters();
+  updateStats();
+}
+
+function setSyncStatus(kind, text) {
+  const el = $('sync-status');
+  if (!el) return;
+  const dot = kind === 'online' ? '● ' : kind === 'error' ? '▲ ' : '○ ';
+  el.className   = 'sync-status ' + (kind || '');
+  el.textContent = dot + (text || '');
+}
+
 /* ── Event Listeners ────────────────────────────── */
 function attachEvents() {
+  $('user-chip').addEventListener('click', changeUserName);
   $('btn-save').addEventListener('click', saveQuestion);
   $('btn-prev').addEventListener('click', navigatePrev);
   $('btn-skip').addEventListener('click', skipQuestion);
   $('btn-export').addEventListener('click', () => exportJSON(false));
   $('btn-export-today').addEventListener('click', () => exportJSON(true));
+
+  $('btn-add-question').addEventListener('click', openAddQuestion);
+  $('btn-delete').addEventListener('click', deleteCurrentQuestion);
+  $('addq-submit').addEventListener('click', submitAddQuestion);
+  $('addq-cancel').addEventListener('click', closeAddQuestion);
 
   $('sel-subject').addEventListener('change', onSubjectChange);
   $('sel-chapter').addEventListener('change', onChapterChange);
@@ -95,29 +423,58 @@ function populateSubjectDropdowns() {
   });
 }
 
-/* ── Tag Dropdown ───────────────────────────────── */
+/* ── Tag Pills (multi-select) ───────────────────── */
 function populateTagDropdown() {
-  const tagSel = $('sel-tag');
+  const container = $('tag-pills');
+  container.innerHTML = '';
 
-  // Preferred source: the canonical tag list from data/tags.json ({ slug, name }).
+  // Build the list of { slug, name } to show as pills.
+  let tags;
   if (state.tagList.length) {
-    state.tagList.forEach(t => tagSel.appendChild(makeOption(t.slug, t.name)));
-    return;
+    // Preferred source: canonical tag list from data/tags.json.
+    tags = state.tagList.map(t => ({ slug: t.slug, name: t.name }));
+  } else {
+    // Fallback: derive the unique set of tag slugs from the loaded questions.
+    const set = new Set();
+    state.questions.forEach(q => (q.tagSlugs || []).forEach(t => set.add(t)));
+    const sorted = [...set].sort((a, b) => {
+      const ay = parseInt((a.match(/\d+/) || [])[0], 10);
+      const by = parseInt((b.match(/\d+/) || [])[0], 10);
+      if (!isNaN(ay) && !isNaN(by)) return by - ay;
+      return a.localeCompare(b);
+    });
+    tags = sorted.map(slug => ({ slug, name: prettifyTag(slug) }));
   }
 
-  // Fallback: derive the unique set of tag slugs from the loaded questions.
-  const tags = new Set();
-  state.questions.forEach(q => (q.tagSlugs || []).forEach(t => tags.add(t)));
-
-  // Sort: newest PYQ year first, then any other slug alphabetically.
-  const sorted = [...tags].sort((a, b) => {
-    const ay = parseInt((a.match(/\d+/) || [])[0], 10);
-    const by = parseInt((b.match(/\d+/) || [])[0], 10);
-    if (!isNaN(ay) && !isNaN(by)) return by - ay;
-    return a.localeCompare(b);
+  tags.forEach(t => {
+    const pill = document.createElement('button');
+    pill.type        = 'button';
+    pill.className    = 'tag-pill';
+    pill.dataset.slug = t.slug;
+    pill.textContent  = t.name;
+    pill.setAttribute('aria-pressed', 'false');
+    pill.addEventListener('click', () => {
+      const on = pill.classList.toggle('selected');
+      pill.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    container.appendChild(pill);
   });
+}
 
-  sorted.forEach(slug => tagSel.appendChild(makeOption(slug, prettifyTag(slug))));
+// Read the currently selected tag slugs from the pills.
+function getSelectedTags() {
+  return [...document.querySelectorAll('#tag-pills .tag-pill.selected')]
+    .map(p => p.dataset.slug);
+}
+
+// Set which pills are selected (used when pre-filling a saved question).
+function setSelectedTags(slugs) {
+  const wanted = new Set(slugs || []);
+  document.querySelectorAll('#tag-pills .tag-pill').forEach(p => {
+    const on = wanted.has(p.dataset.slug);
+    p.classList.toggle('selected', on);
+    p.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
 }
 
 function prettifyTag(slug) {
@@ -190,6 +547,10 @@ function renderEditor(index) {
   $('q-num').textContent   = index + 1;
   $('q-total').textContent = state.questions.length;
 
+  // Show an "Added" tag for team-added questions, and enable delete accordingly.
+  const addedTag = $('badge-added');
+  if (addedTag) addedTag.style.display = q._added ? '' : 'none';
+
   // Status badge
   const badgeEl = $('badge-status');
   if (state.savedIndexSet.has(index)) {
@@ -199,6 +560,10 @@ function renderEditor(index) {
   } else {
     badgeEl.className = 'badge unsaved'; badgeEl.textContent = '○ Unsaved';
   }
+
+  // Who last edited this question (from the shared DB)
+  const eb = state.editedBy[index];
+  $('edited-by').textContent = eb && eb.name ? `edited by ${eb.name}` : '';
 
   // Question HTML
   $('question-body').innerHTML = q.questionHtml || '<em>No question text</em>';
@@ -257,7 +622,7 @@ function renderKaTeX(containerId) {
 /* ── Pre-fill Form ──────────────────────────────── */
 function prefillForm(index) {
   // Check if we have a saved version with overridden values
-  let subjectId, chapterId, topicId, difficulty, tag;
+  let subjectId, chapterId, topicId, difficulty, tagSlugs = [];
 
   if (state.savedIndexSet.has(index)) {
     const savedQ = state.savedQuestions.find(q => q._originalIndex === index);
@@ -266,7 +631,7 @@ function prefillForm(index) {
       chapterId  = savedQ.chapterId  || '';
       topicId    = savedQ.topicId    || '';
       difficulty = savedQ.difficulty || 'Medium';
-      tag        = (savedQ.tagSlugs || [])[0] || '';
+      tagSlugs   = savedQ.tagSlugs || [];
     }
   } else {
     const q = state.questions[index];
@@ -274,7 +639,7 @@ function prefillForm(index) {
     chapterId  = q.chapterId  || '';
     topicId    = q.topicId    || '';
     difficulty = q.difficulty || 'Medium';
-    tag        = (q.tagSlugs || [])[0] || '';
+    tagSlugs   = q.tagSlugs || [];
   }
 
   // Set subject and trigger cascade
@@ -290,7 +655,7 @@ function prefillForm(index) {
   }
 
   $('sel-difficulty').value = difficulty || 'Medium';
-  $('sel-tag').value = tag || '';
+  setSelectedTags(tagSlugs);
 }
 
 /* ── Save ───────────────────────────────────────── */
@@ -301,7 +666,7 @@ function saveQuestion() {
   const chapterId  = $('sel-chapter').value  || null;
   const topicId    = $('sel-topic').value    || null;
   const difficulty = $('sel-difficulty').value;
-  const tag        = $('sel-tag').value || '';
+  const tags       = getSelectedTags();
   const markId     = subjectId ? (state.topicData.marks?.[subjectId]?.id || null) : null;
 
   const annotated = {
@@ -313,7 +678,7 @@ function saveQuestion() {
     questionHtml:    q.questionHtml,
     explanationHtml: q.explanationHtml,
     options:         q.options,
-    tagSlugs:        tag ? [tag] : [],
+    tagSlugs:        tags,
     _originalIndex:  index,                 // internal, stripped on export
     _savedAt:        new Date().toISOString() // internal, stripped on export
   };
@@ -329,7 +694,20 @@ function saveQuestion() {
   // Remove from skipped if it was skipped
   state.skippedSet.delete(index);
 
-  persistToLocalStorage();
+  // Record & sync who edited this question.
+  state.editedBy[index] = { name: state.userName, at: annotated._savedAt };
+  upsertAnnotation({
+    question_id:    qidOf(index),
+    subject_id:     subjectId,
+    chapter_id:     chapterId,
+    topic_id:       topicId,
+    mark_id:        markId,
+    difficulty,
+    tag_slugs:      tags,
+    status:         'saved',
+    edited_by:      state.userName
+  });
+
   updateStats();
   showToast('Saved!', 'success');
   renderQuestionList();
@@ -341,11 +719,122 @@ function skipQuestion() {
   const index = state.currentIndex;
   if (!state.savedIndexSet.has(index)) {
     state.skippedSet.add(index);
+    state.editedBy[index] = { name: state.userName, at: new Date().toISOString() };
+    upsertAnnotation({
+      question_id: qidOf(index),
+      status:      'skipped',
+      edited_by:   state.userName
+    });
+  } else {
+    persistToLocalStorage();
   }
-  persistToLocalStorage();
   renderQuestionList();
   updateStats();
   navigateNext();
+}
+
+/* ── Add / Delete Questions ─────────────────────── */
+function requireSupabase() {
+  if (!state.useSupabase) {
+    showToast('Connect Supabase to add or delete questions', 'warning');
+    return false;
+  }
+  return true;
+}
+
+function openAddQuestion() {
+  if (!requireSupabase()) return;
+  $('addq-question').value    = '';
+  $('addq-explanation').value = '';
+  ['a', 'b', 'c', 'd'].forEach(k => { $('addq-opt-' + k).value = ''; });
+  const first = document.querySelector('input[name="addq-correct"][value="0"]');
+  if (first) first.checked = true;
+  $('addq-modal').classList.remove('hidden');
+  setTimeout(() => $('addq-question').focus(), 50);
+}
+
+function closeAddQuestion() {
+  $('addq-modal').classList.add('hidden');
+}
+
+async function submitAddQuestion() {
+  const qhtml = $('addq-question').value.trim();
+  if (!qhtml) { showToast('Question text is required', 'warning'); return; }
+
+  const keys = ['a', 'b', 'c', 'd'];
+  const checked = document.querySelector('input[name="addq-correct"]:checked');
+  const correctIdx = checked ? parseInt(checked.value, 10) : 0;
+
+  const options = [];
+  keys.forEach((k, i) => {
+    const name = $('addq-opt-' + k).value.trim();
+    if (name) options.push({ name, answer: i === correctIdx });
+  });
+  if (options.length < 2) { showToast('Add at least two options', 'warning'); return; }
+  if (!options.some(o => o.answer)) options[0].answer = true;   // safety: ensure one correct
+
+  const explanation = $('addq-explanation').value.trim();
+  const btn = $('addq-submit');
+  btn.disabled = true;
+  try {
+    const { data, error } = await state.sb.from('questions').insert({
+      question_html:    qhtml,
+      explanation_html: explanation,
+      options,
+      created_by:       state.userName
+    }).select().single();
+    if (error) throw error;
+
+    appendAddedQuestion(data);
+    buildQidIndex();
+    recomputeHidden();
+    closeAddQuestion();
+    applyFilters();
+    updateStats();
+    showToast('Question added', 'success');
+    const idx = indexOfQid(data.id);
+    renderEditor(idx);
+    ensureCardVisible(idx);
+  } catch (e) {
+    console.warn('Add question failed:', e);
+    showToast('Failed to add question', 'warning');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function deleteCurrentQuestion() {
+  if (!requireSupabase()) return;
+  const index = state.currentIndex;
+  const q = state.questions[index];
+  if (!q) return;
+  const qid = q._qid;
+
+  const ok = confirm(q._added
+    ? 'Delete this added question for everyone? This cannot be undone from the app.'
+    : 'Hide this question for everyone? The original data file is untouched; it can be restored from Supabase.');
+  if (!ok) return;
+
+  // Optimistically hide locally (no index shift), then sync.
+  state.hiddenQids.add(qid);
+  recomputeHidden();
+  applyFilters();
+  updateStats();
+  navigateToVisible();
+
+  try {
+    if (q._added) {
+      await state.sb.from('questions').delete().eq('id', qid);
+      await state.sb.from('annotations').delete().eq('question_id', qid);
+    } else {
+      await state.sb.from('hidden_questions')
+        .upsert({ question_id: qid, hidden_by: state.userName }, { onConflict: 'question_id' });
+    }
+    showToast('Question deleted', 'success');
+  } catch (e) {
+    console.warn('Delete failed:', e);
+    showToast('Delete failed to sync', 'warning');
+  }
 }
 
 /* ── Navigation ─────────────────────────────────── */
@@ -377,6 +866,14 @@ function navigatePrev() {
   }
 }
 
+// Move to the nearest visible question (used after the current one is hidden).
+function navigateToVisible() {
+  const fi = state.filteredIndices;
+  if (!fi.length) return;
+  const next = fi.find(i => i > state.currentIndex);
+  renderEditor(next != null ? next : fi[fi.length - 1]);
+}
+
 /* ── Filters ────────────────────────────────────── */
 function onFilterChange() {
   state.filters.subject = $('filter-subject').value;
@@ -391,6 +888,9 @@ function applyFilters() {
   const searchLower = search.toLowerCase();
 
   state.filteredIndices = state.questions.reduce((acc, q, i) => {
+    // Hidden (soft-deleted) questions never appear
+    if (state.hiddenIndexSet.has(i)) return acc;
+
     // Subject filter
     if (subject && q.subjectId !== subject) return acc;
 
@@ -460,7 +960,10 @@ function makeQuestionCard(index) {
   else                badgeHtml = `<span class="badge unsaved">○ Unsaved</span>`;
 
   const subjectName = getSubjectName(q.subjectId);
-  const metaText    = subjectName ? `${subjectName}${q.difficulty ? ' · ' + q.difficulty : ''}` : '';
+  const eb          = state.editedBy[index];
+  const byText      = eb && eb.name ? `👤 ${eb.name}` : '';
+  const metaParts   = [subjectName, q.difficulty, byText].filter(Boolean);
+  const metaText    = metaParts.join(' · ');
 
   card.innerHTML = `
     <div class="q-card-left">
@@ -526,7 +1029,7 @@ function changePage(dir) {
 
 /* ── Stats ──────────────────────────────────────── */
 function updateStats() {
-  const total   = state.questions.length;
+  const total   = visibleCount();
   const saved   = state.savedQuestions.length;
   const skipped = state.skippedSet.size;
 
@@ -593,6 +1096,16 @@ function persistToLocalStorage() {
       showToast('Storage full — export your data now!', 'warning');
     }
   }
+}
+
+function restoreCurrentIndex() {
+  try {
+    const rawIndex = localStorage.getItem(LS_INDEX);
+    if (rawIndex !== null) {
+      const idx = JSON.parse(rawIndex);
+      if (idx >= 0 && idx < state.questions.length) state.currentIndex = idx;
+    }
+  } catch (e) { /* ignore */ }
 }
 
 function restoreFromLocalStorage() {

@@ -618,3 +618,212 @@ body {
   .btn-export { margin-left: 0; }
   #export-actions { margin-left: 0; }
 }
+
+/* ── Collaboration UI (name modal, sync status, edited-by) ─────── */
+#app-bar-right {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.sync-status {
+  font-size: .78rem;
+  font-weight: 600;
+  padding: .15rem .5rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.sync-status.online  { background: var(--green-bg);  color: var(--green); }
+.sync-status.offline { background: var(--amber-bg);  color: var(--amber); }
+.sync-status.error   { background: var(--red-bg);    color: var(--red);   }
+
+.user-chip {
+  font-size: .78rem;
+  font-weight: 600;
+  padding: .15rem .55rem;
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--accent-dark);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.user-chip:hover { background: var(--accent-light); }
+
+.edited-by {
+  font-size: .74rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* ── Modal ─────────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, .45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+}
+.modal-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 1.75rem;
+  width: 100%;
+  max-width: 380px;
+}
+.modal-card h2 {
+  font-size: 1.15rem;
+  margin-bottom: .5rem;
+  color: var(--text);
+}
+.modal-card p {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+.modal-card input {
+  width: 100%;
+  padding: .6rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: .95rem;
+  margin-bottom: 1rem;
+}
+.modal-card input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+.modal-card .btn-primary { width: 100%; }
+
+.modal-overlay.hidden,
+.user-chip.hidden { display: none; }
+
+/* ── Tag pills (multi-select) ──────────────────────────────────── */
+.form-row-tags {
+  align-items: flex-start;
+}
+.tag-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  flex: 1;
+}
+.tag-pill {
+  font-family: inherit;
+  font-size: .8rem;
+  font-weight: 500;
+  padding: .3rem .65rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+.tag-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+.tag-pill.selected {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.tag-pill.selected:hover {
+  background: var(--accent-dark);
+  color: #fff;
+}
+
+/* ── Add/Delete question UI ────────────────────────────────────── */
+.badge.added {
+  background: var(--accent-bg);
+  color: var(--accent-dark);
+  border: 1px solid var(--accent-light);
+}
+.btn-danger {
+  color: var(--red);
+  border-color: var(--red);
+  background: var(--red-bg);
+  font-weight: 600;
+}
+.btn-danger:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+.btn-danger:active { transform: translateY(1px); }
+
+#btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .5rem 1rem;
+}
+
+#btn-add-question {
+  flex-shrink: 0;
+  padding: .42rem .7rem;
+  font-size: .82rem;
+  white-space: nowrap;
+}
+
+.modal-card-lg { max-width: 520px; }
+.modal-card textarea,
+.modal-card .addq-option input[type="text"] {
+  width: 100%;
+  font-family: inherit;
+  padding: .55rem .7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: .9rem;
+  color: var(--text);
+}
+.modal-card textarea { resize: vertical; margin-bottom: .9rem; }
+.modal-card textarea:focus,
+.modal-card .addq-option input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+.addq-label {
+  display: block;
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: .35rem;
+}
+.addq-hint {
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-light);
+}
+.addq-option {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: .45rem;
+}
+.addq-option input[type="radio"] { flex-shrink: 0; width: 16px; height: 16px; cursor: pointer; }
+.addq-option input[type="text"] { flex: 1; }
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: .6rem;
+  margin-top: 1.1rem;
+}
+.modal-actions .btn-ghost,
+.modal-actions .btn-primary { width: auto; padding: .5rem 1.1rem; }
+
+/* Make sure the add-question modal hides too */
+#addq-modal.hidden { display: none; }

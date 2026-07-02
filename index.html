@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <!-- Supabase JS SDK (shared realtime storage). Loads before app.js. -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -16,8 +19,22 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
       NEET Annotator
     </div>
-    <span id="global-status">Loading data…</span>
+    <div id="app-bar-right">
+      <span id="sync-status" class="sync-status" title="Sync status">● Local</span>
+      <span id="user-chip" class="user-chip hidden" title="Click to change your name"></span>
+      <span id="global-status">Loading data…</span>
+    </div>
   </header>
+
+  <!-- Name prompt (shown on first load; identifies who edited what) -->
+  <div id="name-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h2>Who's annotating?</h2>
+      <p>Your name is attached to each question you save, so teammates can see who did what. It's stored on this device.</p>
+      <input type="text" id="name-input" placeholder="e.g. Digvijay" maxlength="40" autocomplete="off" />
+      <button id="name-submit" class="btn-primary">Start</button>
+    </div>
+  </div>
 
   <div id="toast" class="toast hidden"></div>
 
@@ -30,6 +47,8 @@
         <div id="question-counter">Question <span id="q-num">–</span> of <span id="q-total">–</span></div>
         <div id="editor-badges">
           <span id="badge-status" class="badge unsaved">Unsaved</span>
+          <span id="badge-added" class="badge added" style="display:none">＋ Added</span>
+          <span id="edited-by" class="edited-by"></span>
         </div>
       </div>
 
@@ -67,11 +86,9 @@
           </select>
         </div>
 
-        <div class="form-row">
-          <label for="sel-tag">Tag</label>
-          <select id="sel-tag">
-            <option value="">— Select Tag —</option>
-          </select>
+        <div class="form-row form-row-tags">
+          <label>Tags</label>
+          <div id="tag-pills" class="tag-pills"></div>
         </div>
 
         <div class="form-row">
@@ -91,6 +108,7 @@
       </div>
 
       <div id="editor-actions">
+        <button id="btn-delete" class="btn-ghost btn-danger" title="Delete / hide this question"><span aria-hidden="true">🗑</span> Delete</button>
         <button id="btn-prev" class="btn-ghost">← Prev</button>
         <button id="btn-skip" class="btn-ghost">Skip</button>
         <button id="btn-save" class="btn-primary">Save &amp; Next →</button>
@@ -146,6 +164,7 @@
           <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="search" id="filter-search" placeholder="Search questions…" />
         </div>
+        <button id="btn-add-question" class="btn-primary" title="Add a new question">＋ Add</button>
       </div>
 
       <div id="question-list"></div>
@@ -159,6 +178,43 @@
     </section>
 
   </main>
+
+  <!-- Add-question modal -->
+  <div id="addq-modal" class="modal-overlay hidden">
+    <div class="modal-card modal-card-lg">
+      <h2>Add a new question</h2>
+      <p>Shared with your whole team. You can use <code>$LaTeX$</code> like the other questions.</p>
+
+      <label class="addq-label" for="addq-question">Question</label>
+      <textarea id="addq-question" rows="3" placeholder="Enter the question text…"></textarea>
+
+      <label class="addq-label">Options <span class="addq-hint">(select the correct one)</span></label>
+      <div class="addq-option">
+        <input type="radio" name="addq-correct" value="0" checked />
+        <input type="text" id="addq-opt-a" placeholder="Option A" />
+      </div>
+      <div class="addq-option">
+        <input type="radio" name="addq-correct" value="1" />
+        <input type="text" id="addq-opt-b" placeholder="Option B" />
+      </div>
+      <div class="addq-option">
+        <input type="radio" name="addq-correct" value="2" />
+        <input type="text" id="addq-opt-c" placeholder="Option C" />
+      </div>
+      <div class="addq-option">
+        <input type="radio" name="addq-correct" value="3" />
+        <input type="text" id="addq-opt-d" placeholder="Option D" />
+      </div>
+
+      <label class="addq-label" for="addq-explanation">Explanation <span class="addq-hint">(optional)</span></label>
+      <textarea id="addq-explanation" rows="2" placeholder="Explanation…"></textarea>
+
+      <div class="modal-actions">
+        <button id="addq-cancel" class="btn-ghost">Cancel</button>
+        <button id="addq-submit" class="btn-primary">Add Question</button>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
