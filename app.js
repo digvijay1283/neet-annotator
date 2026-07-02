@@ -24,7 +24,10 @@ const state = {
   // ── Collaboration ──
   userName:       '',
   sb:             null,
-  useSupabase:    false
+  useSupabase:    false,
+
+  // ── Admin (export buttons visible only to unlocked device) ──
+  isAdmin:        false
 };
 
 /* ── DOM refs ───────────────────────────────────── */
@@ -44,6 +47,7 @@ async function init() {
   }
 
   await ensureUserName();          // identify the annotator (name prompt)
+  initAdminGate();                 // show export buttons only to an unlocked device
   populateSubjectDropdowns();
   populateTagDropdown();
 
@@ -77,13 +81,22 @@ async function loadData() {
   state.papers.forEach((paper, paperIdx) => {
     (paper.questions || []).forEach((q, qIdx) => {
       q._qid = q.id;
-      // Snapshot the original source names so the context hint strip keeps
-      // showing them even after the expert overwrites subject/chapter/topic.
+      // Snapshot the original annotatable fields so (a) the context hint strip
+      // keeps showing the source names after an overwrite, and (b) "Unsave" can
+      // fully restore the question to its original, unmodified state.
       q._ctx = {
+        subjectId:   q.subjectId,
+        subjectKey:  q.subjectKey,
         subjectName: q.subjectName,
+        chapterId:   q.chapterId,
         chapterName: q.chapterName,
+        topicId:     q.topicId,
         topicName:   q.topicName,
-        marks:       q.marks
+        markId:      q.markId,
+        markName:    q.markName,
+        marks:       q.marks,
+        difficulty:  q.difficulty,
+        tagSlugs:    Array.isArray(q.tagSlugs) ? q.tagSlugs.slice() : []
       };
       state.qIndex.set(q.id, { paperIdx, qIdx });
     });
@@ -135,6 +148,37 @@ function changeUserName() {
     localStorage.setItem(LS_USER, state.userName);
     updateUserChip();
   }
+}
+
+/* ── Admin gate (export buttons) ────────────────── */
+const LS_ADMIN = 'neet_admin';
+
+function initAdminGate() {
+  const secret = (window.APP_CONFIG && window.APP_CONFIG.adminSecret) || '';
+
+  // Look for ?admin=… in the query string OR the #hash (support both).
+  const fromQuery = new URLSearchParams(window.location.search).get('admin');
+  const fromHash  = new URLSearchParams((window.location.hash || '').replace(/^#/, '')).get('admin');
+  const provided  = fromQuery != null ? fromQuery : fromHash;
+
+  if (provided === 'off') {
+    localStorage.removeItem(LS_ADMIN);                 // lock this device again
+    history.replaceState(null, '', window.location.pathname);
+  } else if (secret && provided && provided === secret) {
+    localStorage.setItem(LS_ADMIN, '1');               // unlock + remember
+    history.replaceState(null, '', window.location.pathname);  // scrub secret from URL bar
+  }
+
+  state.isAdmin = localStorage.getItem(LS_ADMIN) === '1';
+  applyAdminVisibility();
+}
+
+// Show/hide every export control based on admin status.
+function applyAdminVisibility() {
+  ['btn-export', 'btn-export-today', 'btn-export-all'].forEach(id => {
+    const el = $(id);
+    if (el) el.style.display = state.isAdmin ? '' : 'none';
+  });
 }
 
 /* ── Supabase (shared realtime storage) ─────────── */
@@ -205,6 +249,23 @@ function applyRecordToQuestion(q, rec) {
   q.markName    = rec.markName;
   q.difficulty  = rec.difficulty;
   q.tagSlugs    = rec.tagSlugs;    // extra field kept for our workflow
+}
+
+// Revert a question to its original, unmodified state (used by Unsave).
+function restoreQuestionDefault(q) {
+  if (!q || !q._ctx) return;
+  const c = q._ctx;
+  q.subjectId   = c.subjectId   ?? null;
+  q.subjectKey  = c.subjectKey  ?? null;
+  q.subjectName = c.subjectName ?? null;
+  q.chapterId   = c.chapterId   ?? null;
+  q.chapterName = c.chapterName ?? null;
+  q.topicId     = c.topicId     ?? null;
+  q.topicName   = c.topicName   ?? null;
+  q.markId      = c.markId      ?? null;
+  q.markName    = c.markName    ?? null;
+  q.difficulty  = c.difficulty  ?? null;
+  q.tagSlugs    = Array.isArray(c.tagSlugs) ? c.tagSlugs.slice() : [];
 }
 
 function questionByQid(qid) {
@@ -289,6 +350,7 @@ function subscribeRealtime() {
 
           if (isDelete) {
             state.annotations.delete(qid);
+            restoreQuestionDefault(questionByQid(qid));   // teammate unsaved it
           } else {
             const rec = rowToRecord(row);
             state.annotations.set(qid, rec);
@@ -365,6 +427,7 @@ function attachEvents() {
   $('btn-save').addEventListener('click', saveQuestion);
   $('btn-prev').addEventListener('click', navigatePrev);
   $('btn-skip').addEventListener('click', skipQuestion);
+  $('btn-unsave').addEventListener('click', unsaveQuestion);
   $('btn-delete').addEventListener('click', deleteCurrentQuestion);
 
   $('btn-export').addEventListener('click', () => exportJSON(false));
@@ -455,7 +518,6 @@ function openPaper(i) {
   state.currentPage = 1;
 
   rebuildPaperSets();
-  state.currentIndex = firstVisibleIndex();
 
   $('paper-view').classList.add('hidden');
   $('layout').classList.remove('hidden');
@@ -464,6 +526,8 @@ function openPaper(i) {
   $('editor-paper-name').textContent = paper.paperName;
 
   applyFilters();
+  // Land on the first item of the sorted list (the first unmodified question).
+  state.currentIndex = state.filteredIndices.length ? state.filteredIndices[0] : firstVisibleIndex();
   renderEditor(state.currentIndex);
   updateStats();
 }
@@ -626,6 +690,11 @@ function renderEditor(index) {
 
   const eb = state.editedBy[index];
   $('edited-by').textContent = eb && eb.name ? `edited by ${eb.name}` : '';
+
+  // Unsave is always visible while a paper is open, but only enabled for an
+  // already-annotated (saved/skipped) question.
+  const annotated = state.savedIndexSet.has(index) || state.skippedSet.has(index);
+  $('btn-unsave').disabled = !annotated;
 
   // Question HTML
   $('question-body').innerHTML = q.questionHtml || '<em>No question text</em>';
@@ -820,6 +889,48 @@ function skipQuestion() {
   navigateNext();
 }
 
+/* ── Unsave (reset a question to its original state) ─ */
+async function unsaveQuestion() {
+  const index = state.currentIndex;
+  const q = state.questions[index];
+  if (!q) return;
+  const qid = q._qid;
+
+  if (!state.annotations.has(qid)) {
+    showToast('Nothing to unsave', '');
+    return;
+  }
+  const ok = confirm('Reset this question to its original, unmodified state? '
+    + 'This removes its saved annotation' + (state.useSupabase ? ' for everyone.' : '.'));
+  if (!ok) return;
+
+  // Clear locally: drop the record, restore original field values, update sets.
+  state.annotations.delete(qid);
+  restoreQuestionDefault(q);
+  state.savedIndexSet.delete(index);
+  state.skippedSet.delete(index);
+  delete state.editedBy[index];
+  persistToLocalStorage();
+
+  // Remove the row from the shared DB (if connected).
+  if (state.useSupabase) {
+    try {
+      const { error } = await state.sb.from('annotations').delete().eq('question_id', qid);
+      if (error) throw error;
+      setSyncStatus('online', 'Live');
+    } catch (e) {
+      console.warn('Unsave sync failed:', e);
+      setSyncStatus('error', 'Sync failed');
+      showToast('Unsave failed to sync', 'warning');
+    }
+  }
+
+  applyFilters();        // re-sorts → moves back up into the unmodified group
+  renderEditor(index);
+  updateStats();
+  showToast('Reset to unmodified', 'success');
+}
+
 /* ── Delete / hide a question ───────────────────── */
 function requireSupabase() {
   if (!state.useSupabase) {
@@ -918,6 +1029,11 @@ function applyFilters() {
     acc.push(i);
     return acc;
   }, []);
+
+  // Unmodified (unsaved) questions on top, already-saved ones at the bottom.
+  // Array.sort is stable, so each group keeps its natural ascending order.
+  state.filteredIndices.sort((a, b) =>
+    (state.savedIndexSet.has(a) ? 1 : 0) - (state.savedIndexSet.has(b) ? 1 : 0));
 
   renderQuestionList();
 }
