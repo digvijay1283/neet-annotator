@@ -19,11 +19,16 @@ data stays in your browser). The status chip in the top bar shows which mode you
 2. **New project** → give it a name, set a database password, pick a region → **Create**.
 3. Wait ~1 minute for it to provision.
 
-### 2. Create the table
+### 2. Create the tables
 1. In the project, open **SQL Editor** → **New query**.
-2. Open [`supabase_schema.sql`](supabase_schema.sql) from this repo, copy everything, paste it in.
-3. Click **Run**. You should see "Success". This creates the `annotations` table,
-   the realtime broadcast, and access policies.
+2. Open [`supabase_migration_v3.sql`](supabase_migration_v3.sql) from this repo, copy
+   everything, paste it in.
+3. Click **Run**. You should see "Success". This creates the `annotations` and
+   `hidden_questions` tables, the realtime broadcast, and access policies.
+
+> `supabase_migration_v3.sql` is the current (and only) schema for the **paper-level**
+> app. If you ran an earlier version, clear old rows first — see the note about
+> `truncate` inside the v3 file (old `st-<n>` keys no longer map to any question).
 
 ### 3. Get your keys
 1. **Project Settings** (gear icon) → **API**.
@@ -51,41 +56,35 @@ Commit and push — Netlify redeploys automatically. Share the URL with your tea
 ## How each person uses it
 1. Open the site. On first load, enter your **name** (stored on your device; click the
    name chip in the top bar to change it).
-2. Annotate as usual. Every **Save** / **Skip** writes to the shared database.
-3. When a teammate saves a question, your list updates automatically and a small toast
-   shows e.g. *"Priya updated Q42"*. Each question shows **who last edited it**.
+2. The landing page shows a **card per paper** (NEET 2013, AIPMT 2012, …) with a live
+   `saved / total` progress bar. Pick a paper to annotate its questions; use **← Papers**
+   in the top bar to go back.
+3. Annotate each question — pick Subject → Chapter → Topic (marks fill in automatically
+   from the subject). Every **Save** / **Skip** writes to the shared database.
+4. When a teammate saves a question, your list and the paper cards update automatically.
+   Each question shows **who last edited it**.
 
 ## Conflict behaviour
 **Last write wins.** If two people save the same question, the most recent save is kept,
 and the question shows who did it. For a small team splitting the work this is usually
 fine. If you later want per-question locking, that can be added.
 
+## Export
+- **Export completed papers** (top-right of the paper picker) downloads a single file in
+  the paper-level format `{ "success": true, "data": [ …papers… ] }` — containing **only
+  papers whose every question has been saved**. Each question carries the expert-filled
+  `subjectId / subjectKey / chapterId / topicId / markId / markName` (plus your `tagSlugs`);
+  the read-only context (`subjectName`, etc.) and runtime fields (`selectedOptionId`,
+  `markedForReview`) are left untouched.
+- **Export today's** limits it to completed papers touched today.
+
 ## Notes
-- The original question bank (`data/questions_data.json`) stays static and read-only.
-  Team-**added** questions live in Supabase and are keyed by a stable id, so everyone
-  stays in sync even as questions are added or hidden.
-- **Export JSON** still works and now exports the combined team annotations.
+- The source papers (`data/converted_papers.json`) stay static and read-only. Progress,
+  and hidden questions live in Supabase keyed by each question's **real id**.
 - No backend server to run — the browser talks to Supabase directly.
 
----
-
-## Add / delete questions (migration v2)
-
-A later update added the ability to **add new questions** and **delete/hide existing
-ones**, shared across the team. This needs one extra SQL migration:
-
-1. Open **SQL Editor → New query** in Supabase.
-2. Paste all of [`supabase_migration_v2.sql`](supabase_migration_v2.sql) and **Run**.
-
-> ⚠️ This recreates the `annotations` table to key off a stable question **id**
-> instead of array position. Run it **before** using the updated app, otherwise
-> saving fails. It's safe when the table is empty (as it is right after first setup).
-
-After migrating:
-- **＋ Add** (top-right of the question list) opens a form: question text, up to 4
-  options with a correct-answer marker, and an optional explanation. `$LaTeX$` works.
-  New questions appear for everyone and can be annotated like any other.
-- **🗑** (in the editor toolbar) deletes the current question. Deleting a question you
-  **added** removes it; deleting an **original** question hides it for everyone (the
-  data file is untouched — it can be un-hidden by deleting the row from the
-  `hidden_questions` table in Supabase).
+## Delete / hide a question
+- **🗑** (in the editor toolbar) hides the current question for everyone. The source data
+  file is untouched; a hidden question is excluded from its paper's progress, completion
+  check, and export. Un-hide by deleting the row from the `hidden_questions` table in
+  Supabase. (Adding brand-new questions was removed — the papers are fixed PYQ sets.)

@@ -704,6 +704,30 @@ body {
 .modal-overlay.hidden,
 .user-chip.hidden { display: none; }
 
+/* ── Read-only source context strip ────────────────────────────── */
+.q-context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem .5rem;
+  padding: .6rem .75rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: .9rem;
+  font-size: .78rem;
+}
+.q-context:empty { display: none; }
+.q-context .ctx-item { display: inline-flex; align-items: baseline; gap: .3rem; }
+.q-context .ctx-label {
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: .64rem;
+  font-weight: 700;
+}
+.q-context .ctx-value { color: var(--text); font-weight: 600; }
+.q-context .ctx-sep { color: var(--border); }
+
 /* ── Tag pills (multi-select) ──────────────────────────────────── */
 .form-row-tags {
   align-items: flex-start;
@@ -768,62 +792,146 @@ body {
   padding: .5rem 1rem;
 }
 
-#btn-add-question {
-  flex-shrink: 0;
-  padding: .42rem .7rem;
-  font-size: .82rem;
-  white-space: nowrap;
-}
+/* ── View toggling (picker vs editor) ──────────────────────────── */
+#paper-view.hidden,
+#layout.hidden,
+.btn-back.hidden { display: none; }
 
-.modal-card-lg { max-width: 520px; }
-.modal-card textarea,
-.modal-card .addq-option input[type="text"] {
-  width: 100%;
+/* ── Back button + editor paper name ───────────────────────────── */
+.btn-back {
   font-family: inherit;
-  padding: .55rem .7rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  font-size: .9rem;
-  color: var(--text);
-}
-.modal-card textarea { resize: vertical; margin-bottom: .9rem; }
-.modal-card textarea:focus,
-.modal-card .addq-option input[type="text"]:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-light);
-}
-.addq-label {
-  display: block;
-  font-size: .78rem;
+  font-size: 1rem;
+  line-height: 1;
   font-weight: 700;
   color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  margin-bottom: .35rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: .28rem .55rem;
+  cursor: pointer;
+  transition: var(--transition);
 }
-.addq-hint {
-  font-weight: 500;
-  text-transform: none;
-  letter-spacing: 0;
-  color: var(--text-light);
+.btn-back:hover { background: var(--accent-bg); color: var(--accent-dark); border-color: var(--accent-light); }
+
+.editor-paper-name {
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-right: .5rem;
 }
-.addq-option {
+.editor-paper-name::after { content: "·"; margin-left: .5rem; color: var(--text-light); }
+
+/* ── Paper picker (landing view) ───────────────────────────────── */
+#paper-view {
+  height: calc(100vh - var(--app-bar-h));
+  overflow-y: auto;
+  padding: 1.5rem 1.75rem 3rem;
+}
+
+#paper-view-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+#paper-view-title h1 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+#paper-view-sub {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-top: .2rem;
+  max-width: 46ch;
+}
+#paper-view-actions {
   display: flex;
   align-items: center;
-  gap: .55rem;
-  margin-bottom: .45rem;
-}
-.addq-option input[type="radio"] { flex-shrink: 0; width: 16px; height: 16px; cursor: pointer; }
-.addq-option input[type="text"] { flex: 1; }
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
   gap: .6rem;
-  margin-top: 1.1rem;
+  flex-wrap: wrap;
 }
-.modal-actions .btn-ghost,
-.modal-actions .btn-primary { width: auto; padding: .5rem 1.1rem; }
+/* TEMPORARY debug button — remove with the #btn-export-all button */
+.btn-temp {
+  color: var(--amber);
+  border: 1px dashed var(--amber-border);
+  background: var(--amber-bg);
+}
+.btn-temp:hover { background: var(--amber-border); color: var(--amber); }
 
-/* Make sure the add-question modal hides too */
-#addq-modal.hidden { display: none; }
+.papers-progress {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: .35rem .75rem;
+  border-radius: 9999px;
+}
+
+#paper-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.paper-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.15rem;
+  cursor: pointer;
+  transition: box-shadow var(--transition), border-color var(--transition), transform var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  box-shadow: var(--shadow-sm);
+}
+.paper-card:hover {
+  border-color: var(--accent-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.paper-card.completed {
+  border-color: var(--green-border);
+  background: var(--green-bg);
+}
+
+.paper-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.paper-card-name {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--text);
+}
+.paper-card-meta {
+  font-size: .75rem;
+  color: var(--text-muted);
+}
+.paper-card-progress-num {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.paper-card.completed .paper-card-progress-num { color: var(--green); }
+
+.paper-card-bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.paper-card-bar > i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 9999px;
+  transition: width .4s ease;
+}
+.paper-card.completed .paper-card-bar > i { background: var(--green); }

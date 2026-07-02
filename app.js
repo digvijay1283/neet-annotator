@@ -1,25 +1,30 @@
 /* ── State ──────────────────────────────────────── */
 const state = {
-  questions:      [],
+  // ── Data (paper-level) ──
+  papers:         [],            // 29 raw paper objects (preserved for export)
   topicData:      null,
   tagList:        [],
+  qIndex:         new Map(),     // qid → { paperIdx, qIdx }
+  annotations:    new Map(),     // qid → annotation record (global saved/skipped store)
+  hiddenQids:     new Set(),     // qids soft-deleted for everyone
+
+  // ── Current paper working set ──
+  currentPaperIndex: null,       // null → paper-picker view
+  questions:      [],            // current paper's questions (refs, each tagged _qid)
   currentIndex:   0,
-  savedQuestions: [],
-  savedIndexSet:  new Set(),
+  savedIndexSet:  new Set(),     // indices (within current paper) that are saved
   skippedSet:     new Set(),
+  hiddenIndexSet: new Set(),
+  editedBy:       {},            // index → { name, at } for the current paper
   filters:        { subject: '', status: 'all', search: '' },
   currentPage:    1,
   PAGE_SIZE:      15,
   filteredIndices: [],
+
   // ── Collaboration ──
-  userName:       '',            // who is annotating (from name prompt)
-  editedBy:       {},            // array index → { name, at }
-  sb:             null,          // Supabase client
-  useSupabase:    false,         // false → local-only fallback
-  // ── Question identity (stable across users) ──
-  qidToIndex:     new Map(),     // stable question id → current array index
-  hiddenQids:     new Set(),     // ids soft-deleted for everyone
-  hiddenIndexSet: new Set()      // array indices currently hidden
+  userName:       '',
+  sb:             null,
+  useSupabase:    false
 };
 
 /* ── DOM refs ───────────────────────────────────── */
@@ -43,33 +48,46 @@ async function init() {
   populateTagDropdown();
 
   initSupabase();                  // connect shared storage (or fall back)
-  await loadRemoteQuestions();     // pull team-added questions + hidden list
-  await loadAnnotations();         // pull team progress from Supabase / local
-
-  applyFilters();
-  renderEditor(state.currentIndex);
-  updateStats();
+  await loadRemoteState();         // pull annotations + hidden list (or local)
+  applyAllRecords();               // reflect saved records onto question objects
 
   attachEvents();
   subscribeRealtime();             // live updates from other users
-  setGlobalStatus(`${state.questions.length} questions loaded`);
+
+  showPaperView();                 // landing = paper picker
+  setGlobalStatus(`${state.papers.length} papers · ${state.qIndex.size} questions`);
 }
 
 /* ── Data Loading ───────────────────────────────── */
 async function loadData() {
-  const [qRes, tRes, tagRes] = await Promise.all([
-    fetch('./data/questions_data.json'),
+  const [pRes, tRes, tagRes] = await Promise.all([
+    fetch('./data/converted_papers.json'),
     fetch('./data/topic.txt'),
     fetch('./data/tags.json').catch(() => null)   // optional
   ]);
-  if (!qRes.ok) throw new Error('questions_data.json not found');
+  if (!pRes.ok) throw new Error('converted_papers.json not found');
   if (!tRes.ok) throw new Error('topic.txt not found');
-  state.questions = await qRes.json();
+
+  const paperFile = await pRes.json();
+  state.papers    = Array.isArray(paperFile) ? paperFile : (paperFile.data || []);
   state.topicData = await tRes.json();
 
-  // Give every original question a stable id ('st-<position>') so annotations
-  // key off identity, not array position — survives added/deleted questions.
-  state.questions.forEach((q, i) => { q._qid = 'st-' + i; q._added = false; });
+  // Tag each question with a stable id (real id) and build the global index.
+  state.qIndex = new Map();
+  state.papers.forEach((paper, paperIdx) => {
+    (paper.questions || []).forEach((q, qIdx) => {
+      q._qid = q.id;
+      // Snapshot the original source names so the context hint strip keeps
+      // showing them even after the expert overwrites subject/chapter/topic.
+      q._ctx = {
+        subjectName: q.subjectName,
+        chapterName: q.chapterName,
+        topicName:   q.topicName,
+        marks:       q.marks
+      };
+      state.qIndex.set(q.id, { paperIdx, qIdx });
+    });
+  });
 
   // Tags file is optional — accept either the raw array or the API envelope.
   if (tagRes && tagRes.ok) {
@@ -142,94 +160,94 @@ function initSupabase() {
   }
 }
 
-/* ── Question identity helpers ──────────────────── */
-function buildQidIndex() {
-  state.qidToIndex = new Map();
-  state.questions.forEach((q, i) => state.qidToIndex.set(q._qid, i));
+/* ── Annotation record helpers ──────────────────── */
+// Turn a DB row into an in-memory annotation record.
+function rowToRecord(row) {
+  return {
+    subjectId:   row.subject_id,
+    subjectKey:  row.subject_key || row.subject_id,
+    subjectName: row.subject_name,
+    chapterId:   row.chapter_id,
+    chapterName: row.chapter_name,
+    topicId:     row.topic_id,
+    topicName:   row.topic_name,
+    markId:      row.mark_id,
+    markName:    row.mark_name,
+    difficulty:  row.difficulty || 'Medium',
+    tagSlugs:    Array.isArray(row.tag_slugs) ? row.tag_slugs : [],
+    status:      row.status || 'saved',
+    editedBy:    row.edited_by,
+    at:          row.updated_at
+  };
 }
 
-function indexOfQid(qid) {
-  return state.qidToIndex.has(qid) ? state.qidToIndex.get(qid) : -1;
+// Text of the currently-selected <option> in a dropdown (null if none chosen).
+function selectedText(id) {
+  const el = $(id);
+  if (!el || !el.value) return null;
+  const opt = el.selectedOptions && el.selectedOptions[0];
+  return opt ? opt.text : null;
 }
 
+// Write a saved record's chosen IDs *and* names onto the live question object so
+// filters, cards and export reflect the expert's selection. The original source
+// context is preserved separately on q._ctx (see loadData) for the hint strip.
+function applyRecordToQuestion(q, rec) {
+  if (!q || !rec || rec.status !== 'saved') return;
+  q.subjectId   = rec.subjectId;
+  q.subjectKey  = rec.subjectId;   // same value as subjectId (per spec)
+  q.subjectName = rec.subjectName;
+  q.chapterId   = rec.chapterId;
+  q.chapterName = rec.chapterName;
+  q.topicId     = rec.topicId;
+  q.topicName   = rec.topicName;
+  q.markId      = rec.markId;
+  q.markName    = rec.markName;
+  q.difficulty  = rec.difficulty;
+  q.tagSlugs    = rec.tagSlugs;    // extra field kept for our workflow
+}
+
+function questionByQid(qid) {
+  const loc = state.qIndex.get(qid);
+  if (!loc) return null;
+  return state.papers[loc.paperIdx].questions[loc.qIdx];
+}
+
+// Reflect every loaded record onto its question object.
+function applyAllRecords() {
+  state.annotations.forEach((rec, qid) => applyRecordToQuestion(questionByQid(qid), rec));
+}
+
+// qid ↔ index helpers for the CURRENT paper.
 function qidOf(index) {
   const q = state.questions[index];
   return q ? q._qid : null;
 }
-
-function recomputeHidden() {
-  state.hiddenIndexSet = new Set();
-  state.questions.forEach((q, i) => {
-    if (state.hiddenQids.has(q._qid)) state.hiddenIndexSet.add(i);
-  });
+function indexOfQid(qid) {
+  const loc = state.qIndex.get(qid);
+  return (loc && loc.paperIdx === state.currentPaperIndex) ? loc.qIdx : -1;
 }
 
-function visibleCount() {
-  return state.questions.length - state.hiddenIndexSet.size;
-}
-
-// Turn a `questions` table row into an in-memory question and append it.
-function appendAddedQuestion(row) {
-  if (state.qidToIndex.has(row.id)) return;   // already present
-  state.questions.push({
-    subjectId:       null,
-    chapterId:       null,
-    topicId:         null,
-    markId:          null,
-    difficulty:      'Medium',
-    questionHtml:    row.question_html,
-    explanationHtml: row.explanation_html || '',
-    options:         Array.isArray(row.options) ? row.options : [],
-    tagSlugs:        [],
-    _qid:            row.id,
-    _added:          true,
-    _createdBy:      row.created_by
-  });
-}
-
-/* ── Load team-added questions + hidden list ────── */
-async function loadRemoteQuestions() {
-  if (!state.useSupabase) { buildQidIndex(); recomputeHidden(); return; }
-  try {
-    const [qRes, hRes] = await Promise.all([
-      state.sb.from('questions').select('*').order('created_at', { ascending: true }),
-      state.sb.from('hidden_questions').select('question_id')
-    ]);
-    if (qRes.error) throw qRes.error;
-    if (hRes.error) throw hRes.error;
-
-    (qRes.data || []).forEach(row => appendAddedQuestion(row));
-    state.hiddenQids = new Set((hRes.data || []).map(h => h.question_id));
-    buildQidIndex();
-    recomputeHidden();
-
-    const added = (qRes.data || []).length;
-    if (added) showToast(`Loaded ${added} team-added question${added > 1 ? 's' : ''}`, 'success');
-  } catch (e) {
-    console.warn('Loading remote questions failed:', e);
-    buildQidIndex();
-    recomputeHidden();
-  }
-}
-
-async function loadAnnotations() {
+/* ── Load annotations + hidden list ─────────────── */
+async function loadRemoteState() {
   if (!state.useSupabase) { restoreFromLocalStorage(); return; }
 
   setSyncStatus('online', 'Syncing…');
   try {
-    const { data, error } = await state.sb.from('annotations').select('*');
-    if (error) throw error;
+    const [aRes, hRes] = await Promise.all([
+      state.sb.from('annotations').select('*'),
+      state.sb.from('hidden_questions').select('question_id')
+    ]);
+    if (aRes.error) throw aRes.error;
+    if (hRes.error) throw hRes.error;
 
-    state.savedQuestions = [];
-    state.savedIndexSet  = new Set();
-    state.skippedSet     = new Set();
-    state.editedBy       = {};
-    (data || []).forEach(row => applyRow(row));
+    state.annotations = new Map();
+    (aRes.data || []).forEach(row => state.annotations.set(row.question_id, rowToRecord(row)));
+    state.hiddenQids = new Set((hRes.data || []).map(h => h.question_id));
 
-    restoreCurrentIndex();
     setSyncStatus('online', 'Live');
-    if (state.savedQuestions.length) {
-      showToast(`Loaded ${state.savedQuestions.length} annotations from the team`, 'success');
+    if (state.annotations.size) {
+      showToast(`Loaded ${state.annotations.size} annotations from the team`, 'success');
     }
   } catch (e) {
     console.warn('Supabase load failed — falling back to local:', e);
@@ -237,51 +255,6 @@ async function loadAnnotations() {
     setSyncStatus('error', 'Offline (local)');
     restoreFromLocalStorage();
   }
-}
-
-// Apply one DB row into local state (used by initial load AND realtime).
-function applyRow(row) {
-  const idx = indexOfQid(row.question_id);
-  if (idx < 0) return;
-
-  state.editedBy[idx] = { name: row.edited_by || '?', at: row.updated_at };
-  const pos = state.savedQuestions.findIndex(s => s._originalIndex === idx);
-
-  if (row.status === 'skipped') {
-    state.skippedSet.add(idx);
-    state.savedIndexSet.delete(idx);
-    if (pos !== -1) state.savedQuestions.splice(pos, 1);
-    return;
-  }
-
-  const q = state.questions[idx] || {};
-  const annotated = {
-    subjectId:       row.subject_id,
-    chapterId:       row.chapter_id,
-    topicId:         row.topic_id,
-    markId:          row.mark_id,
-    difficulty:      row.difficulty || 'Medium',
-    questionHtml:    q.questionHtml,
-    explanationHtml: q.explanationHtml,
-    options:         q.options,
-    tagSlugs:        Array.isArray(row.tag_slugs) ? row.tag_slugs : [],
-    _originalIndex:  idx,
-    _savedAt:        row.updated_at
-  };
-  if (pos !== -1) state.savedQuestions[pos] = annotated;
-  else            state.savedQuestions.push(annotated);
-  state.savedIndexSet.add(idx);
-  state.skippedSet.delete(idx);
-}
-
-function removeRow(qid) {
-  const idx = indexOfQid(qid);
-  if (idx < 0) return;
-  state.savedIndexSet.delete(idx);
-  state.skippedSet.delete(idx);
-  delete state.editedBy[idx];
-  const pos = state.savedQuestions.findIndex(s => s._originalIndex === idx);
-  if (pos !== -1) state.savedQuestions.splice(pos, 1);
 }
 
 // Write one annotation to the shared DB (last write wins). Always caches locally.
@@ -301,7 +274,7 @@ async function upsertAnnotation(payload) {
   }
 }
 
-// Live updates: another user's save/skip/add/delete lands here.
+/* ── Realtime (live team updates) ───────────────── */
 function subscribeRealtime() {
   if (!state.useSupabase) return;
   state.sb
@@ -312,33 +285,22 @@ function subscribeRealtime() {
         payload => {
           const isDelete = payload.eventType === 'DELETE';
           const row = isDelete ? payload.old : payload.new;
-          const idx = isDelete ? removeRowReturnIndex(row.question_id) : applyRowReturnIndex(row);
+          const qid = row.question_id;
 
-          applyFilters();
-          if (idx === state.currentIndex) renderEditor(idx);
-          updateStats();
+          if (isDelete) {
+            state.annotations.delete(qid);
+          } else {
+            const rec = rowToRecord(row);
+            state.annotations.set(qid, rec);
+            applyRecordToQuestion(questionByQid(qid), rec);
+          }
+          onRemoteChange(qid);
 
-          if (!isDelete && idx >= 0 && row.edited_by && row.edited_by !== state.userName) {
-            showToast(`${row.edited_by} updated Q${idx + 1}`, '');
+          if (!isDelete && row.edited_by && row.edited_by !== state.userName) {
+            const loc = state.qIndex.get(qid);
+            if (loc) showToast(`${row.edited_by} updated a question`, '');
           }
         })
-    // New questions added by teammates
-    .on('postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'questions' },
-        payload => {
-          appendAddedQuestion(payload.new);
-          buildQidIndex();
-          recomputeHidden();
-          applyFilters();
-          updateStats();
-          if (payload.new.created_by && payload.new.created_by !== state.userName) {
-            showToast(`${payload.new.created_by} added a question`, '');
-          }
-        })
-    // A teammate hard-deleted a question they had added
-    .on('postgres_changes',
-        { event: 'DELETE', schema: 'public', table: 'questions' },
-        payload => { hideQidLocally(payload.old.id); })
     // Soft-delete (hide) / un-hide of any question
     .on('postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'hidden_questions' },
@@ -351,26 +313,40 @@ function subscribeRealtime() {
     });
 }
 
-// Realtime helpers that also report the affected array index.
-function applyRowReturnIndex(row) { applyRow(row); return indexOfQid(row.question_id); }
-function removeRowReturnIndex(qid) { const i = indexOfQid(qid); removeRow(qid); return i; }
+// A remote annotation change landed for `qid` — refresh whichever view is showing.
+function onRemoteChange(qid) {
+  const loc = state.qIndex.get(qid);
+  if (state.currentPaperIndex === null) {
+    renderPaperGrid();
+    return;
+  }
+  if (loc && loc.paperIdx === state.currentPaperIndex) {
+    rebuildPaperSets();
+    applyFilters();
+    updateStats();
+    if (loc.qIdx === state.currentIndex) renderEditor(loc.qIdx);
+  }
+}
 
-// Hide a question locally (from a remote hide/delete) without shifting indices.
 function hideQidLocally(qid) {
   if (!qid || state.hiddenQids.has(qid)) return;
   state.hiddenQids.add(qid);
-  recomputeHidden();
-  applyFilters();
-  updateStats();
-  if (indexOfQid(qid) === state.currentIndex) navigateToVisible();
+  afterHiddenChange(qid);
 }
-
 function unhideQidLocally(qid) {
   if (!state.hiddenQids.has(qid)) return;
   state.hiddenQids.delete(qid);
-  recomputeHidden();
-  applyFilters();
-  updateStats();
+  afterHiddenChange(qid);
+}
+function afterHiddenChange(qid) {
+  const loc = state.qIndex.get(qid);
+  if (state.currentPaperIndex === null) { renderPaperGrid(); return; }
+  if (loc && loc.paperIdx === state.currentPaperIndex) {
+    rebuildPaperSets();
+    applyFilters();
+    updateStats();
+    if (loc.qIdx === state.currentIndex) navigateToVisible();
+  }
 }
 
 function setSyncStatus(kind, text) {
@@ -384,16 +360,16 @@ function setSyncStatus(kind, text) {
 /* ── Event Listeners ────────────────────────────── */
 function attachEvents() {
   $('user-chip').addEventListener('click', changeUserName);
+  $('btn-back').addEventListener('click', closePaper);
+
   $('btn-save').addEventListener('click', saveQuestion);
   $('btn-prev').addEventListener('click', navigatePrev);
   $('btn-skip').addEventListener('click', skipQuestion);
+  $('btn-delete').addEventListener('click', deleteCurrentQuestion);
+
   $('btn-export').addEventListener('click', () => exportJSON(false));
   $('btn-export-today').addEventListener('click', () => exportJSON(true));
-
-  $('btn-add-question').addEventListener('click', openAddQuestion);
-  $('btn-delete').addEventListener('click', deleteCurrentQuestion);
-  $('addq-submit').addEventListener('click', submitAddQuestion);
-  $('addq-cancel').addEventListener('click', closeAddQuestion);
+  $('btn-export-all').addEventListener('click', () => exportJSON(false, true));  // TEMPORARY
 
   $('sel-subject').addEventListener('change', onSubjectChange);
   $('sel-chapter').addEventListener('change', onChapterChange);
@@ -411,12 +387,120 @@ function attachEvents() {
   $('pg-next').addEventListener('click', () => changePage(1));
 }
 
+/* ── Paper progress + picker view ───────────────── */
+function paperStats(paper) {
+  let total = 0, saved = 0;
+  (paper.questions || []).forEach(q => {
+    if (state.hiddenQids.has(q._qid)) return;
+    total++;
+    const rec = state.annotations.get(q._qid);
+    if (rec && rec.status === 'saved') saved++;
+  });
+  return { saved, total, complete: total > 0 && saved === total };
+}
+
+function showPaperView() {
+  state.currentPaperIndex = null;
+  $('paper-view').classList.remove('hidden');
+  $('layout').classList.add('hidden');
+  $('btn-back').classList.add('hidden');
+  $('app-title-text').textContent = 'NEET Annotator';
+  renderPaperGrid();
+}
+
+function renderPaperGrid() {
+  const grid = $('paper-grid');
+  grid.innerHTML = '';
+  let completedCount = 0;
+
+  const frag = document.createDocumentFragment();
+  state.papers.forEach((paper, i) => {
+    const { saved, total, complete } = paperStats(paper);
+    if (complete) completedCount++;
+    const pct = total > 0 ? Math.round((saved / total) * 100) : 0;
+
+    const card = document.createElement('div');
+    card.className = 'paper-card' + (complete ? ' completed' : '');
+    card.innerHTML = `
+      <div class="paper-card-top">
+        <div>
+          <div class="paper-card-name">${escapeHtml(paper.paperName)}</div>
+          <div class="paper-card-meta">${total} question${total !== 1 ? 's' : ''}</div>
+        </div>
+        ${complete ? '<span class="badge saved">✓ Completed</span>' : ''}
+      </div>
+      <div class="paper-card-bar"><i style="width:${pct}%"></i></div>
+      <div class="paper-card-progress-num">${saved} / ${total} annotated</div>
+    `;
+    card.addEventListener('click', () => openPaper(i));
+    frag.appendChild(card);
+  });
+  grid.appendChild(frag);
+
+  $('papers-progress').textContent =
+    `${completedCount} / ${state.papers.length} papers completed`;
+}
+
+/* ── Open / close a paper ───────────────────────── */
+function openPaper(i) {
+  state.currentPaperIndex = i;
+  const paper = state.papers[i];
+  state.questions = paper.questions || [];
+
+  // Reset filters + paging for the newly opened paper.
+  state.filters = { subject: '', status: 'all', search: '' };
+  $('filter-subject').value = '';
+  $('filter-status').value  = 'all';
+  $('filter-search').value  = '';
+  state.currentPage = 1;
+
+  rebuildPaperSets();
+  state.currentIndex = firstVisibleIndex();
+
+  $('paper-view').classList.add('hidden');
+  $('layout').classList.remove('hidden');
+  $('btn-back').classList.remove('hidden');
+  $('app-title-text').textContent  = paper.paperName;
+  $('editor-paper-name').textContent = paper.paperName;
+
+  applyFilters();
+  renderEditor(state.currentIndex);
+  updateStats();
+}
+
+function closePaper() {
+  showPaperView();
+}
+
+// Derive the saved / skipped / hidden index sets for the current paper from
+// the global annotation store.
+function rebuildPaperSets() {
+  state.savedIndexSet  = new Set();
+  state.skippedSet     = new Set();
+  state.hiddenIndexSet = new Set();
+  state.editedBy       = {};
+  state.questions.forEach((q, idx) => {
+    if (state.hiddenQids.has(q._qid)) state.hiddenIndexSet.add(idx);
+    const rec = state.annotations.get(q._qid);
+    if (!rec) return;
+    state.editedBy[idx] = { name: rec.editedBy || '?', at: rec.at };
+    if (rec.status === 'skipped') state.skippedSet.add(idx);
+    else                          state.savedIndexSet.add(idx);
+  });
+}
+
+function firstVisibleIndex() {
+  for (let i = 0; i < state.questions.length; i++) {
+    if (!state.hiddenIndexSet.has(i)) return i;
+  }
+  return 0;
+}
+
 /* ── Subject Dropdowns ──────────────────────────── */
 function populateSubjectDropdowns() {
-  const subjects = state.topicData.subjects;
+  const subjects = state.topicData.subjects || [];
   const editorSel = $('sel-subject');
   const filterSel = $('filter-subject');
-
   subjects.forEach(s => {
     editorSel.appendChild(makeOption(s.id, s.name));
     filterSel.appendChild(makeOption(s.id, s.name));
@@ -428,22 +512,16 @@ function populateTagDropdown() {
   const container = $('tag-pills');
   container.innerHTML = '';
 
-  // Build the list of { slug, name } to show as pills.
   let tags;
   if (state.tagList.length) {
-    // Preferred source: canonical tag list from data/tags.json.
     tags = state.tagList.map(t => ({ slug: t.slug, name: t.name }));
   } else {
-    // Fallback: derive the unique set of tag slugs from the loaded questions.
     const set = new Set();
-    state.questions.forEach(q => (q.tagSlugs || []).forEach(t => set.add(t)));
-    const sorted = [...set].sort((a, b) => {
-      const ay = parseInt((a.match(/\d+/) || [])[0], 10);
-      const by = parseInt((b.match(/\d+/) || [])[0], 10);
-      if (!isNaN(ay) && !isNaN(by)) return by - ay;
-      return a.localeCompare(b);
+    state.qIndex.forEach((_, qid) => {
+      const q = questionByQid(qid);
+      (q && q.tagSlugs || []).forEach(t => set.add(t));
     });
-    tags = sorted.map(slug => ({ slug, name: prettifyTag(slug) }));
+    tags = [...set].sort().map(slug => ({ slug, name: prettifyTag(slug) }));
   }
 
   tags.forEach(t => {
@@ -461,13 +539,11 @@ function populateTagDropdown() {
   });
 }
 
-// Read the currently selected tag slugs from the pills.
 function getSelectedTags() {
   return [...document.querySelectorAll('#tag-pills .tag-pill.selected')]
     .map(p => p.dataset.slug);
 }
 
-// Set which pills are selected (used when pre-filling a saved question).
 function setSelectedTags(slugs) {
   const wanted = new Set(slugs || []);
   document.querySelectorAll('#tag-pills .tag-pill').forEach(p => {
@@ -478,11 +554,7 @@ function setSelectedTags(slugs) {
 }
 
 function prettifyTag(slug) {
-  // "pyq-2000" → "PYQ 2000"
-  return slug
-    .split('-')
-    .map(part => (/^\d+$/.test(part) ? part : part.toUpperCase()))
-    .join(' ');
+  return slug.split('-').map(part => (/^\d+$/.test(part) ? part : part.toUpperCase())).join(' ');
 }
 
 function makeOption(value, text) {
@@ -498,15 +570,11 @@ function onSubjectChange() {
   const chapterSel = $('sel-chapter');
   const topicSel   = $('sel-topic');
 
-  // Reset chapter
   chapterSel.innerHTML = '<option value="">— Select Chapter —</option>';
   chapterSel.disabled = true;
-
-  // Reset topic
   topicSel.innerHTML = '<option value="">— Select Topic —</option>';
   topicSel.disabled = true;
 
-  // Marks
   const marks = subjectId ? state.topicData.marks?.[subjectId] : null;
   $('marks-display').textContent = marks ? marks.name : '–';
 
@@ -543,13 +611,8 @@ function renderEditor(index) {
 
   const q = state.questions[index];
 
-  // Counter
   $('q-num').textContent   = index + 1;
   $('q-total').textContent = state.questions.length;
-
-  // Show an "Added" tag for team-added questions, and enable delete accordingly.
-  const addedTag = $('badge-added');
-  if (addedTag) addedTag.style.display = q._added ? '' : 'none';
 
   // Status badge
   const badgeEl = $('badge-status');
@@ -561,7 +624,6 @@ function renderEditor(index) {
     badgeEl.className = 'badge unsaved'; badgeEl.textContent = '○ Unsaved';
   }
 
-  // Who last edited this question (from the shared DB)
   const eb = state.editedBy[index];
   $('edited-by').textContent = eb && eb.name ? `edited by ${eb.name}` : '';
 
@@ -570,11 +632,10 @@ function renderEditor(index) {
   renderKaTeX('question-body');
 
   // Options
-  renderOptions(q.options || []);
+  renderOptions(q);
 
   // Explanation
   $('explanation-body').innerHTML = q.explanationHtml || '<em>No explanation</em>';
-  // KaTeX rendered lazily when explanation opens
   $('explanation-toggle').removeAttribute('open');
   $('explanation-toggle').addEventListener('toggle', function onToggle() {
     if ($('explanation-toggle').open) {
@@ -583,24 +644,46 @@ function renderEditor(index) {
     }
   }, { once: true });
 
+  // Read-only source context
+  renderContext(q);
+
   // Pre-fill form
   prefillForm(index);
 
-  // Highlight active card in list
   highlightActiveCard(index);
 }
 
-function renderOptions(options) {
+// New-format options: { id, text }; correct answer via q.correctOptionId.
+function renderOptions(q) {
+  const options = q.options || [];
   const list = $('options-list');
   list.innerHTML = '';
   const labels = ['A', 'B', 'C', 'D', 'E'];
   options.forEach((opt, i) => {
     const li = document.createElement('li');
-    if (opt.answer) li.classList.add('correct');
-    li.innerHTML = `<span class="opt-label">${labels[i] || i + 1}</span><span>${opt.name}</span>`;
+    if (opt.id === q.correctOptionId) li.classList.add('correct');
+    li.innerHTML = `<span class="opt-label">${labels[i] || opt.id}</span><span>${opt.text ?? ''}</span>`;
     list.appendChild(li);
   });
   renderKaTeX('options-list');
+}
+
+// Original source suggestion (helps the expert decide). Read from the snapshot
+// taken at load, so it stays visible even after the fields are overwritten.
+function renderContext(q) {
+  const ctx = q._ctx || q;
+  const items = [
+    ['Source Subject', ctx.subjectName],
+    ['Chapter',        ctx.chapterName],
+    ['Topic',          ctx.topicName],
+    ['Marks',          ctx.marks != null ? String(ctx.marks) : null]
+  ].filter(([, v]) => v);
+
+  $('q-context').innerHTML = items.length
+    ? items.map(([label, val]) =>
+        `<span class="ctx-item"><span class="ctx-label">${label}</span><span class="ctx-value">${escapeHtml(val)}</span></span>`
+      ).join('<span class="ctx-sep">·</span>')
+    : '';
 }
 
 /* ── KaTeX ──────────────────────────────────────── */
@@ -621,37 +704,22 @@ function renderKaTeX(containerId) {
 
 /* ── Pre-fill Form ──────────────────────────────── */
 function prefillForm(index) {
-  // Check if we have a saved version with overridden values
-  let subjectId, chapterId, topicId, difficulty, tagSlugs = [];
+  const q   = state.questions[index];
+  const rec = state.annotations.get(q._qid);
 
-  if (state.savedIndexSet.has(index)) {
-    const savedQ = state.savedQuestions.find(q => q._originalIndex === index);
-    if (savedQ) {
-      subjectId  = savedQ.subjectId  || '';
-      chapterId  = savedQ.chapterId  || '';
-      topicId    = savedQ.topicId    || '';
-      difficulty = savedQ.difficulty || 'Medium';
-      tagSlugs   = savedQ.tagSlugs || [];
-    }
-  } else {
-    const q = state.questions[index];
-    subjectId  = q.subjectId  || '';
-    chapterId  = q.chapterId  || '';
-    topicId    = q.topicId    || '';
-    difficulty = q.difficulty || 'Medium';
-    tagSlugs   = q.tagSlugs || [];
-  }
+  const subjectId  = (rec && rec.subjectId)  || q.subjectId  || '';
+  const chapterId  = (rec && rec.chapterId)  || q.chapterId  || '';
+  const topicId    = (rec && rec.topicId)    || q.topicId    || '';
+  const difficulty = (rec && rec.difficulty) || q.difficulty || 'Medium';
+  const tagSlugs   = (rec && rec.tagSlugs)   || q.tagSlugs   || [];
 
-  // Set subject and trigger cascade
   $('sel-subject').value = subjectId;
   onSubjectChange();
 
   if (chapterId) {
     $('sel-chapter').value = chapterId;
     onChapterChange();
-    if (topicId) {
-      $('sel-topic').value = topicId;
-    }
+    if (topicId) $('sel-topic').value = topicId;
   }
 
   $('sel-difficulty').value = difficulty || 'Medium';
@@ -662,50 +730,61 @@ function prefillForm(index) {
 function saveQuestion() {
   const index      = state.currentIndex;
   const q          = state.questions[index];
+  const paper      = state.papers[state.currentPaperIndex];
   const subjectId  = $('sel-subject').value  || null;
   const chapterId  = $('sel-chapter').value  || null;
   const topicId    = $('sel-topic').value    || null;
   const difficulty = $('sel-difficulty').value;
   const tags       = getSelectedTags();
-  const markId     = subjectId ? (state.topicData.marks?.[subjectId]?.id || null) : null;
+  const mark       = subjectId ? state.topicData.marks?.[subjectId] : null;
+  const markId     = mark ? mark.id : null;
+  const markName   = mark ? mark.name : null;
 
-  const annotated = {
+  // Names of the chosen options (from topic.txt, via the dropdown text).
+  const subjectName = selectedText('sel-subject');
+  const chapterName = selectedText('sel-chapter');
+  const topicName   = selectedText('sel-topic');
+
+  const rec = {
     subjectId,
+    subjectKey: subjectId,
+    subjectName,
     chapterId,
+    chapterName,
     topicId,
+    topicName,
     markId,
+    markName,
     difficulty,
-    questionHtml:    q.questionHtml,
-    explanationHtml: q.explanationHtml,
-    options:         q.options,
-    tagSlugs:        tags,
-    _originalIndex:  index,                 // internal, stripped on export
-    _savedAt:        new Date().toISOString() // internal, stripped on export
+    tagSlugs: tags,
+    status:   'saved',
+    editedBy: state.userName,
+    at:       new Date().toISOString()
   };
 
-  if (state.savedIndexSet.has(index)) {
-    const pos = state.savedQuestions.findIndex(s => s._originalIndex === index);
-    if (pos !== -1) state.savedQuestions[pos] = annotated;
-  } else {
-    state.savedQuestions.push(annotated);
-    state.savedIndexSet.add(index);
-  }
+  state.annotations.set(q._qid, rec);
+  applyRecordToQuestion(q, rec);
 
-  // Remove from skipped if it was skipped
+  state.savedIndexSet.add(index);
   state.skippedSet.delete(index);
+  state.editedBy[index] = { name: state.userName, at: rec.at };
 
-  // Record & sync who edited this question.
-  state.editedBy[index] = { name: state.userName, at: annotated._savedAt };
   upsertAnnotation({
-    question_id:    qidOf(index),
-    subject_id:     subjectId,
-    chapter_id:     chapterId,
-    topic_id:       topicId,
-    mark_id:        markId,
+    question_id:  q._qid,
+    paper_id:     paper.paperId,
+    subject_id:   subjectId,
+    subject_key:  subjectId,
+    subject_name: subjectName,
+    chapter_id:   chapterId,
+    chapter_name: chapterName,
+    topic_id:     topicId,
+    topic_name:   topicName,
+    mark_id:      markId,
+    mark_name:    markName,
     difficulty,
-    tag_slugs:      tags,
-    status:         'saved',
-    edited_by:      state.userName
+    tag_slugs:    tags,
+    status:       'saved',
+    edited_by:    state.userName
   });
 
   updateStats();
@@ -717,11 +796,19 @@ function saveQuestion() {
 /* ── Skip ───────────────────────────────────────── */
 function skipQuestion() {
   const index = state.currentIndex;
+  const q     = state.questions[index];
+  const paper = state.papers[state.currentPaperIndex];
+
   if (!state.savedIndexSet.has(index)) {
+    const at = new Date().toISOString();
+    state.annotations.set(q._qid, {
+      status: 'skipped', editedBy: state.userName, at, tagSlugs: []
+    });
     state.skippedSet.add(index);
-    state.editedBy[index] = { name: state.userName, at: new Date().toISOString() };
+    state.editedBy[index] = { name: state.userName, at };
     upsertAnnotation({
-      question_id: qidOf(index),
+      question_id: q._qid,
+      paper_id:    paper.paperId,
       status:      'skipped',
       edited_by:   state.userName
     });
@@ -733,74 +820,13 @@ function skipQuestion() {
   navigateNext();
 }
 
-/* ── Add / Delete Questions ─────────────────────── */
+/* ── Delete / hide a question ───────────────────── */
 function requireSupabase() {
   if (!state.useSupabase) {
-    showToast('Connect Supabase to add or delete questions', 'warning');
+    showToast('Connect Supabase to delete questions', 'warning');
     return false;
   }
   return true;
-}
-
-function openAddQuestion() {
-  if (!requireSupabase()) return;
-  $('addq-question').value    = '';
-  $('addq-explanation').value = '';
-  ['a', 'b', 'c', 'd'].forEach(k => { $('addq-opt-' + k).value = ''; });
-  const first = document.querySelector('input[name="addq-correct"][value="0"]');
-  if (first) first.checked = true;
-  $('addq-modal').classList.remove('hidden');
-  setTimeout(() => $('addq-question').focus(), 50);
-}
-
-function closeAddQuestion() {
-  $('addq-modal').classList.add('hidden');
-}
-
-async function submitAddQuestion() {
-  const qhtml = $('addq-question').value.trim();
-  if (!qhtml) { showToast('Question text is required', 'warning'); return; }
-
-  const keys = ['a', 'b', 'c', 'd'];
-  const checked = document.querySelector('input[name="addq-correct"]:checked');
-  const correctIdx = checked ? parseInt(checked.value, 10) : 0;
-
-  const options = [];
-  keys.forEach((k, i) => {
-    const name = $('addq-opt-' + k).value.trim();
-    if (name) options.push({ name, answer: i === correctIdx });
-  });
-  if (options.length < 2) { showToast('Add at least two options', 'warning'); return; }
-  if (!options.some(o => o.answer)) options[0].answer = true;   // safety: ensure one correct
-
-  const explanation = $('addq-explanation').value.trim();
-  const btn = $('addq-submit');
-  btn.disabled = true;
-  try {
-    const { data, error } = await state.sb.from('questions').insert({
-      question_html:    qhtml,
-      explanation_html: explanation,
-      options,
-      created_by:       state.userName
-    }).select().single();
-    if (error) throw error;
-
-    appendAddedQuestion(data);
-    buildQidIndex();
-    recomputeHidden();
-    closeAddQuestion();
-    applyFilters();
-    updateStats();
-    showToast('Question added', 'success');
-    const idx = indexOfQid(data.id);
-    renderEditor(idx);
-    ensureCardVisible(idx);
-  } catch (e) {
-    console.warn('Add question failed:', e);
-    showToast('Failed to add question', 'warning');
-  } finally {
-    btn.disabled = false;
-  }
 }
 
 async function deleteCurrentQuestion() {
@@ -810,27 +836,19 @@ async function deleteCurrentQuestion() {
   if (!q) return;
   const qid = q._qid;
 
-  const ok = confirm(q._added
-    ? 'Delete this added question for everyone? This cannot be undone from the app.'
-    : 'Hide this question for everyone? The original data file is untouched; it can be restored from Supabase.');
+  const ok = confirm('Hide this question for everyone? The source data file is untouched; it can be restored from Supabase.');
   if (!ok) return;
 
-  // Optimistically hide locally (no index shift), then sync.
   state.hiddenQids.add(qid);
-  recomputeHidden();
+  rebuildPaperSets();
   applyFilters();
   updateStats();
   navigateToVisible();
 
   try {
-    if (q._added) {
-      await state.sb.from('questions').delete().eq('id', qid);
-      await state.sb.from('annotations').delete().eq('question_id', qid);
-    } else {
-      await state.sb.from('hidden_questions')
-        .upsert({ question_id: qid, hidden_by: state.userName }, { onConflict: 'question_id' });
-    }
-    showToast('Question deleted', 'success');
+    await state.sb.from('hidden_questions')
+      .upsert({ question_id: qid, hidden_by: state.userName }, { onConflict: 'question_id' });
+    showToast('Question hidden', 'success');
   } catch (e) {
     console.warn('Delete failed:', e);
     showToast('Delete failed to sync', 'warning');
@@ -839,7 +857,6 @@ async function deleteCurrentQuestion() {
 
 /* ── Navigation ─────────────────────────────────── */
 function navigateNext() {
-  // Find next question in filtered list after current
   const fi = state.filteredIndices;
   const pos = fi.indexOf(state.currentIndex);
   if (pos !== -1 && pos < fi.length - 1) {
@@ -847,7 +864,6 @@ function navigateNext() {
     scrollActiveCardIntoView(fi[pos + 1]);
     return;
   }
-  // Fallback: linear next
   if (state.currentIndex + 1 < state.questions.length) {
     renderEditor(state.currentIndex + 1);
   }
@@ -866,7 +882,6 @@ function navigatePrev() {
   }
 }
 
-// Move to the nearest visible question (used after the current one is hidden).
 function navigateToVisible() {
   const fi = state.filteredIndices;
   if (!fi.length) return;
@@ -888,18 +903,13 @@ function applyFilters() {
   const searchLower = search.toLowerCase();
 
   state.filteredIndices = state.questions.reduce((acc, q, i) => {
-    // Hidden (soft-deleted) questions never appear
     if (state.hiddenIndexSet.has(i)) return acc;
-
-    // Subject filter
     if (subject && q.subjectId !== subject) return acc;
 
-    // Status filter
     if (status === 'saved'   && !state.savedIndexSet.has(i))  return acc;
     if (status === 'skipped' && !state.skippedSet.has(i))     return acc;
     if (status === 'unsaved' && (state.savedIndexSet.has(i) || state.skippedSet.has(i))) return acc;
 
-    // Search filter
     if (search) {
       const text = stripHtml(q.questionHtml).toLowerCase();
       if (!text.includes(searchLower)) return acc;
@@ -918,7 +928,6 @@ function renderQuestionList() {
   const total = state.filteredIndices.length;
   const pages = Math.max(1, Math.ceil(total / state.PAGE_SIZE));
 
-  // Clamp page
   if (state.currentPage > pages) state.currentPage = pages;
 
   const start = (state.currentPage - 1) * state.PAGE_SIZE;
@@ -934,13 +943,10 @@ function renderQuestionList() {
   } else {
     list.innerHTML = '';
     const frag = document.createDocumentFragment();
-    slice.forEach(qi => {
-      frag.appendChild(makeQuestionCard(qi));
-    });
+    slice.forEach(qi => frag.appendChild(makeQuestionCard(qi)));
     list.appendChild(frag);
   }
 
-  // Pagination controls
   $('pg-info').textContent = `Page ${state.currentPage} of ${pages}  (${total} questions)`;
   $('pg-prev').disabled = state.currentPage <= 1;
   $('pg-next').disabled = state.currentPage >= pages;
@@ -959,7 +965,7 @@ function makeQuestionCard(index) {
   else if (isSkipped) badgeHtml = `<span class="badge skipped">⊘ Skipped</span>`;
   else                badgeHtml = `<span class="badge unsaved">○ Unsaved</span>`;
 
-  const subjectName = getSubjectName(q.subjectId);
+  const subjectName = getSubjectName(q.subjectId) || q.subjectName || '';
   const eb          = state.editedBy[index];
   const byText      = eb && eb.name ? `👤 ${eb.name}` : '';
   const metaParts   = [subjectName, q.difficulty, byText].filter(Boolean);
@@ -978,7 +984,6 @@ function makeQuestionCard(index) {
 
   card.addEventListener('click', () => {
     renderEditor(index);
-    // Ensure card page is correct
     ensureCardVisible(index);
   });
 
@@ -986,15 +991,12 @@ function makeQuestionCard(index) {
 }
 
 function highlightActiveCard(index) {
-  // Remove old active
   const old = document.querySelector('.q-card.active');
   if (old) old.classList.remove('active');
 
-  // Check if current page shows this card
   const start = (state.currentPage - 1) * state.PAGE_SIZE;
   const sliceIndices = state.filteredIndices.slice(start, start + state.PAGE_SIZE);
   if (!sliceIndices.includes(index)) {
-    // Navigate to the correct page
     ensureCardVisible(index);
     return;
   }
@@ -1011,7 +1013,6 @@ function ensureCardVisible(index) {
   if (pos === -1) return;
   state.currentPage = Math.floor(pos / state.PAGE_SIZE) + 1;
   renderQuestionList();
-  // After re-render, highlight
   const card = document.querySelector(`.q-card[data-index="${index}"]`);
   if (card) card.classList.add('active');
 }
@@ -1028,9 +1029,13 @@ function changePage(dir) {
 }
 
 /* ── Stats ──────────────────────────────────────── */
+function visibleCount() {
+  return state.questions.length - state.hiddenIndexSet.size;
+}
+
 function updateStats() {
   const total   = visibleCount();
-  const saved   = state.savedQuestions.length;
+  const saved   = state.savedIndexSet.size;
   const skipped = state.skippedSet.size;
 
   $('stat-saved').textContent   = saved;
@@ -1041,56 +1046,85 @@ function updateStats() {
   const pct = total > 0 ? (saved / total) * 100 : 0;
   $('stat-progress-bar').style.width = pct + '%';
 
-  setGlobalStatus(`${saved} / ${total} saved`);
+  const paper = state.papers[state.currentPaperIndex];
+  setGlobalStatus(paper ? `${paper.paperName}: ${saved} / ${total} saved` : '');
 }
 
-/* ── Export ─────────────────────────────────────── */
-function exportJSON(todayOnly = false) {
-  let source = state.savedQuestions;
+/* ── Export ──────────────────────────────────────
+   Default: whole file, completed papers only.
+   includePartial=true (TEMPORARY debug button): dump every paper regardless of
+   completion — unsaved questions simply keep their original null ids/names. */
+function exportJSON(todayOnly = false, includePartial = false) {
+  const today = new Date().toDateString();
+  const out = [];
 
-  if (todayOnly) {
-    const today = new Date().toDateString();
-    source = source.filter(q => q._savedAt && new Date(q._savedAt).toDateString() === today);
-    if (source.length === 0) {
-      showToast('No questions changed today', 'warning');
-      return;
+  const isSaved = q => {
+    const r = state.annotations.get(q._qid);
+    return r && r.status === 'saved';
+  };
+
+  state.papers.forEach(paper => {
+    const visible = (paper.questions || []).filter(q => !state.hiddenQids.has(q._qid));
+    if (!visible.length) return;
+
+    let included;
+    if (includePartial) {
+      // Partial dump: keep ONLY the questions that have been annotated (saved).
+      included = visible.filter(isSaved);
+      if (!included.length) return;              // nothing annotated in this paper
+    } else {
+      // Completed-only: every visible question must be saved.
+      if (!visible.every(isSaved)) return;
+      included = visible;
     }
-  } else if (source.length === 0) {
-    showToast('No saved questions to export', 'warning');
+
+    if (todayOnly) {
+      const touchedToday = included.some(q => {
+        const r = state.annotations.get(q._qid);
+        return r && r.at && new Date(r.at).toDateString() === today;
+      });
+      if (!touchedToday) return;
+    }
+
+    const questions = included.map(q => {
+      const { _qid, _ctx, ...rest } = q;   // strip internals; ids/names/tags already applied
+      return rest;
+    });
+    out.push({ ...paper, questions, questionCount: questions.length });
+  });
+
+  if (out.length === 0) {
+    const msg = includePartial ? 'No papers to export'
+      : todayOnly ? 'No completed papers touched today' : 'No completed papers to export';
+    showToast(msg, 'warning');
     return;
   }
 
-  // Strip internal fields before export
-  const clean = source.map(q => {
-    const { _originalIndex, _savedAt, ...rest } = q;
-    return rest;
-  });
-
-  const blob = new Blob([JSON.stringify(clean, null, 2)], { type: 'application/json' });
+  const payload = { success: true, data: out };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
   const url  = URL.createObjectURL(blob);
   const date = new Date().toISOString().slice(0, 10);
   const a    = document.createElement('a');
   a.href     = url;
-  a.download = todayOnly
-    ? `annotated_questions_today_${date}.json`
-    : `annotated_questions_${date}.json`;
+  a.download = includePartial ? `annotated_papers_ALL_partial_${date}.json`
+    : todayOnly ? `annotated_papers_today_${date}.json` : `annotated_papers_${date}.json`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  showToast(`Exported ${clean.length} questions`, 'success');
+
+  const qCount = out.reduce((n, p) => n + p.questions.length, 0);
+  showToast(`Exported ${out.length} paper${out.length > 1 ? 's' : ''} (${qCount} questions)${includePartial ? ' — incl. partial' : ''}`, 'success');
 }
 
-/* ── LocalStorage ───────────────────────────────── */
-const LS_SAVED   = 'neet_saved';
-const LS_SKIPPED = 'neet_skipped';
-const LS_INDEX   = 'neet_index';
+/* ── LocalStorage (fallback + cache) ────────────── */
+const LS_ANN    = 'neet_ann';
+const LS_HIDDEN = 'neet_hidden';
 
 function persistToLocalStorage() {
   try {
-    localStorage.setItem(LS_SAVED,   JSON.stringify(state.savedQuestions));
-    localStorage.setItem(LS_SKIPPED, JSON.stringify([...state.skippedSet]));
-    localStorage.setItem(LS_INDEX,   JSON.stringify(state.currentIndex));
+    localStorage.setItem(LS_ANN,    JSON.stringify([...state.annotations.entries()]));
+    localStorage.setItem(LS_HIDDEN, JSON.stringify([...state.hiddenQids]));
   } catch (e) {
     if (e.name === 'QuotaExceededError') {
       showToast('Storage full — export your data now!', 'warning');
@@ -1098,59 +1132,21 @@ function persistToLocalStorage() {
   }
 }
 
-function restoreCurrentIndex() {
-  try {
-    const rawIndex = localStorage.getItem(LS_INDEX);
-    if (rawIndex !== null) {
-      const idx = JSON.parse(rawIndex);
-      if (idx >= 0 && idx < state.questions.length) state.currentIndex = idx;
-    }
-  } catch (e) { /* ignore */ }
-}
-
 function restoreFromLocalStorage() {
   try {
-    const rawSaved   = localStorage.getItem(LS_SAVED);
-    const rawSkipped = localStorage.getItem(LS_SKIPPED);
-    const rawIndex   = localStorage.getItem(LS_INDEX);
+    const rawAnn    = localStorage.getItem(LS_ANN);
+    const rawHidden = localStorage.getItem(LS_HIDDEN);
 
-    if (rawSaved) {
-      const savedArr = JSON.parse(rawSaved);
-      // Build a map from questionHtml → original index for fast matching
-      const htmlToIndex = new Map();
-      state.questions.forEach((q, i) => htmlToIndex.set(q.questionHtml, i));
-
-      state.savedQuestions = savedArr;
-      state.savedIndexSet  = new Set();
-
-      savedArr.forEach(sq => {
-        // Prefer stored _originalIndex; fallback to HTML matching
-        if (sq._originalIndex !== undefined) {
-          state.savedIndexSet.add(sq._originalIndex);
-        } else {
-          const idx = htmlToIndex.get(sq.questionHtml);
-          if (idx !== undefined) {
-            sq._originalIndex = idx;
-            state.savedIndexSet.add(idx);
-          }
-        }
-      });
+    if (rawAnn) {
+      const entries = JSON.parse(rawAnn);
+      state.annotations = new Map(entries);
+    }
+    if (rawHidden) {
+      state.hiddenQids = new Set(JSON.parse(rawHidden));
     }
 
-    if (rawSkipped) {
-      state.skippedSet = new Set(JSON.parse(rawSkipped));
-    }
-
-    if (rawIndex !== null) {
-      const idx = JSON.parse(rawIndex);
-      if (idx >= 0 && idx < state.questions.length) {
-        state.currentIndex = idx;
-      }
-    }
-
-    const restoredCount = state.savedQuestions.length;
-    if (restoredCount > 0) {
-      showToast(`Restored ${restoredCount} saved questions`, 'success');
+    if (state.annotations.size > 0) {
+      showToast(`Restored ${state.annotations.size} saved annotations`, 'success');
     }
   } catch (e) {
     console.warn('LocalStorage restore failed:', e);
@@ -1169,9 +1165,15 @@ function stripHtml(html) {
     .trim();
 }
 
+function escapeHtml(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 function getSubjectName(subjectId) {
   if (!subjectId || !state.topicData) return '';
-  const s = state.topicData.subjects.find(s => s.id === subjectId);
+  const s = (state.topicData.subjects || []).find(s => s.id === subjectId);
   return s ? s.name : '';
 }
 
@@ -1189,5 +1191,9 @@ function showToast(msg, type = '') {
 }
 
 function showError(msg) {
-  $('question-body').innerHTML = `<div class="state-message"><strong style="color:var(--red)">Error</strong><span>${msg}</span></div>`;
+  const html = `<div class="state-message"><strong style="color:var(--red)">Error</strong><span>${msg}</span></div>`;
+  const grid = $('paper-grid');
+  if (grid) grid.innerHTML = html;
+  const body = $('question-body');
+  if (body) body.innerHTML = html;
 }

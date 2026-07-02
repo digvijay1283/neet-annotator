@@ -16,8 +16,9 @@
 
   <header id="app-bar">
     <div id="app-title">
+      <button id="btn-back" class="btn-back hidden" title="Back to papers">←</button>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-      NEET Annotator
+      <span id="app-title-text">NEET Annotator</span>
     </div>
     <div id="app-bar-right">
       <span id="sync-status" class="sync-status" title="Sync status">● Local</span>
@@ -38,16 +39,36 @@
 
   <div id="toast" class="toast hidden"></div>
 
-  <main id="layout">
+  <!-- ======== PAPER PICKER (landing view) ======== -->
+  <section id="paper-view">
+    <div id="paper-view-header">
+      <div id="paper-view-title">
+        <h1>Select a paper</h1>
+        <p id="paper-view-sub">Pick a paper to annotate its questions. A paper is exported once all its questions are saved.</p>
+      </div>
+      <div id="paper-view-actions">
+        <span id="papers-progress" class="papers-progress">0 / 29 papers completed</span>
+        <button id="btn-export" class="btn-primary btn-export">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export completed papers
+        </button>
+        <button id="btn-export-today" class="btn-ghost">Export today's</button>
+        <!-- TEMPORARY: dump all papers incl. partially-annotated ones. Remove when done. -->
+        <button id="btn-export-all" class="btn-ghost btn-temp" title="Debug: export every paper, even partially annotated">⚠ Export all (partial)</button>
+      </div>
+    </div>
+    <div id="paper-grid"></div>
+  </section>
+
+  <main id="layout" class="hidden">
 
     <!-- ======== LEFT PANEL: Editor ======== -->
     <section id="left-panel">
 
       <div id="editor-header">
-        <div id="question-counter">Question <span id="q-num">–</span> of <span id="q-total">–</span></div>
+        <div id="question-counter"><span id="editor-paper-name" class="editor-paper-name"></span>Question <span id="q-num">–</span> of <span id="q-total">–</span></div>
         <div id="editor-badges">
           <span id="badge-status" class="badge unsaved">Unsaved</span>
-          <span id="badge-added" class="badge added" style="display:none">＋ Added</span>
           <span id="edited-by" class="edited-by"></span>
         </div>
       </div>
@@ -62,6 +83,8 @@
       </details>
 
       <div id="annotation-form">
+
+        <div id="q-context" class="q-context"></div>
 
         <div class="form-section-title">Assign Parameters</div>
 
@@ -141,13 +164,6 @@
         <div class="stat-progress-wrap">
           <div id="stat-progress-bar"></div>
         </div>
-        <div id="export-actions">
-          <button id="btn-export-today" class="btn-ghost">Export Today's</button>
-          <button id="btn-export" class="btn-primary btn-export">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Export JSON
-          </button>
-        </div>
       </div>
 
       <div id="filter-bar">
@@ -164,7 +180,6 @@
           <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="search" id="filter-search" placeholder="Search questions…" />
         </div>
-        <button id="btn-add-question" class="btn-primary" title="Add a new question">＋ Add</button>
       </div>
 
       <div id="question-list"></div>
@@ -178,43 +193,6 @@
     </section>
 
   </main>
-
-  <!-- Add-question modal -->
-  <div id="addq-modal" class="modal-overlay hidden">
-    <div class="modal-card modal-card-lg">
-      <h2>Add a new question</h2>
-      <p>Shared with your whole team. You can use <code>$LaTeX$</code> like the other questions.</p>
-
-      <label class="addq-label" for="addq-question">Question</label>
-      <textarea id="addq-question" rows="3" placeholder="Enter the question text…"></textarea>
-
-      <label class="addq-label">Options <span class="addq-hint">(select the correct one)</span></label>
-      <div class="addq-option">
-        <input type="radio" name="addq-correct" value="0" checked />
-        <input type="text" id="addq-opt-a" placeholder="Option A" />
-      </div>
-      <div class="addq-option">
-        <input type="radio" name="addq-correct" value="1" />
-        <input type="text" id="addq-opt-b" placeholder="Option B" />
-      </div>
-      <div class="addq-option">
-        <input type="radio" name="addq-correct" value="2" />
-        <input type="text" id="addq-opt-c" placeholder="Option C" />
-      </div>
-      <div class="addq-option">
-        <input type="radio" name="addq-correct" value="3" />
-        <input type="text" id="addq-opt-d" placeholder="Option D" />
-      </div>
-
-      <label class="addq-label" for="addq-explanation">Explanation <span class="addq-hint">(optional)</span></label>
-      <textarea id="addq-explanation" rows="2" placeholder="Explanation…"></textarea>
-
-      <div class="modal-actions">
-        <button id="addq-cancel" class="btn-ghost">Cancel</button>
-        <button id="addq-submit" class="btn-primary">Add Question</button>
-      </div>
-    </div>
-  </div>
 
   <script src="app.js"></script>
 </body>
