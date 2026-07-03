@@ -78,6 +78,11 @@ fine. If you later want per-question locking, that can be added.
   `markedForReview`) are left untouched.
 - **Export today's** limits it to completed papers touched today.
 
+> 📦 **Losing access to the button, or need to rebuild the JSON another way?**
+> See [`DATA_RECOVERY.md`](DATA_RECOVERY.md) — it explains exactly how data is stored
+> in Supabase and three independent ways to regenerate the exact export (including the
+> standalone `export_from_supabase.js` script, no app needed).
+
 ## Notes
 - The source papers (`data/converted_papers.json`) stay static and read-only. Progress,
   and hidden questions live in Supabase keyed by each question's **real id**.
