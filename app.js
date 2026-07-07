@@ -564,11 +564,31 @@ function firstVisibleIndex() {
 function populateSubjectDropdowns() {
   const subjects = state.topicData.subjects || [];
   const editorSel = $('sel-subject');
+
+  // Editor (assignment) dropdown keeps the full, grade-specific topic list.
+  subjects.forEach(s => editorSel.appendChild(makeOption(s.id, s.name)));
+
+  // Filter dropdown matches the source data, which only distinguishes the base
+  // subject (Physics / Chemistry / Biology) and carries no subjectId. Build the
+  // options from the base names actually present so the filter can match both
+  // unannotated (subjectName: "Physics") and annotated ("Physics 11th") rows.
   const filterSel = $('filter-subject');
-  subjects.forEach(s => {
-    editorSel.appendChild(makeOption(s.id, s.name));
-    filterSel.appendChild(makeOption(s.id, s.name));
-  });
+  const bases = new Set();
+  state.papers.forEach(p => (p.questions || []).forEach(q => {
+    const base = baseSubjectName(q.subjectName);
+    if (base) bases.add(base);
+  }));
+  // Fall back to the topic list (stripped of grade) if the data had no names.
+  if (!bases.size) subjects.forEach(s => bases.add(baseSubjectName(s.name)));
+
+  [...bases].sort().forEach(base => filterSel.appendChild(makeOption(base, base)));
+}
+
+// Reduce a subject label to its base name, dropping any grade suffix.
+// "Physics 11th" → "Physics", "Biology 12th" → "Biology", "Physics" → "Physics".
+function baseSubjectName(name) {
+  if (!name) return '';
+  return String(name).replace(/\s+\d+(st|nd|rd|th)\b.*$/i, '').trim();
 }
 
 /* ── Tag Pills (multi-select) ───────────────────── */
@@ -1015,7 +1035,9 @@ function applyFilters() {
 
   state.filteredIndices = state.questions.reduce((acc, q, i) => {
     if (state.hiddenIndexSet.has(i)) return acc;
-    if (subject && q.subjectId !== subject) return acc;
+    // Match on base subject name: source rows have subjectId:null and only a
+    // broad subjectName ("Physics"); annotated rows carry "Physics 11th" etc.
+    if (subject && baseSubjectName(q.subjectName) !== subject) return acc;
 
     if (status === 'saved'   && !state.savedIndexSet.has(i))  return acc;
     if (status === 'skipped' && !state.skippedSet.has(i))     return acc;
