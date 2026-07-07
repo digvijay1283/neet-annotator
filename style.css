@@ -20,6 +20,7 @@
   --amber-border: #FDE68A;
   --red:          #DC2626;
   --red-bg:       #FEF2F2;
+  --red-border:   #FECACA;
   --shadow-sm:    0 1px 2px rgba(0,0,0,.06);
   --shadow:       0 1px 3px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.06);
   --shadow-md:    0 4px 6px -1px rgba(0,0,0,.10), 0 2px 4px -1px rgba(0,0,0,.06);
@@ -333,6 +334,13 @@ body {
 
 .btn-primary:hover { background: var(--accent-dark); box-shadow: var(--shadow); }
 .btn-primary:active { transform: translateY(1px); }
+.btn-primary:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  background: var(--accent);
+  box-shadow: none;
+  transform: none;
+}
 
 .btn-ghost {
   background: transparent;
@@ -367,6 +375,7 @@ body {
 .badge.saved    { background: var(--green-bg);  color: var(--green);  border: 1px solid var(--green-border); }
 .badge.unsaved  { background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
 .badge.skipped  { background: var(--amber-bg);  color: var(--amber);  border: 1px solid var(--amber-border); }
+.badge.partial  { background: var(--red-bg);    color: var(--red);    border: 1px solid var(--red-border); }
 
 /* ── Right Panel ────────────────────────────────── */
 #right-panel {

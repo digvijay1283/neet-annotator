@@ -13,6 +13,7 @@ const state = {
   questions:      [],            // current paper's questions (refs, each tagged _qid)
   currentIndex:   0,
   savedIndexSet:  new Set(),     // indices (within current paper) that are saved
+  partialIndexSet: new Set(),    // saved but missing a required field (subj/chap/topic/tag)
   skippedSet:     new Set(),
   hiddenIndexSet: new Set(),
   editedBy:       {},            // index → { name, at } for the current paper
@@ -437,6 +438,11 @@ function attachEvents() {
   $('sel-subject').addEventListener('change', onSubjectChange);
   $('sel-chapter').addEventListener('change', onChapterChange);
 
+  // Keep the Save button's enabled/disabled state in sync with the form.
+  $('sel-subject').addEventListener('change', updateSaveButtonState);
+  $('sel-chapter').addEventListener('change', updateSaveButtonState);
+  $('sel-topic').addEventListener('change', updateSaveButtonState);
+
   $('filter-subject').addEventListener('change', onFilterChange);
   $('filter-status').addEventListener('change', onFilterChange);
 
@@ -539,17 +545,22 @@ function closePaper() {
 // Derive the saved / skipped / hidden index sets for the current paper from
 // the global annotation store.
 function rebuildPaperSets() {
-  state.savedIndexSet  = new Set();
-  state.skippedSet     = new Set();
-  state.hiddenIndexSet = new Set();
-  state.editedBy       = {};
+  state.savedIndexSet   = new Set();
+  state.partialIndexSet = new Set();
+  state.skippedSet      = new Set();
+  state.hiddenIndexSet  = new Set();
+  state.editedBy        = {};
   state.questions.forEach((q, idx) => {
     if (state.hiddenQids.has(q._qid)) state.hiddenIndexSet.add(idx);
     const rec = state.annotations.get(q._qid);
     if (!rec) return;
     state.editedBy[idx] = { name: rec.editedBy || '?', at: rec.at };
-    if (rec.status === 'skipped') state.skippedSet.add(idx);
-    else                          state.savedIndexSet.add(idx);
+    if (rec.status === 'skipped') {
+      state.skippedSet.add(idx);
+    } else {
+      state.savedIndexSet.add(idx);
+      if (isPartialAnnotation(rec)) state.partialIndexSet.add(idx);
+    }
   });
 }
 
@@ -618,6 +629,7 @@ function populateTagDropdown() {
     pill.addEventListener('click', () => {
       const on = pill.classList.toggle('selected');
       pill.setAttribute('aria-pressed', on ? 'true' : 'false');
+      updateSaveButtonState();
     });
     container.appendChild(pill);
   });
@@ -700,7 +712,9 @@ function renderEditor(index) {
 
   // Status badge
   const badgeEl = $('badge-status');
-  if (state.savedIndexSet.has(index)) {
+  if (state.partialIndexSet.has(index)) {
+    badgeEl.className = 'badge partial'; badgeEl.textContent = '⚠ Partial';
+  } else if (state.savedIndexSet.has(index)) {
     badgeEl.className = 'badge saved'; badgeEl.textContent = '✓ Saved';
   } else if (state.skippedSet.has(index)) {
     badgeEl.className = 'badge skipped'; badgeEl.textContent = '⊘ Skipped';
@@ -813,10 +827,50 @@ function prefillForm(index) {
 
   $('sel-difficulty').value = difficulty || 'Medium';
   setSelectedTags(tagSlugs);
+
+  updateSaveButtonState();
+}
+
+/* ── Required-field validation ──────────────────────
+   Subject, Chapter, Topic and at least one Tag are mandatory. Difficulty always
+   carries a value (defaults to Medium) and Marks auto-derives from Subject. */
+function missingRequiredFields() {
+  const missing = [];
+  if (!$('sel-subject').value) missing.push('Subject');
+  if (!$('sel-chapter').value) missing.push('Chapter');
+  if (!$('sel-topic').value)   missing.push('Topic');
+  if (getSelectedTags().length === 0) missing.push('at least one Tag');
+  return missing;
+}
+
+// A saved annotation counts as "partial" if any mandatory field is empty. These
+// are typically rows saved before the all-fields-required rule was introduced.
+function isPartialAnnotation(rec) {
+  if (!rec || rec.status !== 'saved') return false;
+  return !rec.subjectId || !rec.chapterId || !rec.topicId
+    || !Array.isArray(rec.tagSlugs) || rec.tagSlugs.length === 0;
+}
+
+// Enable Save only when every required field is filled; otherwise disable it and
+// explain what's missing via the tooltip.
+function updateSaveButtonState() {
+  const btn = $('btn-save');
+  if (!btn) return;
+  const missing = missingRequiredFields();
+  btn.disabled = missing.length > 0;
+  btn.title = missing.length ? `Select ${missing.join(', ')} to save` : 'Save & Next';
 }
 
 /* ── Save ───────────────────────────────────────── */
 function saveQuestion() {
+  // All fields are mandatory — refuse to save an incomplete annotation.
+  const missing = missingRequiredFields();
+  if (missing.length) {
+    showToast(`Select ${missing.join(', ')} before saving`, 'warning');
+    updateSaveButtonState();
+    return;
+  }
+
   const index      = state.currentIndex;
   const q          = state.questions[index];
   const paper      = state.papers[state.currentPaperIndex];
@@ -855,6 +909,7 @@ function saveQuestion() {
   applyRecordToQuestion(q, rec);
 
   state.savedIndexSet.add(index);
+  state.partialIndexSet.delete(index);   // save enforces all fields → never partial
   state.skippedSet.delete(index);
   state.editedBy[index] = { name: state.userName, at: rec.at };
 
@@ -928,6 +983,7 @@ async function unsaveQuestion() {
   state.annotations.delete(qid);
   restoreQuestionDefault(q);
   state.savedIndexSet.delete(index);
+  state.partialIndexSet.delete(index);
   state.skippedSet.delete(index);
   delete state.editedBy[index];
   persistToLocalStorage();
@@ -1039,8 +1095,9 @@ function applyFilters() {
     // broad subjectName ("Physics"); annotated rows carry "Physics 11th" etc.
     if (subject && baseSubjectName(q.subjectName) !== subject) return acc;
 
-    if (status === 'saved'   && !state.savedIndexSet.has(i))  return acc;
-    if (status === 'skipped' && !state.skippedSet.has(i))     return acc;
+    if (status === 'saved'   && !state.savedIndexSet.has(i))   return acc;
+    if (status === 'partial' && !state.partialIndexSet.has(i)) return acc;
+    if (status === 'skipped' && !state.skippedSet.has(i))      return acc;
     if (status === 'unsaved' && (state.savedIndexSet.has(i) || state.skippedSet.has(i))) return acc;
 
     if (search) {
@@ -1096,10 +1153,12 @@ function makeQuestionCard(index) {
   card.className = 'q-card' + (index === state.currentIndex ? ' active' : '');
   card.dataset.index = index;
 
+  const isPartial = state.partialIndexSet.has(index);
   const isSaved   = state.savedIndexSet.has(index);
   const isSkipped = state.skippedSet.has(index);
   let badgeHtml;
-  if (isSaved)        badgeHtml = `<span class="badge saved">✓ Saved</span>`;
+  if (isPartial)      badgeHtml = `<span class="badge partial">⚠ Partial</span>`;
+  else if (isSaved)   badgeHtml = `<span class="badge saved">✓ Saved</span>`;
   else if (isSkipped) badgeHtml = `<span class="badge skipped">⊘ Skipped</span>`;
   else                badgeHtml = `<span class="badge unsaved">○ Unsaved</span>`;
 
@@ -1226,6 +1285,7 @@ function exportJSON(todayOnly = false, includePartial = false) {
 
     const questions = included.map(q => {
       const { _qid, _ctx, ...rest } = q;   // strip internals; ids/names/tags already applied
+      rest.id = uuidFromId(_qid || rest.id);   // emit a stable UUID (keeps its key position)
       return rest;
     });
     out.push({ ...paper, questions, questionCount: questions.length });
@@ -1313,6 +1373,37 @@ function getSubjectName(subjectId) {
   if (!subjectId || !state.topicData) return '';
   const s = (state.topicData.subjects || []).find(s => s.id === subjectId);
   return s ? s.name : '';
+}
+
+/* ── Stable UUID (deterministic from the source id) ──
+   The exported `id` must be a UUID. We derive it from each question's original
+   stable id so the SAME question always yields the SAME UUID — across every
+   re-export and on every teammate's machine — avoiding duplicate rows on import.
+   cyrb128 gives 128 well-mixed bits, formatted as an RFC-4122 (v5-style) UUID. */
+function cyrb128(str) {
+  let h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
+  for (let i = 0, k; i < str.length; i++) {
+    k = str.charCodeAt(i);
+    h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
+    h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
+    h3 = h4 ^ Math.imul(h3 ^ k, 951274213);
+    h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+  }
+  h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
+  h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
+  h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
+  h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
+  return [(h1 ^ h2 ^ h3 ^ h4) >>> 0, (h2 ^ h1) >>> 0, (h3 ^ h1) >>> 0, (h4 ^ h1) >>> 0];
+}
+
+function uuidFromId(id) {
+  const parts = cyrb128(String(id));
+  const b = [];
+  parts.forEach(n => b.push((n >>> 24) & 0xff, (n >>> 16) & 0xff, (n >>> 8) & 0xff, n & 0xff));
+  b[6] = (b[6] & 0x0f) | 0x50;   // version 5 (name-based / deterministic)
+  b[8] = (b[8] & 0x3f) | 0x80;   // RFC-4122 variant
+  const h = b.map(x => x.toString(16).padStart(2, '0'));
+  return `${h.slice(0, 4).join('')}-${h.slice(4, 6).join('')}-${h.slice(6, 8).join('')}-${h.slice(8, 10).join('')}-${h.slice(10, 16).join('')}`;
 }
 
 function setGlobalStatus(msg) {
