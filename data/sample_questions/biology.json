@@ -1,0 +1,1288 @@
+{
+    "questions": [
+            {
+                "id": "0d2b38e5-c3db-4676-a049-c9776e2ee958",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "6940dfce6f5fb5229685a86f",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d34758c88c5d1ea2409",
+                "orderIndex": 0,
+                "question": {
+                    "id": "6940dfce6f5fb5229685a86f",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d34758c88c5d1ea2409",
+                    "topicId": null,
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "In polytene chromosomes dark bands are visible. These bands are formed by the position of",
+                    "questionOriginal": null,
+                    "explanationHtml": "Polytene chromosomes was reported by Balbiani (1881) from cells of salivary glands of insect larvae. Polytene chromosomes contain several dark stained regions called bands separated by lighter or less stained area called interbands. These dark bands are heterochromatin (genetically insert) area.",
+                    "explanationPlain": "Polytene chromosomes was reported by Balbiani (1881) from cells of salivary glands of insect larvae. Polytene chromosomes contain several dark stained regions called bands separated by lighter or less stained area called interbands. These dark bands are heterochromatin (genetically insert) area.",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Protein particles\", \"answer\": false}, {\"id\": 2, \"name\": \"Chromomeres on chromonemata\", \"answer\": true}, {\"id\": 3, \"name\": \"Nucleosomes\", \"answer\": false}, {\"id\": 4, \"name\": \"None of the above\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "PRINCIPLES OF INHERITANCE AND VARIATION",
+                    "topicName": null,
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "5b2ff77a-86e3-4d16-be6a-6697b68e6bdc",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "694aca1a53fd64e6f036c6a4",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d2b758c88c5d1ea23e1",
+                "orderIndex": 1,
+                "question": {
+                    "id": "694aca1a53fd64e6f036c6a4",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d2b758c88c5d1ea23e1",
+                    "topicId": null,
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "<html><head></head><body><p>Identify <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6833em;\"></span><span class=\"mord mathnormal\">A</span></span></span></span> to <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6833em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.13889em;\">F</span></span></span></span> in the diagram<br><img style=\"max-width: 250px;; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" src=\"data/assets/questionapi.in/9f53de6762c116c52b99b440d2efddbd.jpg\" alt=\"question image\" width=\"116\" height=\"175\" data-filename=\"3480563446617f6d048e417a98933a4850f56b1586563868d1d89ee042340a24.jpg\" loading=\"lazy\"></p></body></html>",
+                    "questionOriginal": null,
+                    "explanationHtml": "<html><head></head><body><p>Mature embryo sac<br><img style=\"max-width: 250px;; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" src=\"data/assets/questionapi.in/27f37f0eda3abf592292813e37bb4c4f.jpg\" alt=\"question image\" width=\"209\" height=\"262\" data-filename=\"8c7d806e652bb264cafa4a8740c0cf0268dbaf314904e6fd61ccdbd27f1060fd.jpg\" loading=\"lazy\"></p></body></html>",
+                    "explanationPlain": "<p>Mature embryo sac<br><img style=\"max-width: 250px;\" src=\"data/assets/questionapi.in/27f37f0eda3abf592292813e37bb4c4f.jpg\" alt=\"question image\" width=\"209\" height=\"262\" data-filename=\"8c7d806e652bb264cafa4a8740c0cf0268dbaf314904e6fd61ccdbd27f1060fd.jpg\"></p>",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"A-Egg, B-Filiform apparatus, C-Synergid, D-Antipodal cell, E-Polar nuclei, F-Central cell\", \"answer\": false}, {\"id\": 2, \"name\": \"A-Egg, B-Synergid, C-Filiform apparatus, D-Antipodal cell, E-Central cell, F-Polar nuclei\", \"answer\": false}, {\"id\": 3, \"name\": \"A-Central cell, B-Egg, C-Synergid, D-Antipodal cell, E-Filiform apparatus, F-Polar nuclei\", \"answer\": false}, {\"id\": 4, \"name\": \"A-Filiform apparatus, B-Synergid, C-Egg, D-Central cell, E-Polar nuclei, F-Antipodal cell\", \"answer\": true}]",
+                    "subjectName": "Biology",
+                    "chapterName": "SEXUAL REPRODUCTION IN FLOWERING PLANTS",
+                    "topicName": null,
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "9ddbca07-7222-4f4b-904c-650b7f83afbe",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "6940dfce6f5fb5229685a619",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d34758c88c5d1ea2409",
+                "orderIndex": 2,
+                "question": {
+                    "id": "6940dfce6f5fb5229685a619",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d34758c88c5d1ea2409",
+                    "topicId": "69110d34758c88c5d1ea240a",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "Genotypic and phenotypic ratios remains the same in",
+                    "questionOriginal": null,
+                    "explanationHtml": "<html><head></head><body><p>Intermediate inheritance also called the incomplete dominance. In that inheritance the phenotypic and genotypic ratio are same. The classical examples are <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.3669em;\"></span><span class=\"mrel\">=</span></span></span></span> four <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.7519em;\"></span><span class=\"mord\"><span class=\"mord\">0</span><span class=\"msupsub\"><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.7519em;\"><span style=\"top:-3.063em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\"><span class=\"mord mtight\">′</span></span></span></span></span></span></span></span></span></span></span></span> clock plant and snapdragon. Mirabilis jalapa shows incomplete dominance<br><img style=\"max-width: 250px;; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" src=\"data/assets/questionapi.in/73be86bf85df19022880bfddc89b839b.jpg\" alt=\"question image\" width=\"214\" height=\"155\" data-filename=\"86af1abf5ec0b9e16ce0099944541faa433007132a0ab0d8ce8787477906345c.jpg\" loading=\"lazy\">The ratio of pink and white flower will be 1 : 1</p></body></html>",
+                    "explanationPlain": "<p>Intermediate inheritance also called the incomplete dominance. In that inheritance the phenotypic and genotypic ratio are same. The classical examples are $=$ four $0'$ clock plant and snapdragon. Mirabilis jalapa shows incomplete dominance<br><img style=\"max-width: 250px;\" src=\"data/assets/questionapi.in/73be86bf85df19022880bfddc89b839b.jpg\" alt=\"question image\" width=\"214\" height=\"155\" data-filename=\"86af1abf5ec0b9e16ce0099944541faa433007132a0ab0d8ce8787477906345c.jpg\">The ratio of pink and white flower will be 1 : 1</p>",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Sex-linked genes\", \"answer\": false}, {\"id\": 2, \"name\": \"Pseudoallelic genes\", \"answer\": false}, {\"id\": 3, \"name\": \"Intermediate inheritance\", \"answer\": true}, {\"id\": 4, \"name\": \"Dominance and recessive genes\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "PRINCIPLES OF INHERITANCE AND VARIATION",
+                    "topicName": "Mendel’s Laws of Inheritance",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "d052e67c-6cab-41ff-85c8-3b94d4089a6f",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "693e2197b9c309065649f5b9",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d39758c88c5d1ea2421",
+                "orderIndex": 3,
+                "question": {
+                    "id": "693e2197b9c309065649f5b9",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d39758c88c5d1ea2421",
+                    "topicId": "69110d39758c88c5d1ea2423",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Easy",
+                    "objective": 1,
+                    "questionHtml": "AIDS day is",
+                    "questionOriginal": null,
+                    "explanationHtml": "(b)<br>AIDS day is 1st December",
+                    "explanationPlain": "(b)<br>AIDS day is 1st December",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"1 May\", \"answer\": false}, {\"id\": 2, \"name\": \"1 December\", \"answer\": true}, {\"id\": 3, \"name\": \"1 June\", \"answer\": false}, {\"id\": 4, \"name\": \"1 January\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "HUMAN HEALTH AND DISEASES",
+                    "topicName": "AIDS",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "8deb391a-996c-4f4e-b311-5087c78cb5fb",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "6940dfce6f5fb5229685a830",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d34758c88c5d1ea2409",
+                "orderIndex": 4,
+                "question": {
+                    "id": "6940dfce6f5fb5229685a830",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d34758c88c5d1ea2409",
+                    "topicId": "69110d34758c88c5d1ea240c",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "In a given plant, red colour ( R ) of fruit is dominant over white fruit ( r); and tallness ( T ) is dominant over dwarfness ( t ). If a plant with genotype RRTt is crossed with a plant of genotype rrtt, what will be the percentage of tall plants with red fruits in the next generation?",
+                    "questionOriginal": null,
+                    "explanationHtml": "<html><head></head><body><p><img style=\"max-width: 250px;; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" src=\"data/assets/questionapi.in/ee407fdb55025f0c8282400d2ab40c45.jpg\" alt=\"question image\" data-filename=\"e44ec9cead57ec02a3bd705ec2d49b52914206ec546e21ada5ebfa34cabb8094.jpg\" loading=\"lazy\"><br>Phenotype of different plants is<br>14. All plants contain red fruits. <br>15. <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.8056em;vertical-align:-0.0556em;\"></span><span class=\"mord\">50%</span></span></span></span> plants are tall with red fruits. <br>16. <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.8056em;vertical-align:-0.0556em;\"></span><span class=\"mord\">50%</span></span></span></span> plants are dwarf with red fruits.</p></body></html>",
+                    "explanationPlain": "<p><img style=\"max-width: 250px;\" src=\"data/assets/questionapi.in/ee407fdb55025f0c8282400d2ab40c45.jpg\" alt=\"question image\" data-filename=\"e44ec9cead57ec02a3bd705ec2d49b52914206ec546e21ada5ebfa34cabb8094.jpg\"><br>Phenotype of different plants is<br>14. All plants contain red fruits. <br>15. $50\\%$ plants are tall with red fruits. <br>16. $50\\%$ plants are dwarf with red fruits.</p>",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"<span class=\\\"katex\\\"><span class=\\\"katex-html\\\" aria-hidden=\\\"true\\\"><span class=\\\"base\\\"><span class=\\\"strut\\\" style=\\\"height:0.8056em;vertical-align:-0.0556em;\\\"></span><span class=\\\"mord\\\">100%</span></span></span></span>\", \"answer\": false}, {\"id\": 2, \"name\": \"<span class=\\\"katex\\\"><span class=\\\"katex-html\\\" aria-hidden=\\\"true\\\"><span class=\\\"base\\\"><span class=\\\"strut\\\" style=\\\"height:0.8056em;vertical-align:-0.0556em;\\\"></span><span class=\\\"mord\\\">25%</span></span></span></span>\", \"answer\": false}, {\"id\": 3, \"name\": \"<span class=\\\"katex\\\"><span class=\\\"katex-html\\\" aria-hidden=\\\"true\\\"><span class=\\\"base\\\"><span class=\\\"strut\\\" style=\\\"height:0.8056em;vertical-align:-0.0556em;\\\"></span><span class=\\\"mord\\\">50%</span></span></span></span>\", \"answer\": true}, {\"id\": 4, \"name\": \"<span class=\\\"katex\\\"><span class=\\\"katex-html\\\" aria-hidden=\\\"true\\\"><span class=\\\"base\\\"><span class=\\\"strut\\\" style=\\\"height:0.8056em;vertical-align:-0.0556em;\\\"></span><span class=\\\"mord\\\">75%</span></span></span></span>\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "PRINCIPLES OF INHERITANCE AND VARIATION",
+                    "topicName": "Inheritance of Two Genes",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "3d9bf147-5061-4f19-ae51-b006f8aabbb0",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "693e2197b9c309065649f61f",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d39758c88c5d1ea2421",
+                "orderIndex": 5,
+                "question": {
+                    "id": "693e2197b9c309065649f61f",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d39758c88c5d1ea2421",
+                    "topicId": "69110d3a758c88c5d1ea2426",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "What is HLA?",
+                    "questionOriginal": null,
+                    "explanationHtml": "The most important antigens for causing graft rejection are a complex called HLA Humman Leucocyte Antigen(protein). The HLI occur on the white blood cells as well as on the tissue cells.",
+                    "explanationPlain": "The most important antigens for causing graft rejection are a complex called HLA Humman Leucocyte Antigen(protein). The HLI occur on the white blood cells as well as on the tissue cells.",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Group of proteins\", \"answer\": true}, {\"id\": 2, \"name\": \"Group of chromosomes\", \"answer\": false}, {\"id\": 3, \"name\": \"Group of genes\", \"answer\": false}, {\"id\": 4, \"name\": \"Group of polypeptides\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "HUMAN HEALTH AND DISEASES",
+                    "topicName": "Immunity",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "413386d1-5634-491b-a0e0-ec2c26c16d59",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "6940dfce6f5fb5229685a87d",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d34758c88c5d1ea2409",
+                "orderIndex": 6,
+                "question": {
+                    "id": "6940dfce6f5fb5229685a87d",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d34758c88c5d1ea2409",
+                    "topicId": "69110d34758c88c5d1ea240d",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "Which of the following discoveries resulted in a Nobel Prize?",
+                    "questionOriginal": null,
+                    "explanationHtml": "H J Muller was awarded Nobel Prize in 1946 for his discovery of the production of mutations by X-ray irradiation.",
+                    "explanationPlain": "H J Muller was awarded Nobel Prize in 1946 for his discovery of the production of mutations by X-ray irradiation.",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Recombination of linked genes\", \"answer\": false}, {\"id\": 2, \"name\": \"Genetic engineering\", \"answer\": false}, {\"id\": 3, \"name\": \"X-rays induce sex-linked recessive lethal mutations\", \"answer\": true}, {\"id\": 4, \"name\": \"Cytoplasmic inheritance\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "PRINCIPLES OF INHERITANCE AND VARIATION",
+                    "topicName": "Mutation",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "2cd46f6d-faef-4410-aa11-d82f24a9c59f",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "693e2197b9c309065649f5e5",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d39758c88c5d1ea2421",
+                "orderIndex": 7,
+                "question": {
+                    "id": "693e2197b9c309065649f5e5",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d39758c88c5d1ea2421",
+                    "topicId": "69110d39758c88c5d1ea2425",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "Benign tumours<br>I. remain confined to their original location and do not spread to other parts<br>II. cause little damage<br>Which of the statements given above is/are correct?",
+                    "questionOriginal": null,
+                    "explanationHtml": "Benign tumour is a non-cancerous Tumour. It does not show metastasis and is non-invasive. It is less fatal to the body",
+                    "explanationPlain": "Benign tumour is a non-cancerous Tumour. It does not show metastasis and is non-invasive. It is less fatal to the body",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Only I\", \"answer\": false}, {\"id\": 2, \"name\": \"Only II\", \"answer\": false}, {\"id\": 3, \"name\": \"I and II\", \"answer\": true}, {\"id\": 4, \"name\": \"None of the above\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "HUMAN HEALTH AND DISEASES",
+                    "topicName": "Cancer",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "6553aed1-f9ae-4506-9b75-c7423b442bf3",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "693e2197b9c309065649f647",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d39758c88c5d1ea2421",
+                "orderIndex": 8,
+                "question": {
+                    "id": "693e2197b9c309065649f647",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d39758c88c5d1ea2421",
+                    "topicId": "69110d39758c88c5d1ea2424",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Easy",
+                    "objective": 1,
+                    "questionHtml": "A drug called morphine is obtained from",
+                    "questionOriginal": null,
+                    "explanationHtml": "The drug morphine is obtained from P. somniferum.",
+                    "explanationPlain": "The drug morphine is obtained from P. somniferum.",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Rauwolffia serpentina\", \"answer\": false}, {\"id\": 2, \"name\": \"Cannabis sativa\", \"answer\": false}, {\"id\": 3, \"name\": \"Cajanus cajan\", \"answer\": false}, {\"id\": 4, \"name\": \"Papaver somniferum\", \"answer\": true}]",
+                    "subjectName": "Biology",
+                    "chapterName": "HUMAN HEALTH AND DISEASES",
+                    "topicName": "Drugs and Alcohol Abuse",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "c2dc37ba-166c-48f4-8700-21341699760e",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "693d7313b9c309065649f378",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d2e758c88c5d1ea23ed",
+                "orderIndex": 9,
+                "question": {
+                    "id": "693d7313b9c309065649f378",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d2e758c88c5d1ea23ed",
+                    "topicId": "69110d30758c88c5d1ea23f5",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "The chronological order of human evolution from early to the recent is",
+                    "questionOriginal": null,
+                    "explanationHtml": "The correct chronological order of human evolution from early to recent is<br>Ramapithecus  <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.3669em;\"></span><span class=\"mrel\">→</span></span></span></span>  Australopithecus  <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.3669em;\"></span><span class=\"mrel\">→</span></span></span></span><br>(First hominid) (First ape man)<br>Homo habilis  <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.522em;vertical-align:-0.011em;\"></span><span class=\"mrel\">⟶</span></span></span></span>  Homo erectus<br>(Tool maker handy man) (Erect man)",
+                    "explanationPlain": "The correct chronological order of human evolution from early to recent is<br>Ramapithecus  $\\rightarrow$  Australopithecus  $\\rightarrow$<br>(First hominid) (First ape man)<br>Homo habilis  $\\longrightarrow$  Homo erectus<br>(Tool maker handy man) (Erect man)",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Ramapithecus - Australopithecus - Homo habilis - Homo erectus\", \"answer\": true}, {\"id\": 2, \"name\": \"Australopithecus - Ramapithecus - Homo habilis - Homo erectus\", \"answer\": false}, {\"id\": 3, \"name\": \"Pithecanthropus pekinensis - Homo habilis - Homo erectus\", \"answer\": false}, {\"id\": 4, \"name\": \"Australopithecus - Ramapithecus - Pithecant - hropus pekinensis - Homo erectus\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "EVOLUTION",
+                    "topicName": "Origin and Evolution of Man",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "5b7ad318-6e67-4d57-bd1c-ddf323416295",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "693e2197b9c309065649f77b",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d39758c88c5d1ea2421",
+                "orderIndex": 10,
+                "question": {
+                    "id": "693e2197b9c309065649f77b",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d39758c88c5d1ea2421",
+                    "topicId": null,
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "MRI is not allowed in the following conditions except one. Identify the exception",
+                    "questionOriginal": null,
+                    "explanationHtml": "Presence of pace-maker in the body",
+                    "explanationPlain": "Presence of pace-maker in the body",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Presence of pace-maker in the body\", \"answer\": true}, {\"id\": 2, \"name\": \"Pregnant women\", \"answer\": false}, {\"id\": 3, \"name\": \"Person suffering from stroke\", \"answer\": false}, {\"id\": 4, \"name\": \"Presence of metallic plate in the body from treatment of broken bones\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "HUMAN HEALTH AND DISEASES",
+                    "topicName": null,
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "c39426e9-1859-463e-be84-4b98503e2edf",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "693fef698b5b01e6982ce048",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d2c758c88c5d1ea23e7",
+                "orderIndex": 11,
+                "question": {
+                    "id": "693fef698b5b01e6982ce048",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d2c758c88c5d1ea23e7",
+                    "topicId": null,
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "Progesterone in the contraceptive pill:",
+                    "questionOriginal": null,
+                    "explanationHtml": "Prevents ovulation",
+                    "explanationPlain": "Prevents ovulation",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Prevents ovulation\", \"answer\": true}, {\"id\": 2, \"name\": \"Inhibits estrogen\", \"answer\": false}, {\"id\": 3, \"name\": \"Checks attachment of zygote to endometrium\", \"answer\": false}, {\"id\": 4, \"name\": \"All the above\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "REPRODUCTIVE HEALTH",
+                    "topicName": null,
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "71d32eda-b6dd-4430-8db0-e6f8635c8929",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "6940dfce6f5fb5229685a750",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d34758c88c5d1ea2409",
+                "orderIndex": 12,
+                "question": {
+                    "id": "6940dfce6f5fb5229685a750",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d34758c88c5d1ea2409",
+                    "topicId": "69110d34758c88c5d1ea240a",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "The ABO blood grouping in human beings is an example for<br>I.Dominance<br>II.Incomplete dominance<br>III.Codominance<br>IV.Multiple alleles",
+                    "questionOriginal": null,
+                    "explanationHtml": "In human beings, ABO blood grouping is an example of dominance, codominance and multiple alleles.",
+                    "explanationPlain": "In human beings, ABO blood grouping is an example of dominance, codominance and multiple alleles.",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"I and II\", \"answer\": false}, {\"id\": 2, \"name\": \"II, III and IV\", \"answer\": false}, {\"id\": 3, \"name\": \"I, III and IV\", \"answer\": true}, {\"id\": 4, \"name\": \"III and II\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "PRINCIPLES OF INHERITANCE AND VARIATION",
+                    "topicName": "Mendel’s Laws of Inheritance",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "061a64d6-7dcf-419d-bf9d-d6a88f72b5d8",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "693e752eb9c309065649fc8c",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d3a758c88c5d1ea2427",
+                "orderIndex": 13,
+                "question": {
+                    "id": "693e752eb9c309065649fc8c",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d3a758c88c5d1ea2427",
+                    "topicId": "69110d3a758c88c5d1ea2428",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Easy",
+                    "objective": 1,
+                    "questionHtml": "Ecology at the organism level is also called",
+                    "questionOriginal": null,
+                    "explanationHtml": "Ecology at the organismic level is essentially called physiological ecology which tries to understand how different organisms are adapted to their environments in terms of not only survival but also reproduction",
+                    "explanationPlain": "Ecology at the organismic level is essentially called physiological ecology which tries to understand how different organisms are adapted to their environments in terms of not only survival but also reproduction",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Anatomical ecology\", \"answer\": false}, {\"id\": 2, \"name\": \"Physiological ecology\", \"answer\": true}, {\"id\": 3, \"name\": \"Habitat ecology\", \"answer\": false}, {\"id\": 4, \"name\": \"Niche ecology\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "ORGANISMS AND POPULATION",
+                    "topicName": "Populations",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "ab3a2638-4ff8-4f2a-9c5b-0a8c308c268f",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "6940dfce6f5fb5229685a7f9",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d34758c88c5d1ea2409",
+                "orderIndex": 14,
+                "question": {
+                    "id": "6940dfce6f5fb5229685a7f9",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d34758c88c5d1ea2409",
+                    "topicId": "69110d35758c88c5d1ea240f",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "In which mode of inheritance, do you expect more maternal influence among the offsprings?",
+                    "questionOriginal": null,
+                    "explanationHtml": "The more maternal influence can be expected in the cytoplasmic inheritances (i.e., the inheritance of genes contained in the cytoplasm of a cell, rather than the nucleus). The reason is that of the female reproductive cell or the egg has large amount of cytoplasm containing many organelles which contain their own genes and can reproduce independently (e.g., mitochondria and chloroplast) and which are consequently incorporated into the cytoplasm of all the cells of the embryo. The male reproductive cell (sperm and<br>pollen) consists almost solely of a nucleus. Cytoplasmic organelles are thus, not inherited from the male parent. This is why, the cytoplasmic inheritance is also called maternal inheritance.",
+                    "explanationPlain": "The more maternal influence can be expected in the cytoplasmic inheritances (i.e., the inheritance of genes contained in the cytoplasm of a cell, rather than the nucleus). The reason is that of the female reproductive cell or the egg has large amount of cytoplasm containing many organelles which contain their own genes and can reproduce independently (e.g., mitochondria and chloroplast) and which are consequently incorporated into the cytoplasm of all the cells of the embryo. The male reproductive cell (sperm and<br>pollen) consists almost solely of a nucleus. Cytoplasmic organelles are thus, not inherited from the male parent. This is why, the cytoplasmic inheritance is also called maternal inheritance.",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Autosomal\", \"answer\": false}, {\"id\": 2, \"name\": \"Cytoplasmic\", \"answer\": true}, {\"id\": 3, \"name\": \"Y-linked\", \"answer\": false}, {\"id\": 4, \"name\": \"X-linked\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "PRINCIPLES OF INHERITANCE AND VARIATION",
+                    "topicName": "Sex Determination",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "9a40ac9a-8127-4ce3-8f05-eec021f5e031",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "693a7ea6b9c309065649f087",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d35758c88c5d1ea2410",
+                "orderIndex": 15,
+                "question": {
+                    "id": "693a7ea6b9c309065649f087",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d35758c88c5d1ea2410",
+                    "topicId": null,
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Easy",
+                    "objective": 1,
+                    "questionHtml": "Pollen grains of a plant, whose  <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6444em;\"></span><span class=\"mord\">2</span><span class=\"mord mathnormal\">n</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span><span class=\"mrel\">=</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6444em;\"></span><span class=\"mord\">28</span></span></span></span> , are cultured to get callus by tissue culture method. What would be the number of chromosomes in the cells of the callus?",
+                    "questionOriginal": null,
+                    "explanationHtml": "Haploid plants may be obtained from pollen grains by placing anthers or isolated pollen grains on a suitable culture medium. Thus, the number of the chromosomes in the cells of the callus for the given case will be 14.",
+                    "explanationPlain": "Haploid plants may be obtained from pollen grains by placing anthers or isolated pollen grains on a suitable culture medium. Thus, the number of the chromosomes in the cells of the callus for the given case will be 14.",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"28\", \"answer\": false}, {\"id\": 2, \"name\": \"21\", \"answer\": false}, {\"id\": 3, \"name\": \"14\", \"answer\": true}, {\"id\": 4, \"name\": \"56\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "BIOTECHNOLOGY AND ITS APPLICATIONS",
+                    "topicName": null,
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "2ad1ac71-05bd-4ea7-b607-a93c980204de",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "693e3e24b9c309065649f8d1",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d37758c88c5d1ea2419",
+                "orderIndex": 16,
+                "question": {
+                    "id": "693e3e24b9c309065649f8d1",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d37758c88c5d1ea2419",
+                    "topicId": "69110d37758c88c5d1ea241a",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Easy",
+                    "objective": 1,
+                    "questionHtml": "Primary oocyte surrounded by a layer of granulosa cells is called",
+                    "questionOriginal": null,
+                    "explanationHtml": "<html><head></head><body><p>Primary oocyte surrounded by a layer of granulosa cell called primary follicle which are 2n in number.<img style=\"width: 475px; height: 214px; display: block; background: white;; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" src=\"data/assets/questionapi.in/000015f524a452ca77d3313ccc3f2349.jpg\" alt=\"question image\" data-filename=\"b7a734a822dfa88fb9c0dc443788a6280ef888c32dec61a0305229324435e004.jpg\" loading=\"lazy\">Oogenesis is the process of formation of mature ovum. It has three phases<br>(a) Multiplication Phase Oogenesis takes place in embryo stage. A couple of million of gamete mother cells (oogonia) are formed within each foetal ovary. No more oogonia are formed after birth. These cells (oogonia) get into prophase-I of meiotic division. They get temporarily arrested as this stage called primary oocyte <br>(b) Growth Phase Each primary oocyte then gets surrounded by a layer of granulosa cells. This structure is called the primary follicle. A large number of these follicles degenerate during the phase from birth to puberty. At puberty, only 60000 and 80000 primary follicles are left in each ovary. The primary follicles get surrounded by more layers of granulosa cells and a new theca to form secondary follicles <br>(c) Maturation Phase In the first maturation phase, the secondary follicle soon transforms into a tertiary follicle. The primary oocyte within the tertiary follicle grows in size and completes its first meiotic division to form a large haploid secondary oocyte and a tiny first polar body<br>The tertiary follicle changes into a mature follicle-the Graafian follicle which ruptures to release the secondary oocyte (ovum) from the ovary by a process called ovulation. The second maturation phase occurs after fertilization when the meiotic division of the secondary oocyte is complete. This second meiotic division results in the formation of a second polar body and a haploid ovum (ootid)</p></body></html>",
+                    "explanationPlain": "<p>Primary oocyte surrounded by a layer of granulosa cell called primary follicle which are 2n in number.<img style=\"width: 475px; height: 214px; display: block; background: white;\" src=\"data/assets/questionapi.in/000015f524a452ca77d3313ccc3f2349.jpg\" alt=\"question image\" data-filename=\"b7a734a822dfa88fb9c0dc443788a6280ef888c32dec61a0305229324435e004.jpg\">Oogenesis is the process of formation of mature ovum. It has three phases<br>(a) Multiplication Phase Oogenesis takes place in embryo stage. A couple of million of gamete mother cells (oogonia) are formed within each foetal ovary. No more oogonia are formed after birth. These cells (oogonia) get into prophase-I of meiotic division. They get temporarily arrested as this stage called primary oocyte <br>(b) Growth Phase Each primary oocyte then gets surrounded by a layer of granulosa cells. This structure is called the primary follicle. A large number of these follicles degenerate during the phase from birth to puberty. At puberty, only 60000 and 80000 primary follicles are left in each ovary. The primary follicles get surrounded by more layers of granulosa cells and a new theca to form secondary follicles <br>(c) Maturation Phase In the first maturation phase, the secondary follicle soon transforms into a tertiary follicle. The primary oocyte within the tertiary follicle grows in size and completes its first meiotic division to form a large haploid secondary oocyte and a tiny first polar body<br>The tertiary follicle changes into a mature follicle-the Graafian follicle which ruptures to release the secondary oocyte (ovum) from the ovary by a process called ovulation. The second maturation phase occurs after fertilization when the meiotic division of the secondary oocyte is complete. This second meiotic division results in the formation of a second polar body and a haploid ovum (ootid)</p>",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Secondary follicle\", \"answer\": false}, {\"id\": 2, \"name\": \"Ootid\", \"answer\": false}, {\"id\": 3, \"name\": \"Primary follicle\", \"answer\": true}, {\"id\": 4, \"name\": \"Tertiary follicle\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "HUMAN REPRODUCTION",
+                    "topicName": "The Female Reproductive System",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "911f1fd7-feb9-41c9-adbd-b20799213be3",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "6940dfce6f5fb5229685a639",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d34758c88c5d1ea2409",
+                "orderIndex": 17,
+                "question": {
+                    "id": "6940dfce6f5fb5229685a639",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d34758c88c5d1ea2409",
+                    "topicId": "69110d34758c88c5d1ea240e",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "Genes when present in homozygous condition results in non - viable progeny, the factor responsible for such conditions are",
+                    "questionOriginal": null,
+                    "explanationHtml": "Some genes control phenotypic traits and at the same time they also influence the viability of the individuals. The influence of these genes on viability is such that it may cause death of individual carrying them. Such genes are called lethal genes.",
+                    "explanationPlain": "Some genes control phenotypic traits and at the same time they also influence the viability of the individuals. The influence of these genes on viability is such that it may cause death of individual carrying them. Such genes are called lethal genes.",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Polygenes\", \"answer\": false}, {\"id\": 2, \"name\": \"Linked genes\", \"answer\": false}, {\"id\": 3, \"name\": \"Lethal genes\", \"answer\": true}, {\"id\": 4, \"name\": \"Epistatic genes\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "PRINCIPLES OF INHERITANCE AND VARIATION",
+                    "topicName": "Genetic Disorders",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "4f67195d-a447-4160-bd79-acf1c3bfc71b",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "693d7313b9c309065649f42f",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d2e758c88c5d1ea23ed",
+                "orderIndex": 18,
+                "question": {
+                    "id": "693d7313b9c309065649f42f",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d2e758c88c5d1ea23ed",
+                    "topicId": "69110d2f758c88c5d1ea23f0",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "Why is the advent of reproductive isolation is important from an evolutionary standpoint",
+                    "questionOriginal": null,
+                    "explanationHtml": "Reproductive isolation states the condition when two populations of a species can no longer interbred. As a result the flow of genetic material stops between them. This leads to the origin of new species",
+                    "explanationPlain": "Reproductive isolation states the condition when two populations of a species can no longer interbred. As a result the flow of genetic material stops between them. This leads to the origin of new species",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"When the organisms comprising two populations of a species can no longer interbreed, the flow of genetic material between them stops\", \"answer\": true}, {\"id\": 2, \"name\": \"It is not important from an evolutionary standpoint. The question is based on a false assumption\", \"answer\": false}, {\"id\": 3, \"name\": \"Reproductive isolation increases the mutational rate\", \"answer\": false}, {\"id\": 4, \"name\": \"Reproductive isolation may slow down reproduction\", \"answer\": false}]",
+                    "subjectName": "Biology",
+                    "chapterName": "EVOLUTION",
+                    "topicName": "Mechanism of Evolution",
+                    "markName": "4"
+                }
+            },
+            {
+                "id": "bd7eeb04-e8e6-4cf1-8f77-cc7e9ec77cbf",
+                "paperId": "99357f02-bf2b-4149-a256-0334597a3509",
+                "questionId": "693aca9eb9c309065649f2f9",
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "chapterId": "69110d3b758c88c5d1ea242c",
+                "orderIndex": 19,
+                "question": {
+                    "id": "693aca9eb9c309065649f2f9",
+                    "subjectId": "69110d2b758c88c5d1ea23e0",
+                    "chapterId": "69110d3b758c88c5d1ea242c",
+                    "topicId": "69110d3b758c88c5d1ea242f",
+                    "markId": "69110d3d758c88c5d1ea2434",
+                    "categorySlug": "single-correct-mcq",
+                    "difficulty": "Medium",
+                    "objective": 1,
+                    "questionHtml": "<html><head></head><body><p>Given below is the diagram of the ecological pyramids<br><img style=\"max-width: 250px;; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" src=\"data/assets/questionapi.in/0fe4a1da3d6c584202e06930e95216d5.jpg\" alt=\"question image\" data-filename=\"ad4a1f9ac23277be4d6afe95357b289eaed2504ff8d69c4f251a0bbcc16e63b1.jpg\" loading=\"lazy\">This type represents</p></body></html>",
+                    "questionOriginal": null,
+                    "explanationHtml": "Pyramid of energy.<br>The pyramid of energy is always upright because energy is always loss as heat at each step. It represents the total amount of energy utilised by different trophic level organisms in unit area over a period of time",
+                    "explanationPlain": "Pyramid of energy.<br>The pyramid of energy is always upright because energy is always loss as heat at each step. It represents the total amount of energy utilised by different trophic level organisms in unit area over a period of time",
+                    "explanationOriginal": null,
+                    "optionsJson": "[{\"id\": 1, \"name\": \"Pyramid of number in a grassland\", \"answer\": false}, {\"id\": 2, \"name\": \"Pyramid of biomass in a lake\", \"answer\": false}, {\"id\": 3, \"name\": \"Pyramid of biomass in a land\", \"answer\": false}, {\"id\": 4, \"name\": \"Pyramid of energy\", \"answer\": true}]",
+                    "subjectName": "Biology",
+                    "chapterName": "ECOSYSTEM",
+                    "topicName": "Ecological Pyramids",
+                    "markName": "4"
+                }
+            },
+                       {
+                "id": "9628c371-8aa1-4505-8bc0-aa68b65e6cf4",
+                "orderIndex": 0,
+                "subjectId": "69110d2b758c88c5d1ea23e0",
+                "subjectKey": "69110d2b758c88c5d1ea23e0",
+                "subjectName": "Biology",
+                "chapterId": "69110d3a758c88c5d1ea2427",
+                "chapterName": "ORGANISMS AND POPULATION",
+                "topicId": "69110d3a758c88c5d1ea2428",
+                "topicName": "Populations",
+                "markId": "69110d3d758c88c5d1ea2434",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "Certain characteristic demographic features of developing countries are",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "High fertility, low or rapidly falling mortality rate, rapid population growth and a very young age distribution"
+                    },
+                    {
+                        "id": 2,
+                        "text": "High fertility, high density, rapidly rising mortality rate and a very young age distribution"
+                    },
+                    {
+                        "id": 3,
+                        "text": "High infant mortality, low fertility, uneven population growth and a very young age distribution"
+                    },
+                    {
+                        "id": 4,
+                        "text": "High mortality, high density, uneven population growth and a very old age distribution"
+                    }
+                ]
+            },
+            {
+                "id": "ce4e4bdd-94fd-42d0-bb29-cf10fb195751",
+                "orderIndex": 1,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110cdd758c88c5d1ea2281",
+                "chapterName": "Animal Kingdom",
+                "topicId": "69110cde758c88c5d1ea2282",
+                "topicName": "Classification of Animals",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Easy",
+                "questionHtml": "The internal buds of freshwater sponges are otherwise called.",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "Choanocyte"
+                    },
+                    {
+                        "id": 2,
+                        "text": "Gemmule"
+                    },
+                    {
+                        "id": 3,
+                        "text": "Osculum"
+                    },
+                    {
+                        "id": 4,
+                        "text": "Blastula"
+                    }
+                ]
+            },
+            {
+                "id": "2a698353-b91d-413f-9d1e-f5363d6f0971",
+                "orderIndex": 2,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110ce4758c88c5d1ea22a6",
+                "chapterName": "Biological Classification",
+                "topicId": "69110ce5758c88c5d1ea22ab",
+                "topicName": "Kingdom Monera",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Easy",
+                "questionHtml": "State whether the given statements are true or false\n\nI. Bacteria shows both autotrophic and heterotrophic nutrition\n\nII. Some of the bacteria are autotrophic. They may be photosynthetic autotrophic or chemosynthetic autotrophic\n\nIII. Heterotrophic nutrition involves the obtaining of readymade organic nutrients from outside sources",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "I and II are true"
+                    },
+                    {
+                        "id": 2,
+                        "text": "I is true, II and III is false"
+                    },
+                    {
+                        "id": 3,
+                        "text": "I, II and III are true."
+                    },
+                    {
+                        "id": 4,
+                        "text": "I, II and III"
+                    }
+                ]
+            },
+            {
+                "id": "49f4a600-2107-4045-90c2-b190b530fa0b",
+                "orderIndex": 3,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110cdd758c88c5d1ea2281",
+                "chapterName": "Animal Kingdom",
+                "topicId": "69110cde758c88c5d1ea2282",
+                "topicName": "Classification of Animals",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "Which is a condition that in connected in the both external and internal structures and it is first found in which phylum of the animal kingdom",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "Mutagenesis-Platyhelminthes"
+                    },
+                    {
+                        "id": 2,
+                        "text": "Metagenesis-Coelenterata"
+                    },
+                    {
+                        "id": 3,
+                        "text": "Appendages-Arthropoda"
+                    },
+                    {
+                        "id": 4,
+                        "text": "Metamerism-Annelida"
+                    }
+                ]
+            },
+            {
+                "id": "1a31952f-dfd5-4a74-884d-f75f312fdceb",
+                "orderIndex": 4,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110cec758c88c5d1ea22ce",
+                "chapterName": "Chemical Coordination and Integration",
+                "topicId": "69110cee758c88c5d1ea22d2",
+                "topicName": "Human Endocrine System",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "Hyposecretion of which of the following can cause diabetes insipidus?",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "Insulin"
+                    },
+                    {
+                        "id": 2,
+                        "text": "Thyroxine"
+                    },
+                    {
+                        "id": 3,
+                        "text": "Glucagon"
+                    },
+                    {
+                        "id": 4,
+                        "text": "ADH"
+                    }
+                ]
+            },
+            {
+                "id": "f4a7d84f-6787-4007-b1dd-54448fccc997",
+                "orderIndex": 5,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110cde758c88c5d1ea2284",
+                "chapterName": "Anatomy of Flowering Plants",
+                "topicId": "69110cde758c88c5d1ea2285",
+                "topicName": "The Tissue System",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Easy",
+                "questionHtml": "Largest number of chloroplast is found in",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "Palisade tissue"
+                    },
+                    {
+                        "id": 2,
+                        "text": "Spongy tissue"
+                    },
+                    {
+                        "id": 3,
+                        "text": "Transfusion tissue"
+                    },
+                    {
+                        "id": 4,
+                        "text": "Bundle sheath cells"
+                    }
+                ]
+            },
+            {
+                "id": "720bbe57-9eb4-4ed8-83cf-0fd906a05f78",
+                "orderIndex": 6,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110cdd758c88c5d1ea2281",
+                "chapterName": "Animal Kingdom",
+                "topicId": "69110cde758c88c5d1ea2282",
+                "topicName": "Classification of Animals",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "<p>Which of the following statements are true/false?</p>\n<p>I. In higher phyla cellular level of organisation is seen</p>\n<p>II. Phylum-Platyhelminthes have cellular level of organisation </p>\n<p>III. Cellular level of organisation is seen when the cells are not arranged as loose cell aggregates</p>\n<p>IV. Molluscs exhibit tissue level of organisation</p>\n<p>Choose the correct option of the following</p>",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "I and II are true, but III and IV are false"
+                    },
+                    {
+                        "id": 2,
+                        "text": "All statements are false"
+                    },
+                    {
+                        "id": 3,
+                        "text": "All statements are true"
+                    },
+                    {
+                        "id": 4,
+                        "text": "III and IV are true, but I and II are false"
+                    }
+                ]
+            },
+            {
+                "id": "54499907-3137-4623-907a-0cae368eea93",
+                "orderIndex": 7,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110cde758c88c5d1ea2284",
+                "chapterName": "Anatomy of Flowering Plants",
+                "topicId": "69110cde758c88c5d1ea2285",
+                "topicName": "The Tissue System",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "Quiescent centre is found in plants at",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "Root tip"
+                    },
+                    {
+                        "id": 2,
+                        "text": "Cambium"
+                    },
+                    {
+                        "id": 3,
+                        "text": "Shoot tip"
+                    },
+                    {
+                        "id": 4,
+                        "text": "Tip"
+                    }
+                ]
+            },
+            {
+                "id": "76b7a728-f133-4b2a-8767-6c6a875cb2a6",
+                "orderIndex": 8,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110cdf758c88c5d1ea2287",
+                "chapterName": "Cell: The Unit of Life",
+                "topicId": null,
+                "topicName": null,
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "Purines posses nitrogen at",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "1, 2, 4 and 6 positions"
+                    },
+                    {
+                        "id": 2,
+                        "text": "1, 3, 5 and 7 positions"
+                    },
+                    {
+                        "id": 3,
+                        "text": "1, 3, 7 and 9 positions"
+                    },
+                    {
+                        "id": 4,
+                        "text": "1, 2, 6 and 8 positions"
+                    }
+                ]
+            },
+            {
+                "id": "2537fbae-ec50-4fb7-9d0e-0d6450b0bcc6",
+                "orderIndex": 9,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110cde758c88c5d1ea2284",
+                "chapterName": "Anatomy of Flowering Plants",
+                "topicId": "69110cdf758c88c5d1ea2286",
+                "topicName": "Anatomy of Dicotyledonous and Monocotyledonous Plants",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "<html><head></head><body><p>Identify A to E in the given TS of dicot stem and choose the correct option <img src=\"data/assets/questionapi.in/2a618d082ea30b0b7120fa454f76e751.jpg\" alt=\"question image\" width=\"181\" height=\"151\" style=\"; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" loading=\"lazy\"></p></body></html>",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "A-Hypodermis, B-Chlorenchyma, C-Endodermis, D-Pericycle, E-Medullary rays"
+                    },
+                    {
+                        "id": 2,
+                        "text": "A-Hypodermis, B-Parenchyma, C-Endodermis, D-Pericycle, E-Medullary rays"
+                    },
+                    {
+                        "id": 3,
+                        "text": "A-Hypodermis, B-Sclerenchyma, C-Endodermis, D-Pericycle, E-Medullary rays"
+                    },
+                    {
+                        "id": 4,
+                        "text": "A-Hypodermis, B-Sclerenchyma, C-Endodermis, D-Pericycle, B-Parenchyma"
+                    }
+                ]
+            },
+            {
+                "id": "c62a04a6-7251-4483-9059-41354b53a95f",
+                "orderIndex": 10,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110ce9758c88c5d1ea22c0",
+                "chapterName": "Breathing and Exchange of Gases",
+                "topicId": "69110cea758c88c5d1ea22c4",
+                "topicName": "Transport of Gases",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "Which fact suggests that most oxygen is transported from lungs to the tissues combined with haemoglobin rather than dissolved in blood plasma?",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "Oxygen carrying capacity of whole blood is much higher than that of plasma and oxygen content of blood leaving the lungs is greater than that of blood entering the lungs"
+                    },
+                    {
+                        "id": 2,
+                        "text": "Haemoglobin can combine with oxygen"
+                    },
+                    {
+                        "id": 3,
+                        "text": "Oxyhaemoglobin can dissociate into haemoglobin and oxygen"
+                    },
+                    {
+                        "id": 4,
+                        "text": "Increase in carbon dioxide concentration decreases the oxygen affinity of haemoglobin"
+                    }
+                ]
+            },
+            {
+                "id": "d93b150b-67fa-4c0e-b1ae-0ed05eac79f8",
+                "orderIndex": 11,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110cdd758c88c5d1ea2281",
+                "chapterName": "Animal Kingdom",
+                "topicId": "69110cde758c88c5d1ea2282",
+                "topicName": "Classification of Animals",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "Note the following words.\nI.Fenestra\nII. Pedical\nIII.Lacinia\nIV. Flagellum\nV.Galea\nVI. Mentum\nVII.Palpifer\nVIII. Cardo\nIX.Glossa\n\nWhich of the above found in the first pair of maxillae in case of cockroach?",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "III, V, VII and VIII"
+                    },
+                    {
+                        "id": 2,
+                        "text": "I, III, V and IX"
+                    },
+                    {
+                        "id": 3,
+                        "text": "I, VI, VII and IX"
+                    },
+                    {
+                        "id": 4,
+                        "text": "II, V, VII and IX"
+                    }
+                ]
+            },
+            {
+                "id": "71e94d8a-0292-4e22-a14f-d82f9a49777d",
+                "orderIndex": 12,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110ceb758c88c5d1ea22c7",
+                "chapterName": "Body Fluids and Circulation",
+                "topicId": "69110cec758c88c5d1ea22cb",
+                "topicName": "Blood",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "People living at sea level have around 5 million RBCs per cubic millimetre of their blood, whereas those living at an altitude of 5400 metres have around 8 million. This is because at high altitude",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "People get pollution-free air to breathe and more oxygen is available"
+                    },
+                    {
+                        "id": 2,
+                        "text": "Atmospheric oxygen level is less and, hence more RBCs are needed to absorb the required amount of oxygen to survive"
+                    },
+                    {
+                        "id": 3,
+                        "text": "There is more UV radiation, which enhances RBCs production"
+                    },
+                    {
+                        "id": 4,
+                        "text": "People eat more nutritive food, therefore, more RBCs are formed"
+                    }
+                ]
+            },
+            {
+                "id": "94c59972-ef6f-4092-ad6b-18b377e0efd9",
+                "orderIndex": 13,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110cde758c88c5d1ea2284",
+                "chapterName": "Anatomy of Flowering Plants",
+                "topicId": "69110cde758c88c5d1ea2285",
+                "topicName": "The Tissue System",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "<html><head></head><body><p>Identify <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6833em;\"></span><span class=\"mord mathnormal\">A</span></span></span></span> to <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6833em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.02778em;\">D</span></span></span></span> in the given diagram and choose the correct option <img src=\"data/assets/questionapi.in/572b7922e9cf4e3bdc145ace91b64c42.jpg\" alt=\"question image\" width=\"187\" height=\"173\" style=\"; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" loading=\"lazy\"></p></body></html>",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "A-Hypodermis, B-Xylem, C-Phloem, D-Ground tissue"
+                    },
+                    {
+                        "id": 2,
+                        "text": "A-Hypodermis, B-Phloem, C-Xylem, D-Ground tissue"
+                    },
+                    {
+                        "id": 3,
+                        "text": "A-Endodermis, B-Phloem, C-Xylem, D-Ground tissue"
+                    },
+                    {
+                        "id": 4,
+                        "text": "A-Endodermis, B-Xylem, C-Phloem, D-Ground tissue"
+                    }
+                ]
+            },
+            {
+                "id": "4f8cbc16-3107-485b-b589-3c188c77cc23",
+                "orderIndex": 14,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110ce4758c88c5d1ea22a6",
+                "chapterName": "Biological Classification",
+                "topicId": "69110ce5758c88c5d1ea22a7",
+                "topicName": "Kingdom Fungi",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Easy",
+                "questionHtml": "Fungi are classified on the basis of",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "Sexual reproduction"
+                    },
+                    {
+                        "id": 2,
+                        "text": "Asexual reproduction"
+                    },
+                    {
+                        "id": 3,
+                        "text": "Vegetative reproduction"
+                    },
+                    {
+                        "id": 4,
+                        "text": "None of these"
+                    }
+                ]
+            },
+            {
+                "id": "86e27ea4-317c-440f-a495-70d4ae3cd2c2",
+                "orderIndex": 15,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110ce9758c88c5d1ea22c0",
+                "chapterName": "Breathing and Exchange of Gases",
+                "topicId": "69110cea758c88c5d1ea22c2",
+                "topicName": "Regulation of Respiration",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "<p>Humans have to maintain the moderate respiratory rhythms to suit the demands of the body. For fulfilling that purpose, we have the Respiratory rhythm centre in medulla = R Pneumotaxic centre in pons <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.3669em;\"></span><span class=\"mrel\">=</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6833em;\"></span><span class=\"mord\"><span class=\"mord mathrm\">PT</span></span></span></span></span> Chemosensitive area in medulla <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.3669em;\"></span><span class=\"mrel\">=</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.8333em;vertical-align:-0.15em;\"></span><span class=\"mord\"><span class=\"mord mathrm\">C</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.3011em;\"><span style=\"top:-2.55em;margin-left:0em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\">1</span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.15em;\"><span></span></span></span></span></span></span></span></span></span> Peripheral chemoreceptors in aortic arch and carotid artery <span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.3669em;\"></span><span class=\"mrel\">=</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.8333em;vertical-align:-0.15em;\"></span><span class=\"mord\"><span class=\"mord mathrm\">C</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.3011em;\"><span style=\"top:-2.55em;margin-left:0em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\">2</span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.15em;\"><span></span></span></span></span></span></span></span></span></span> Select the correct path for the regulation of respiration</p>",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "<html><head></head><body><p><img src=\"data/assets/questionapi.in/14a02a184eb4c1a6f05f0f43b2e6770d.png\" width=\"94\" height=\"58\" style=\"; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" loading=\"lazy\"></p></body></html>"
+                    },
+                    {
+                        "id": 2,
+                        "text": "<html><head></head><body><p><img style=\"display: block; max-width: min(100%, 600px); height: 58px; margin: 0.5rem 0px;; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" src=\"data/assets/questionapi.in/a81bbf698da12d0e8466a71af836191d.png\" width=\"90\" loading=\"lazy\"></p></body></html>"
+                    },
+                    {
+                        "id": 3,
+                        "text": "<html><head></head><body><p><img style=\"display: block; max-width: min(100%, 600px); height: 54px; margin: 0.5rem 0px;; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" src=\"data/assets/questionapi.in/b16d1bb43b32ca25cd90cf7f12c7aaf5.png\" width=\"82\" loading=\"lazy\"></p></body></html>"
+                    },
+                    {
+                        "id": 4,
+                        "text": "<p>None of the above.</p>"
+                    }
+                ]
+            },
+            {
+                "id": "8a7439ce-3330-48c0-a430-d83be5556895",
+                "orderIndex": 16,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110cdf758c88c5d1ea2287",
+                "chapterName": "Cell: The Unit of Life",
+                "topicId": null,
+                "topicName": null,
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Easy",
+                "questionHtml": "Middle lamella is present",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "Inside the secondary wall"
+                    },
+                    {
+                        "id": 2,
+                        "text": "Inside the primary wall"
+                    },
+                    {
+                        "id": 3,
+                        "text": "Outside the primary wall"
+                    },
+                    {
+                        "id": 4,
+                        "text": "In between secondary and tertiary walls"
+                    }
+                ]
+            },
+            {
+                "id": "30e48a8e-dc4c-45e9-817e-97e04820a712",
+                "orderIndex": 17,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110ce0758c88c5d1ea228d",
+                "chapterName": "Biomolecules",
+                "topicId": "69110ce1758c88c5d1ea2294",
+                "topicName": "Enzymes",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "Select the correct graph which shows the relationship between the rate of an enzymatic activity and substrate concentration",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "<html><head></head><body><p><img style=\"display: block; max-width: min(100%, 600px); height: 83px; margin: 0.5rem 0px;; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" src=\"data/assets/questionapi.in/05458af5932f464e2b01d74c206bf415.png\" width=\"91\" loading=\"lazy\"></p></body></html>"
+                    },
+                    {
+                        "id": 2,
+                        "text": "<html><head></head><body><p><img style=\"width: 86px; height: 79px; display: block; background: white;; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" src=\"data/assets/questionapi.in/4e7e1e2dc81e886eeb797b5b466dda33.png\" loading=\"lazy\"></p></body></html>"
+                    },
+                    {
+                        "id": 3,
+                        "text": "<html><head></head><body><p><img style=\"display: block; max-width: min(100%, 600px); height: 81px; margin: 0.5rem 0px;; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" src=\"data/assets/questionapi.in/930ca82182465c5d8cc24b8387241fa4.png\" width=\"116\" loading=\"lazy\"></p></body></html>"
+                    },
+                    {
+                        "id": 4,
+                        "text": "<html><head></head><body><p><img style=\"display: block; max-width: min(100%, 600px); height: 76px; margin: 0.5rem 0px;; max-width: 100%; height: auto; display: block; margin: 0.5rem 0;\" src=\"data/assets/questionapi.in/5d776ec827e566482b034f271a83f9b7.png\" width=\"83\" loading=\"lazy\"></p></body></html>"
+                    }
+                ]
+            },
+            {
+                "id": "2180cbc6-cd75-488e-8be5-74f394181d93",
+                "orderIndex": 18,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110cdd758c88c5d1ea2281",
+                "chapterName": "Animal Kingdom",
+                "topicId": "69110cde758c88c5d1ea2282",
+                "topicName": "Classification of Animals",
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "Which class shows the presence of amnion and chorionic membranes during development?",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "Amphibian"
+                    },
+                    {
+                        "id": 2,
+                        "text": "Osteichthyes"
+                    },
+                    {
+                        "id": 3,
+                        "text": "Reptilia"
+                    },
+                    {
+                        "id": 4,
+                        "text": "Chondrichthyes"
+                    }
+                ]
+            },
+            {
+                "id": "bb856316-14d1-4817-89cb-f7feeb0633b8",
+                "orderIndex": 19,
+                "subjectId": "69110cdb758c88c5d1ea2277",
+                "subjectKey": "69110cdb758c88c5d1ea2277",
+                "subjectName": "Biology",
+                "chapterId": "69110ce9758c88c5d1ea22c0",
+                "chapterName": "Breathing and Exchange of Gases",
+                "topicId": null,
+                "topicName": null,
+                "markId": "69110cf6758c88c5d1ea22fc",
+                "markName": "4",
+                "marks": 4,
+                "difficulty": "Medium",
+                "questionHtml": "Which of the following statement is incorrect about nasopharynx?",
+                "selectedOptionId": null,
+                "markedForReview": false,
+                "options": [
+                    {
+                        "id": 1,
+                        "text": "Internal nostrils opens into nasopharynx"
+                    },
+                    {
+                        "id": 2,
+                        "text": "It is the common passage for air only"
+                    },
+                    {
+                        "id": 3,
+                        "text": "It is a portion of pharynx"
+                    },
+                    {
+                        "id": 4,
+                        "text": "Nasopharynx opens through the glottis of the larynx region into the trachea"
+                    }
+                ]
+            }
+        ]
+}
+
+"questions": [
+            
+        ]
